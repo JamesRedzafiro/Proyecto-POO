@@ -4,6 +4,7 @@ import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import Controlador.ControladorVista;
 
@@ -34,6 +35,9 @@ public class vistaCompra extends JFrame {
         model = new DefaultTableModel();
         table = new JTable(model);
         scrollPane = new JScrollPane(table);
+        // Configurar la transparencia de la tabla y sus celdas
+        table.setOpaque(false);
+        ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
         ControladorVista.configurarTablaVenta(model, table, scrollPane, PanelVistaCompra,15, 210, 850, 290);
 
         // Datos Funcionario
@@ -71,8 +75,8 @@ public class vistaCompra extends JFrame {
 
         // Botones
         // Botones Superiores
-        ControladorVista.agregarBoton(PanelVistaCompra, "Agregar", 700, 100, 75, 35, 690, 130, 75, 75, "check.png");
-        ControladorVista.agregarBoton(PanelVistaCompra, "Eliminar", 790, 100, 75, 35, 780, 130, 75, 75, "eliminar.png");
+        ControladorVista.agregarBoton(PanelVistaCompra, "Agregar", 700, 100, 75, 35, 690, 130, "check.png");
+        ControladorVista.agregarBoton(PanelVistaCompra, "Eliminar", 790, 100, 75, 35, 780, 130, "eliminar.png");
 
 
         //Botones Parte baja

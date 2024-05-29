@@ -4,8 +4,6 @@ import java.awt.*;
 import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.table.*;
-import java.util.ArrayList;
-import java.awt.event.*;
 import Controlador.ControladorVista;
 
 

@@ -3,6 +3,7 @@ package Vista;
 import java.awt.*;
 import java.util.Arrays;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import Controlador.ControladorVista;
 
@@ -34,6 +35,9 @@ public class vistaRegistrarCliente extends JFrame {
         model = new DefaultTableModel();
         table = new JTable(model);
         scrollPane = new JScrollPane(table);
+        // Configurar la transparencia de la tabla y sus celdas
+        table.setOpaque(false);
+        ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
         ControladorVista.configurarTablaRegistarCliente(model, table, scrollPane, PanelVistaCompra,15, 515, 1055, 325);
 
         //Ingresar los Datos
@@ -55,20 +59,12 @@ public class vistaRegistrarCliente extends JFrame {
         ControladorVista.agregarEtiqueta(PanelVistaCompra, "Correo:", new Font("Aptos Black", Font.BOLD, 20), 10, 435, 430, 25);
         ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 5, 460, 550, 35);
         
-        ControladorVista.agregarBoton(PanelVistaCompra, "Registrar", 740, 385, 75, 35, 740, 415, 75, 75, "check.png");
-        ControladorVista.agregarBoton(PanelVistaCompra, "Actualizar", 828, 385, 75, 35, 825, 415, 75, 75, "actualizar.png");
-        ControladorVista.agregarBoton(PanelVistaCompra, "Cancelar", 915, 385, 75, 35, 910, 415, 75, 75, "x.png");
-        ControladorVista.agregarBoton(PanelVistaCompra, "Guardar", 1000, 385, 75, 35, 995, 415, 75, 75, "guardar.png");
-
-
-
+        //Botones
+        ControladorVista.agregarBoton(PanelVistaCompra, "Registrar", 740, 385, 75, 35, 740, 415, "check.png");
+        ControladorVista.agregarBoton(PanelVistaCompra, "Actualizar", 828, 385, 75, 35, 825, 415,"actualizar.png");
+        ControladorVista.agregarBoton(PanelVistaCompra, "Cancelar", 915, 385, 75, 35, 910, 415,"x.png");
+        ControladorVista.agregarBoton(PanelVistaCompra, "Guardar", 1000, 385, 75, 35, 995, 415,"guardar.png");
     }
-
-
-
-
-
-
 }
 
 

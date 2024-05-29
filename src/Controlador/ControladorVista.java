@@ -1,10 +1,6 @@
 package Controlador;
 
 import java.awt.Font;
-import java.awt.*;
-import javax.swing.*;
-import java.util.Arrays;
-import java.text.DecimalFormat;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +8,7 @@ import java.net.URL;
 
 public class ControladorVista {
 
+    //Tabla Compra
     public static void configurarTablaVenta(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel, int x, int y, int ancho, int alto) {
         model.addColumn("ID");
         model.addColumn("Producto");
@@ -29,6 +26,7 @@ public class ControladorVista {
         panel.add(scrollPane);
     }
 
+    //Tabla Pedido de Venta
     public static void configurarTablaPedido(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel,int x, int y, int ancho, int alto) {
         model.addColumn("N° Pedido");
         model.addColumn("Nombre");
@@ -46,6 +44,7 @@ public class ControladorVista {
 
     }
 
+    //Tabla Registrar Cliente
     public static void configurarTablaRegistarCliente(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel,int x, int y, int ancho, int alto) {
         model.addColumn("N° Registro");
         model.addColumn("Nombre");
@@ -68,6 +67,8 @@ public class ControladorVista {
         panel.add(scrollPane);
     }
 
+    //Tabla Buscar
+
     public static void agregarEtiqueta(JPanel panel, String texto, Font font, int x, int y, int width, int height) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setFont(font);
@@ -82,7 +83,7 @@ public class ControladorVista {
         panel.add(campoTexto);
     }
 
-    public static void agregarBoton(JPanel panel, String texto, int xLabel, int yLabel, int widthLabel, int heightLabel, int xButton, int yButton, int widthButton, int heightButton, String nombreIcon) {
+    public static void agregarBoton(JPanel panel, String texto, int xLabel, int yLabel, int widthLabel,int heightLabel,int xButton,int yButton, String nombreIcon) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setFont(new Font("Aptos Black", Font.BOLD, 15));
         etiqueta.setBounds(xLabel, yLabel, widthLabel, heightLabel);
@@ -98,7 +99,7 @@ public class ControladorVista {
             btnJButton.setText("Icono no encontrado");
         }
         btnJButton.setFont(new Font("Aptos Black", Font.BOLD, 20));
-        btnJButton.setBounds(xButton, yButton, widthButton, heightButton);
+        btnJButton.setBounds(xButton, yButton, 75, 75);
         panel.add(btnJButton);
     }
 
@@ -116,4 +117,12 @@ public class ControladorVista {
         btnJButton.setBounds(x, y, width, height);
         panel.add(btnJButton);
     }
+
+    public static void agregarComboBox(JPanel panel, String[] cadena, int x, int y, int width, int height) {
+        JComboBox<String> comboBox = new JComboBox<>(cadena);
+        comboBox.setFont(new Font("Aptos Black", Font.BOLD, 20));
+        comboBox.setBounds(x, y, width, height);
+        panel.add(comboBox);
+    }
+
 }
