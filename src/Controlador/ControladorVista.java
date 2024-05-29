@@ -1,6 +1,10 @@
 package Controlador;
 
 import java.awt.Font;
+import java.awt.*;
+import javax.swing.*;
+import java.util.Arrays;
+import java.text.DecimalFormat;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -42,6 +46,28 @@ public class ControladorVista {
 
     }
 
+    public static void configurarTablaRegistarCliente(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel,int x, int y, int ancho, int alto) {
+        model.addColumn("N° Registro");
+        model.addColumn("Nombre");
+        model.addColumn("Apellido");
+        model.addColumn("DNI");
+        model.addColumn("iDCliente");
+        model.addColumn("Dirección");
+        model.addColumn("Ruc");
+        model.addColumn("Teléfono");
+        model.addColumn("Correo");
+        model.addColumn("Fecha de Registro");
+
+        table.setOpaque(false);
+        ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
+
+        //scrollPane.setBounds(15, 130, 675, 250);
+        scrollPane.setBounds(x, y, ancho, alto);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        panel.add(scrollPane);
+    }
+
     public static void agregarEtiqueta(JPanel panel, String texto, Font font, int x, int y, int width, int height) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setFont(font);
@@ -56,39 +82,38 @@ public class ControladorVista {
         panel.add(campoTexto);
     }
 
-    public static void agregarBoton(JPanel panel, String texto, String iconPath, int xLabel, int yLabel, int widthLabel, int heightLabel, int xButton, int yButton, int widthButton, int heightButton) {
+    public static void agregarBoton(JPanel panel, String texto, int xLabel, int yLabel, int widthLabel, int heightLabel, int xButton, int yButton, int widthButton, int heightButton, String nombreIcon) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setFont(new Font("Aptos Black", Font.BOLD, 15));
         etiqueta.setBounds(xLabel, yLabel, widthLabel, heightLabel);
         panel.add(etiqueta);
 
-        JButton boton = new JButton();
-        URL iconURL = ControladorVista.class.getResource(iconPath);
+        JButton btnJButton = new JButton();
+        URL iconURL = ControladorVista.class.getResource("/Imagenes/" + nombreIcon); // Ajusta la ruta de la imagen
         if (iconURL != null) {
-            ImageIcon icono = new ImageIcon(iconURL);
-            boton.setIcon(icono);
+            ImageIcon btnIcono = new ImageIcon(iconURL);
+            btnJButton.setIcon(btnIcono); // Establece el icono en el botón
         } else {
-            System.err.println("No se encontró el icono: " + iconPath);
-            boton.setText("Icono no encontrado");
+            System.err.println("No se encontró el icono: " + nombreIcon);
+            btnJButton.setText("Icono no encontrado");
         }
-        boton.setFont(new Font("Aptos Black", Font.BOLD, 20));
-        boton.setBounds(xButton, yButton, widthButton, heightButton);
-        panel.add(boton);
+        btnJButton.setFont(new Font("Aptos Black", Font.BOLD, 20));
+        btnJButton.setBounds(xButton, yButton, widthButton, heightButton);
+        panel.add(btnJButton);
     }
 
-    public static void agregarBotonInferior(JPanel panel, String iconPath, int x, int y, int width, int height) {
-        JButton boton = new JButton();
-        URL iconURL = ControladorVista.class.getResource(iconPath);
+    public static void agregarBotonInferior(JPanel panel, int x, int y, int width, int height,String nombreIcon) {
+        JButton btnJButton = new JButton();
+        URL iconURL = ControladorVista.class.getResource("/Imagenes/" + nombreIcon); // Ajusta la ruta de la imagen
         if (iconURL != null) {
-            ImageIcon icono = new ImageIcon(iconURL);
-            boton.setIcon(icono);
+            ImageIcon btnIcono = new ImageIcon(iconURL);
+            btnJButton.setIcon(btnIcono); // Establece el icono en el botón
         } else {
-            System.err.println("No se encontró el icono: " + iconPath);
-            boton.setText("Icono no encontrado");
+            System.err.println("No se encontró el icono: " + nombreIcon);
+            btnJButton.setText("Icono no encontrado");
         }
-        boton.setFont(new Font("Aptos Black", Font.ITALIC, 25));
-        boton.setBounds(x, y, width, height);
-        boton.setHorizontalTextPosition(SwingConstants.CENTER);
-        panel.add(boton);
+        btnJButton.setFont(new Font("Aptos Black", Font.BOLD, 20));
+        btnJButton.setBounds(x, y, width, height);
+        panel.add(btnJButton);
     }
 }

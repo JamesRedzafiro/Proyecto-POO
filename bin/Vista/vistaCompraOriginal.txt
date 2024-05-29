@@ -1,0 +1,283 @@
+package Vista;
+
+import java.awt.*;
+import java.util.Arrays;
+import javax.swing.*;
+import javax.swing.table.*;
+import java.util.ArrayList;
+import java.awt.event.*;
+import java.text.DecimalFormat;
+
+import Controlador.ControladorVista;
+import java.util.Calendar;
+import java.util.Date;
+
+
+public class vistaCompra extends JFrame{
+
+    private DefaultTableModel model;
+    private JTable table;
+    private JScrollPane scrollPane;
+
+
+    public vistaCompra() {
+
+        this.setTitle("EMPRESA SOCOSANI:   Formulario de Venta");
+        this.setFont(new Font("Aptos Black",Font.BOLD,35));
+        this.setBounds(0, 0, 900, 625);
+
+        // Asegúrate de que el contenido de la ventana no esté cubierto por el fondo del panel
+        setLayout(new BorderLayout());
+
+        this.setIconImages(Arrays.asList(new ImageIcon(getClass().getResource("/Imagenes/logo-socosani.png")).getImage()));
+
+        this.setLocationRelativeTo(null);
+        ComponentesVistaCompra();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private void ComponentesVistaCompra(){
+
+        //Usa ImagenFondo en lugar de JPanel
+        ImagenFondo PanelVistaCompra = new ImagenFondo("/Imagenes/fondo-socosani.png");
+        PanelVistaCompra.setLayout(null);
+        this.getContentPane().add(PanelVistaCompra);
+
+        // Crear el modelo de la tabla
+        model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Producto");
+        model.addColumn("Precio");
+        model.addColumn("Cantidad");
+        model.addColumn("Total");
+
+        // Crear la tabla con el modelo
+        table = new JTable(model);
+
+        // Configurar la transparencia de la tabla y sus celdas
+        table.setOpaque(false);
+        ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+        
+        // Agregar la tabla a un JScrollPane
+        scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(15, 210, 850, 290);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        PanelVistaCompra.add(scrollPane);
+
+        //Datos Funcionario
+
+        JLabel datosFuncionarioJLabel = new JLabel("Datos del Funcionario:");
+        datosFuncionarioJLabel.setFont(new Font("Aptos Black", Font.BOLD, 20));
+        datosFuncionarioJLabel.setBounds(15, 0, 430, 20);
+        //datosFuncionarioJLabel.setBounds(15, 0, 435, 110);
+        //datosFuncionarioJLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        //datosFuncionarioJLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        //datosFuncionarioJLabel.setVerticalAlignment(SwingConstants.TOP);
+        //datosFuncionarioJLabel.setOpaque(true);
+        //datosFuncionarioJLabel.setBackground(Color.WHITE);
+        PanelVistaCompra.add(datosFuncionarioJLabel);
+
+        JLabel idFuncionarioJLabel = new JLabel("ID");
+        idFuncionarioJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        idFuncionarioJLabel.setBounds(15, 30, 85,35);
+        
+        PanelVistaCompra.add(idFuncionarioJLabel);
+
+        JLabel nombreFuncionarioJLabel = new JLabel("Nombre");
+        nombreFuncionarioJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        nombreFuncionarioJLabel.setBounds(115, 30, 150, 35);
+        PanelVistaCompra.add(nombreFuncionarioJLabel);
+
+        JLabel apellidoFuncionarioJLabel = new JLabel("Apellido");
+        apellidoFuncionarioJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        apellidoFuncionarioJLabel.setBounds(275, 30, 150, 35);
+        PanelVistaCompra.add(apellidoFuncionarioJLabel);
+
+        JTextField idFuncionarioJTextField = new JTextField();
+        idFuncionarioJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        idFuncionarioJTextField.setBounds(15, 70, 85,35);
+        PanelVistaCompra.add(idFuncionarioJTextField);
+
+        JTextField nombreFuncionarioJTextField = new JTextField();
+        nombreFuncionarioJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        nombreFuncionarioJTextField.setBounds(115, 70, 150, 35);
+        PanelVistaCompra.add(nombreFuncionarioJTextField);
+
+        JTextField apellidoFuncionarioJTextField = new JTextField();
+        apellidoFuncionarioJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        apellidoFuncionarioJTextField.setBounds(275, 70, 175, 35);
+        PanelVistaCompra.add(apellidoFuncionarioJTextField);
+
+        //Datos Cliente
+        JLabel cantidadJLabel = new JLabel("Datos del Cliente:");
+        cantidadJLabel.setFont(new Font("Aptos Black",Font.BOLD,20));
+        cantidadJLabel.setBounds(465, 0, 400, 35);
+        PanelVistaCompra.add(cantidadJLabel);
+
+        JLabel idClienteJLabel = new JLabel("ID");
+        idClienteJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        idClienteJLabel.setBounds(455, 30, 85,35);
+        PanelVistaCompra.add(idClienteJLabel);
+
+        JLabel descripcionClienteJLabel = new JLabel("Descripción");
+        descripcionClienteJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        descripcionClienteJLabel.setBounds(550, 30, 150, 35);
+        PanelVistaCompra.add(descripcionClienteJLabel);
+
+        JLabel rucClienteJLabel = new JLabel("RUC");
+        rucClienteJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        rucClienteJLabel.setBounds(760, 30, 150, 35);
+        PanelVistaCompra.add(rucClienteJLabel);
+
+        JTextField idClienJTextField = new JTextField();
+        idClienJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        idClienJTextField.setBounds(455, 70, 85,35);
+        PanelVistaCompra.add(idClienJTextField);
+
+        JTextField descripcionClienJTextField = new JTextField();
+        descripcionClienJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        descripcionClienJTextField.setBounds(550, 70, 200, 35);
+        PanelVistaCompra.add(descripcionClienJTextField);
+
+        JTextField rucClientJTextField = new JTextField();
+        rucClientJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        rucClientJTextField.setBounds(760, 70, 100, 35);
+        PanelVistaCompra.add(rucClientJTextField);
+
+        //Datos Productos
+        JLabel datosProductoJLabel = new JLabel("Datos del Producto:");
+        datosProductoJLabel.setFont(new Font("Aptos Black",Font.BOLD,20));
+        datosProductoJLabel.setBounds(15, 110, 400, 35);
+        PanelVistaCompra.add(datosProductoJLabel);
+
+        JLabel idProductoJLabel = new JLabel("ID");
+        idProductoJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        idProductoJLabel.setBounds(15, 140, 80,35);
+        PanelVistaCompra.add(idProductoJLabel);
+
+        JLabel descripcionProductoJLabel = new JLabel("Descripción");
+        descripcionProductoJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        descripcionProductoJLabel.setBounds(70, 140, 150, 35);
+        PanelVistaCompra.add(descripcionProductoJLabel);
+
+        JLabel precioProductoJLabel = new JLabel("Precio Venta");
+        precioProductoJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        precioProductoJLabel.setBounds(225, 140, 100, 35);
+        PanelVistaCompra.add(precioProductoJLabel);
+
+        JLabel stockProductoJLabel = new JLabel("Stock");
+        stockProductoJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        stockProductoJLabel.setBounds(350, 140, 75, 35);
+        PanelVistaCompra.add(stockProductoJLabel);
+
+        JLabel cantidadProductoJLabel = new JLabel("Cantidad");
+        cantidadProductoJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        cantidadProductoJLabel.setBounds(485, 140, 150, 35);
+        PanelVistaCompra.add(cantidadProductoJLabel);
+
+        JLabel totalProductoJLabel = new JLabel("Total Venta");
+        totalProductoJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        totalProductoJLabel.setBounds(575, 140, 150, 35);
+        PanelVistaCompra.add(totalProductoJLabel);
+
+        JTextField idProductoJTextField = new JTextField();
+        idProductoJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        idProductoJTextField.setBounds(15, 170, 50, 35);
+        PanelVistaCompra.add(idProductoJTextField);
+
+        JTextField descripcionProductoJTextField = new JTextField();
+        descripcionProductoJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        descripcionProductoJTextField.setBounds(70, 170, 150, 35);
+        PanelVistaCompra.add(descripcionProductoJTextField);
+
+        JTextField precioProductoJTextField = new JTextField();
+        precioProductoJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        precioProductoJTextField.setBounds(225, 170, 100, 35);
+        PanelVistaCompra.add(precioProductoJTextField);
+
+        JTextField stockProductoJTextField = new JTextField();
+        stockProductoJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        stockProductoJTextField.setBounds(350, 170, 75, 35);
+        PanelVistaCompra.add(stockProductoJTextField);
+
+        JTextField cantidadProductoJTextField = new JTextField();
+        cantidadProductoJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        cantidadProductoJTextField.setBounds(485, 170, 75, 35);
+        PanelVistaCompra.add(cantidadProductoJTextField);
+
+        JTextField totalProductoJTextField = new JTextField();
+        totalProductoJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
+        totalProductoJTextField.setBounds(575, 170, 100, 35);
+        PanelVistaCompra.add(totalProductoJTextField);
+
+        //Botones Superiores
+
+        JLabel btnAgregarJLabel =new JLabel("Agregar");
+        btnAgregarJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        btnAgregarJLabel.setBounds(700, 100, 75, 35);
+        PanelVistaCompra.add(btnAgregarJLabel);
+
+        JButton btnAgregar = new JButton();
+        ImageIcon btnAgregarIcono = new ImageIcon(getClass().getResource("/Imagenes/check.png")); // Ajusta la ruta de la imagen
+        btnAgregar.setIcon(btnAgregarIcono);
+        btnAgregar.setFont(new Font("Aptos Black", Font.BOLD, 20));
+        btnAgregar.setBounds(700, 130, 65, 75); // Ajusta el tamaño para que la imagen y el texto quepan
+        btnAgregar.setHorizontalTextPosition(SwingConstants.RIGHT); // Posiciona el texto a la derecha de la imagen
+        PanelVistaCompra.add(btnAgregar);
+
+        JLabel btnEliminarJLabel = new JLabel("Eliminar");
+        btnEliminarJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
+        btnEliminarJLabel.setBounds(775, 100, 75, 35);
+        PanelVistaCompra.add(btnEliminarJLabel);
+
+        JButton btnEliminar = new JButton();
+        ImageIcon btnEliminarIcono = new ImageIcon(getClass().getResource("/Imagenes/eliminar.png")); // Ajusta la ruta de la imagen
+        btnEliminar.setIcon(btnEliminarIcono);
+        btnEliminar.setFont(new Font("Aptos Black",Font.BOLD,20));
+        btnEliminar.setBounds(775, 130, 65, 75);
+        PanelVistaCompra.add(btnEliminar);
+
+        //Botones Parte baja
+        JButton btnNuevo = new JButton();
+        ImageIcon btnNuevoIcono = new ImageIcon(getClass().getResource("/Imagenes/nuevo.png")); // Ajusta la ruta de la imagen
+        btnNuevo.setIcon(btnNuevoIcono);
+        btnNuevo.setFont(new Font("Aptos Black",Font.ITALIC,25));
+        btnNuevo.setBounds(345, 510, 75, 65);
+        btnNuevo.setHorizontalTextPosition(SwingConstants.CENTER);
+        PanelVistaCompra.add(btnNuevo);
+
+        JButton btnGuardar = new JButton();
+        ImageIcon btnGuardarIcono = new ImageIcon(getClass().getResource("/Imagenes/guardar.png"));
+        btnGuardar.setIcon(btnGuardarIcono);
+        btnGuardar.setFont(new Font("Aptops Black",Font.ITALIC,25));
+        btnGuardar.setBounds(435, 510, 75, 65);
+        btnGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
+        PanelVistaCompra.add(btnGuardar);
+
+        JButton btnCancelar = new JButton();
+        ImageIcon btnCancelarIcono = new ImageIcon(getClass().getResource("/Imagenes/x.png"));
+        btnCancelar.setIcon(btnCancelarIcono);
+        btnCancelar.setFont(new Font("Aptops Black",Font.ITALIC,25));
+        btnCancelar.setBounds(525, 510, 75, 65);
+        btnCancelar.setHorizontalTextPosition(SwingConstants.CENTER);
+        PanelVistaCompra.add(btnCancelar);
+        
+
+        //Esto se usará en el ControladorCompra
+        String total = "Total: S/.          ";
+        Double numero = 0.00;
+        DecimalFormat df = new DecimalFormat("0.00");
+        String numeroFormato = df.format(numero);
+        String Total = total + numeroFormato;
+        
+        JTextField totalVentaJTextField = new JTextField(Total);
+        totalVentaJTextField.setEditable(false);
+        totalVentaJTextField.setFocusable(false);
+        totalVentaJTextField.setFont(new Font("Aptops Black",Font.ITALIC,25));
+        totalVentaJTextField.setBounds(615, 535, 250, 35);
+        PanelVistaCompra.add(totalVentaJTextField);
+
+    }
+
+}

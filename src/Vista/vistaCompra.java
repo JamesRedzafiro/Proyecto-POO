@@ -71,55 +71,14 @@ public class vistaCompra extends JFrame {
 
         // Botones
         // Botones Superiores
-        JLabel btnAgregarJLabel =new JLabel("Agregar");
-        btnAgregarJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
-        btnAgregarJLabel.setBounds(700, 100, 75, 35);
-        PanelVistaCompra.add(btnAgregarJLabel);
+        ControladorVista.agregarBoton(PanelVistaCompra, "Agregar", 700, 100, 75, 35, 690, 130, 75, 75, "check.png");
+        ControladorVista.agregarBoton(PanelVistaCompra, "Eliminar", 790, 100, 75, 35, 780, 130, 75, 75, "eliminar.png");
 
-        JButton btnAgregar = new JButton();
-        ImageIcon btnAgregarIcono = new ImageIcon(getClass().getResource("/Imagenes/check.png")); // Ajusta la ruta de la imagen
-        btnAgregar.setIcon(btnAgregarIcono);
-        btnAgregar.setFont(new Font("Aptos Black", Font.BOLD, 20));
-        btnAgregar.setBounds(690, 130, 75, 75); // Ajusta el tamaño para que la imagen y el texto quepan
-        btnAgregar.setHorizontalTextPosition(SwingConstants.RIGHT); // Posiciona el texto a la derecha de la imagen
-        PanelVistaCompra.add(btnAgregar);
-
-        JLabel btnEliminarJLabel = new JLabel("Eliminar");
-        btnEliminarJLabel.setFont(new Font("Aptos Black",Font.BOLD,15));
-        btnEliminarJLabel.setBounds(790, 100, 75, 35);
-        PanelVistaCompra.add(btnEliminarJLabel);
-
-        JButton btnEliminar = new JButton();
-        ImageIcon btnEliminarIcono = new ImageIcon(getClass().getResource("/Imagenes/eliminar.png")); // Ajusta la ruta de la imagen
-        btnEliminar.setIcon(btnEliminarIcono);
-        btnEliminar.setFont(new Font("Aptos Black",Font.BOLD,20));
-        btnEliminar.setBounds(780, 130, 75, 75);
-        PanelVistaCompra.add(btnEliminar);
 
         //Botones Parte baja
-        JButton btnNuevo = new JButton();
-        ImageIcon btnNuevoIcono = new ImageIcon(getClass().getResource("/Imagenes/nuevo.png")); // Ajusta la ruta de la imagen
-        btnNuevo.setIcon(btnNuevoIcono);
-        btnNuevo.setFont(new Font("Aptos Black",Font.ITALIC,25));
-        btnNuevo.setBounds(345, 510, 75, 75);
-        btnNuevo.setHorizontalTextPosition(SwingConstants.CENTER);
-        PanelVistaCompra.add(btnNuevo);
-
-        JButton btnGuardar = new JButton();
-        ImageIcon btnGuardarIcono = new ImageIcon(getClass().getResource("/Imagenes/guardar.png"));
-        btnGuardar.setIcon(btnGuardarIcono);
-        btnGuardar.setFont(new Font("Aptops Black",Font.ITALIC,25));
-        btnGuardar.setBounds(435, 510, 75, 75);
-        btnGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
-        PanelVistaCompra.add(btnGuardar);
-
-        JButton btnCancelar = new JButton();
-        ImageIcon btnCancelarIcono = new ImageIcon(getClass().getResource("/Imagenes/x.png"));
-        btnCancelar.setIcon(btnCancelarIcono);
-        btnCancelar.setFont(new Font("Aptops Black",Font.ITALIC,25));
-        btnCancelar.setBounds(525, 510, 75, 75);
-        btnCancelar.setHorizontalTextPosition(SwingConstants.CENTER);
-        PanelVistaCompra.add(btnCancelar);
+        ControladorVista.agregarBotonInferior(PanelVistaCompra, 345, 510, 75, 75, "nuevo.png");
+        ControladorVista.agregarBotonInferior(PanelVistaCompra, 435, 510, 75, 75, "guardar.png");
+        ControladorVista.agregarBotonInferior(PanelVistaCompra, 525, 510, 75, 75, "x.png");
 
         //Esto se usará en el ControladorCompra
         String total = "Total: S/.          ";
