@@ -66,15 +66,7 @@ public class vistaPedido extends JFrame{
         PanelVistaPedido.add(productoJLabel);
 
         String[] productos = {"agua1", "agua2", "agua3", "agua4", "agua5", "agua6", "agua7"};
-
         ControladorVista.agregarComboBox(PanelVistaPedido, productos, 15, 35, 225, 35);
-
-        // JComboBox<String> productoJComboBox = new JComboBox<>(productos);
-        // productoJComboBox.setFont(new Font("Aptos Black", Font.PLAIN, 20));
-        // productoJComboBox.setBounds(15, 35, 225, 35);
-        // PanelVistaPedido.add(productoJComboBox);
-
-
         //Cantidad
         ControladorVista.agregarEtiqueta(PanelVistaPedido, "Cantidad de Productos:", new Font("Aptos Black",Font.BOLD,20), 260, 0, 225, 35);
         ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 260, 35, 225, 35);
