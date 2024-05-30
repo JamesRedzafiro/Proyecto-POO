@@ -2,51 +2,42 @@ package Modelo;
 
 public class modeloPedido {
 
-    private String Producto;
-    private int Cantidad;
-    private Float Precio;
-    private String Fecha;
+    private int cantidad;
+    private String fecha;
     private modeloCliente Cliente;
+    private modeloProducto Producto;
 
 
-    public modeloPedido(String Producto,int Cantidad, Float Precio, String Fecha, modeloCliente cliente){
-        this.Producto = Producto;
-        this.Cantidad = Cantidad;
-        this.Precio = Precio;
-        this.Fecha = Fecha;
+    public modeloPedido(int cantidad, String fecha, modeloCliente cliente, modeloProducto producto){
+        this.cantidad = cantidad;
+        this.fecha = fecha;
         this.Cliente = cliente;
+        this.Producto = producto;
     }
 
-    public String getProducto() {
-        return this.Producto;
+    public modeloProducto getProducto() {
+        return Producto;
     }
 
-    public void setProducto(String Producto) {
-        this.Producto = Producto;
+    public void setProducto(modeloProducto producto) {
+        this.Producto = producto;
     }
 
+    
     public int getCantidad() {
-        return this.Cantidad;
+        return this.cantidad;
     }
 
-    public void setCantidad(int Cantidad) {
-        this.Cantidad = Cantidad;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
-
-    public Float getPrecio() {
-        return this.Precio;
-    }
-
-    public void setPrecio(Float Precio) {
-        this.Precio = Precio;
-    }
-
+ 
     public String getFecha() {
-        return this.Fecha;
+        return this.fecha;
     }
 
-    public void setFecha(String Fecha) {
-        this.Fecha = Fecha;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public modeloCliente getCliente() {
