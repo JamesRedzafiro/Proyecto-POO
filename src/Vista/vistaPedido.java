@@ -72,37 +72,17 @@ public class vistaPedido extends JFrame{
         PanelVistaPedido.add(productoJComboBox);
 
         //Cantidad
-        JLabel cantidadJLabel = new JLabel("Cantidad de Productos:");
-        cantidadJLabel.setFont(new Font("Aptos Black",Font.BOLD,20));
-        cantidadJLabel.setBounds(260, 0, 225, 35);
-        PanelVistaPedido.add(cantidadJLabel);
-
-        JTextField cantidadJTextField = new JTextField();
-        cantidadJTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
-        cantidadJTextField.setBounds(260, 35, 225, 35);
-        PanelVistaPedido.add(cantidadJTextField);
+        ControladorVista.agregarEtiqueta(PanelVistaPedido, "Cantidad de Productos:", new Font("Aptos Black",Font.BOLD,20), 260, 0, 225, 35);
+        ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 260, 35, 225, 35);
 
         //iD Cliente
-        JLabel iDClienteJLabel = new JLabel("ID Cliente:");
-        iDClienteJLabel.setFont(new Font("Aptos Black",Font.BOLD,20));
-        iDClienteJLabel.setBounds(505, 0, 225, 35);
-        PanelVistaPedido.add(iDClienteJLabel);
-
-        JTextField iDClienteTextField = new JTextField();
-        iDClienteTextField.setFont(new Font("Aptos Black", Font.PLAIN, 20));
-        iDClienteTextField.setBounds(505, 35, 185, 35);
-        PanelVistaPedido.add(iDClienteTextField);
+        ControladorVista.agregarEtiqueta(PanelVistaPedido,"ID Cliente",new Font("Aptos Black",Font.BOLD,20),505, 0, 225, 35);
+        ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 505, 35, 185, 35);
 
         //Total
-        JLabel totalPedidoString = new JLabel("Total Pedido: S/. ");
-        totalPedidoString.setFont(new Font("Aptos Black",Font.BOLD,20));
-        totalPedidoString.setBounds(20, 400, 250, 40);
-        PanelVistaPedido.add(totalPedidoString);
-
-        JLabel totalPedidoFloat = new JLabel("00.00");
-        totalPedidoFloat.setFont(new Font("Aptos Black",Font.BOLD,20));
-        totalPedidoFloat.setBounds(200, 400, 250, 40);
-        PanelVistaPedido.add(totalPedidoFloat);
+        ControladorVista.agregarEtiqueta(PanelVistaPedido, "Total Pedido: S/. ", new Font("Aptos Black",Font.BOLD,20), 20, 400, 250, 40); 
+        ControladorVista.agregarEtiqueta(PanelVistaPedido, "00.00", new Font("Aptos Black",Font.BOLD,20), 200, 400, 250, 40);
+    
 
         //Botones
         JButton btnGuardar = new JButton("Guardar");
@@ -117,7 +97,7 @@ public class vistaPedido extends JFrame{
 
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setFont(new Font("Aptos Black",Font.BOLD,20));
-        btnCancelar.setBounds(550, 80, 140, 40);
+        btnCancelar.setBounds(535, 80, 140, 40);
         PanelVistaPedido.add(btnCancelar);
 
         JButton btnEnviar = new JButton("Enviar");
@@ -131,37 +111,35 @@ public class vistaPedido extends JFrame{
         PanelVistaPedido.add(btnContacto);
 
         //Agregar listeners a los botones
-        /*
-        btnGuardar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controladorPedido.guardarPedido();
-            }
-        });
         
-        btnActualizar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actualizarPedido();
-            }
-        });
+        // btnGuardar.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         controladorPedido.guardarPedido();
+        //     }
+        // });
+        
+        // btnActualizar.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         actualizarPedido();
+        //     }
+        // });
 
-        btnCancelar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cancelarPedido();
-            }
-        });
+        // btnCancelar.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         cancelarPedido();
+        //     }
+        // });
 
-        btnEnviar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                enviarPedido();
-                }
-        });
-        */
-
-        //Configuración del layout y agregado de componentes
+        // btnEnviar.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         enviarPedido();
+        //         }
+        // });
+        
         
     }
 
