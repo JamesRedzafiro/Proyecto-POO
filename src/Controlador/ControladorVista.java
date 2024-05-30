@@ -1,9 +1,12 @@
 package Controlador;
 
-import java.awt.Font;
+import java.awt.Insets;
 import javax.swing.*;
+import java.awt.Font;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
+
 import java.net.URL;
 
 public class ControladorVista {
@@ -80,6 +83,10 @@ public class ControladorVista {
         JTextField campoTexto = new JTextField();
         campoTexto.setFont(font);
         campoTexto.setBounds(x, y, width, height);
+        // Establecer la alineación del texto a la izquierda
+        campoTexto.setAlignmentX(JTextArea.LEFT_ALIGNMENT);
+        // Asegurarse de que el texto esté alineado en la parte superior
+        campoTexto.setAlignmentY(JTextArea.TOP_ALIGNMENT);
         panel.add(campoTexto);
     }
 

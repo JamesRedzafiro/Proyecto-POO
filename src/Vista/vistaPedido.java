@@ -125,6 +125,11 @@ public class vistaPedido extends JFrame{
         btnEnviar.setBounds(550, 400, 140, 40);
         PanelVistaPedido.add(btnEnviar);
 
+        JButton btnContacto = new JButton("Contactanos");
+        btnContacto.setFont(new Font("Aptos Black",Font.BOLD,20));
+        btnContacto.setBounds(375, 400, 160, 40);
+        PanelVistaPedido.add(btnContacto);
+
         //Agregar listeners a los botones
         /*
         btnGuardar.addActionListener(new ActionListener() {
