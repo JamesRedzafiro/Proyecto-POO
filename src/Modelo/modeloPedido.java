@@ -2,16 +2,19 @@ package Modelo;
 
 public class modeloPedido {
 
-    String Producto;
-    int Cantidad;
-    Float Precio;
-    String Fecha;
+    private String Producto;
+    private int Cantidad;
+    private Float Precio;
+    private String Fecha;
+    private modeloCliente Cliente;
 
-    public modeloPedido(String Producto,int Cantidad, Float Precio, String Fecha){
+
+    public modeloPedido(String Producto,int Cantidad, Float Precio, String Fecha, modeloCliente cliente){
         this.Producto = Producto;
         this.Cantidad = Cantidad;
         this.Precio = Precio;
         this.Fecha = Fecha;
+        this.Cliente = cliente;
     }
 
     public String getProducto() {
@@ -44,5 +47,13 @@ public class modeloPedido {
 
     public void setFecha(String Fecha) {
         this.Fecha = Fecha;
+    }
+
+    public modeloCliente getCliente() {
+        return Cliente;
+    }
+
+    public void setCliente(modeloCliente cliente) {
+        this.Cliente = cliente;
     }
 }
