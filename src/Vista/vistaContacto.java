@@ -18,7 +18,7 @@ public class vistaContacto extends JFrame {
 
         this.setTitle("EMPRESA SOCOSANI:   Contáctanos");
         this.setFont(new Font("Aptos Black",Font.BOLD,35));
-        this.setBounds(0, 0, 725, 500);
+        this.setBounds(0, 0, 560, 400);
 
         // Asegúrate de que el contenido de la ventana no esté cubierto por el fondo del panel
         setLayout(new BorderLayout());
@@ -47,9 +47,12 @@ public class vistaContacto extends JFrame {
         ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
 
         ControladorVista.agregarEtiqueta(PanelVistaPedido, "Escriba su dirección de correo:",new Font("Aptos Black", Font.BOLD, 20),5, 5, 450, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.BOLD, 20), 5, 40, 450, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaPedido, "Escriba su mensaje:",new Font("Aptos Black", Font.BOLD, 20),5, 80, 450, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.BOLD, 20), 5, 120, 450, 120);
+        ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.BOLD, 20), 5, 40, 525, 35);
+        ControladorVista.agregarEtiqueta(PanelVistaPedido, "Escriba su mensaje:",new Font("Aptos Black", Font.BOLD, 20),5, 80, 525, 35);
+        ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.BOLD, 20), 5, 120, 525, 120);
+        ControladorVista.agregarBoton(PanelVistaPedido, "Enviar", 390, 235, 250, 30, 385, 260, "check.png");
+        ControladorVista.agregarBoton(PanelVistaPedido, "Cancelar", 460, 235, 250, 30, 465, 260, "x.png");
+
 
     }
 
