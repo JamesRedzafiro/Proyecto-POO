@@ -8,39 +8,17 @@ import java.net.URL;
 
 public class ControladorVista {
 
-    // //Tabla Pedido de Venta
-    // public static void configurarTablaPedido(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel,int x, int y, int ancho, int alto) {
-    //     model.addColumn("N° Pedido");
-    //     model.addColumn("Nombre");
-    //     model.addColumn("Precio");
-    //     model.addColumn("Fecha Entrega");
-
-    //     table.setOpaque(false);
-    //     ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
-
-    //     //scrollPane.setBounds(15, 130, 675, 250);
-    //     scrollPane.setBounds(x, y, ancho, alto);
-    //     scrollPane.setOpaque(false);
-    //     scrollPane.getViewport().setOpaque(false);
-    //     panel.add(scrollPane);
-
-    // }
-
     public static void configurarTabla(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel, int x, int y, int ancho, int alto, String[] columnas) {
         for (String columna : columnas) {
             model.addColumn(columna);
         }
-
         table.setOpaque(false);
         ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
-
         scrollPane.setBounds(x, y, ancho, alto);
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
         panel.add(scrollPane);
     }
-
-    //Tabla Buscar
 
     public static void agregarEtiqueta(JPanel panel, String texto, Font font, int x, int y, int width, int height) {
         JLabel etiqueta = new JLabel(texto);
