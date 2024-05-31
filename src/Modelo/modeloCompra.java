@@ -1,13 +1,13 @@
 package Modelo;
 
-public class modeloBoleta {
+public class modeloCompra {
 
     private modeloCliente Cliente;
     private modeloProducto Producto;
     private modeloFuncionario Funcionario;
 
     
-    public modeloBoleta(modeloCliente cliente, modeloProducto producto, modeloFuncionario funcionario) {
+    public modeloCompra(modeloCliente cliente, modeloProducto producto, modeloFuncionario funcionario) {
         this.Cliente = cliente;
         this.Producto = producto;
         this.Funcionario = funcionario;
@@ -39,4 +39,4 @@ public class modeloBoleta {
     }
 }
     
-}
+

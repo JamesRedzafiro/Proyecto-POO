@@ -1,6 +1,7 @@
 package Modelo;
 
 public class modeloProducto {
+    
     private String marca;
     private double volumen;
     private double precio;
