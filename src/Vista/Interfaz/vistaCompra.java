@@ -1,4 +1,4 @@
-package Vista;
+package Vista.Interfaz;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import Controlador.ControladorVista;
+import Vista.ImagenFondo;
 
 public class vistaCompra extends JFrame {
 

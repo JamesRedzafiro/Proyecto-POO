@@ -1,10 +1,11 @@
-package Vista;
+package Vista.Interfaz;
 
 import java.awt.*;
 import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.table.*;
 import Controlador.ControladorVista;
+import Vista.ImagenFondo;
 
 
 public class vistaPedido extends JFrame{

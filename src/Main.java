@@ -1,10 +1,10 @@
 import javax.swing.SwingUtilities;
 
-import Vista.vistaBuscarCliente;
-import Vista.vistaContacto;
-import Vista.vistaCompra;
-import Vista.vistaPedido;
-import Vista.vistaRegistrarCliente;
+import Vista.Interfaz.vistaBuscarCliente;
+import Vista.Interfaz.vistaCompra;
+import Vista.Interfaz.vistaContacto;
+import Vista.Interfaz.vistaPedido;
+import Vista.Interfaz.vistaRegistrarCliente;
 
 public class Main {
 
