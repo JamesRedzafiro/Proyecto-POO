@@ -7,7 +7,6 @@ public class modeloPedido {
     private modeloCliente Cliente;
     private modeloProducto Producto;
 
-
     public modeloPedido(int cantidad, String fecha, modeloCliente cliente, modeloProducto producto){
         this.cantidad = cantidad;
         this.fecha = fecha;
@@ -23,7 +22,6 @@ public class modeloPedido {
         this.Producto = producto;
     }
 
-    
     public int getCantidad() {
         return this.cantidad;
     }

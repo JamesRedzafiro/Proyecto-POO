@@ -6,7 +6,6 @@ public class modeloCompra {
     private modeloProducto Producto;
     private modeloFuncionario Funcionario;
 
-    
     public modeloCompra(modeloCliente cliente, modeloProducto producto, modeloFuncionario funcionario) {
         this.Cliente = cliente;
         this.Producto = producto;

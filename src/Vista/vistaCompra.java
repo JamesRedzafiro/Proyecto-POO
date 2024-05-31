@@ -38,7 +38,9 @@ public class vistaCompra extends JFrame {
         // Configurar la transparencia de la tabla y sus celdas
         table.setOpaque(false);
         ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
-        ControladorVista.configurarTablaVenta(model, table, scrollPane, PanelVistaCompra,15, 210, 850, 290);
+
+        String [] columnas = {"ID","Producto","Precio","Cantidad","Total"};
+        ControladorVista.configurarTabla(model, table, scrollPane, PanelVistaCompra,15, 210, 850, 290,columnas);
 
         // Datos Funcionario
         ControladorVista.agregarEtiqueta(PanelVistaCompra, "Datos del Funcionario:", new Font("Aptos Black", Font.BOLD, 20), 10, 5, 430, 20);

@@ -38,10 +38,12 @@ public class vistaRegistrarCliente extends JFrame {
         // Configurar la transparencia de la tabla y sus celdas
         table.setOpaque(false);
         ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
-        ControladorVista.configurarTablaRegistarCliente(model, table, scrollPane, PanelVistaCompra,15, 515, 1055, 325);
 
+        String [] columnas ={"N° Registro","Nombre","Apellido","DNI","iDCliente","Direccion","RUC","Telefono","Correo","Fecha Registro"};
+        ControladorVista.configurarTabla(model, table, scrollPane, PanelVistaCompra,15, 515, 1055, 325,columnas);
+
+        
         //Ingresar los Datos
-
         ControladorVista.agregarEtiqueta(PanelVistaCompra, "Nombre:", new Font("Aptos Black", Font.BOLD, 20), 10, 5, 430, 25);
         ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 5, 30, 550, 35);
         ControladorVista.agregarEtiqueta(PanelVistaCompra, "Apellidos:", new Font("Aptos Black", Font.BOLD, 20), 10, 75, 430, 25);

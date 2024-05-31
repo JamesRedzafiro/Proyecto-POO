@@ -4,65 +4,36 @@ import javax.swing.*;
 import java.awt.Font;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
-
 import java.net.URL;
 
 public class ControladorVista {
 
-    //Tabla Compra
-    public static void configurarTablaVenta(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel, int x, int y, int ancho, int alto) {
-        model.addColumn("ID");
-        model.addColumn("Producto");
-        model.addColumn("Precio");
-        model.addColumn("Cantidad");
-        model.addColumn("Total");
+    // //Tabla Pedido de Venta
+    // public static void configurarTablaPedido(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel,int x, int y, int ancho, int alto) {
+    //     model.addColumn("N° Pedido");
+    //     model.addColumn("Nombre");
+    //     model.addColumn("Precio");
+    //     model.addColumn("Fecha Entrega");
+
+    //     table.setOpaque(false);
+    //     ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
+
+    //     //scrollPane.setBounds(15, 130, 675, 250);
+    //     scrollPane.setBounds(x, y, ancho, alto);
+    //     scrollPane.setOpaque(false);
+    //     scrollPane.getViewport().setOpaque(false);
+    //     panel.add(scrollPane);
+
+    // }
+
+    public static void configurarTabla(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel, int x, int y, int ancho, int alto, String[] columnas) {
+        for (String columna : columnas) {
+            model.addColumn(columna);
+        }
 
         table.setOpaque(false);
         ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
 
-        //scrollPane.setBounds(15, 210, 850, 290);
-        scrollPane.setBounds(x, y, ancho, alto);
-        scrollPane.setOpaque(false);
-        scrollPane.getViewport().setOpaque(false);
-        panel.add(scrollPane);
-    }
-
-    //Tabla Pedido de Venta
-    public static void configurarTablaPedido(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel,int x, int y, int ancho, int alto) {
-        model.addColumn("N° Pedido");
-        model.addColumn("Nombre");
-        model.addColumn("Precio");
-        model.addColumn("Fecha Entrega");
-
-        table.setOpaque(false);
-        ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
-
-        //scrollPane.setBounds(15, 130, 675, 250);
-        scrollPane.setBounds(x, y, ancho, alto);
-        scrollPane.setOpaque(false);
-        scrollPane.getViewport().setOpaque(false);
-        panel.add(scrollPane);
-
-    }
-
-    //Tabla Registrar Cliente
-    public static void configurarTablaRegistarCliente(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel,int x, int y, int ancho, int alto) {
-        model.addColumn("N° Registro");
-        model.addColumn("Nombre");
-        model.addColumn("Apellido");
-        model.addColumn("DNI");
-        model.addColumn("iDCliente");
-        model.addColumn("Dirección");
-        model.addColumn("Ruc");
-        model.addColumn("Teléfono");
-        model.addColumn("Correo");
-        model.addColumn("Fecha de Registro");
-
-        table.setOpaque(false);
-        ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
-
-        //scrollPane.setBounds(15, 130, 675, 250);
         scrollPane.setBounds(x, y, ancho, alto);
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);

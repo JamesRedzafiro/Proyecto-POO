@@ -38,7 +38,8 @@ public class vistaBuscarCliente extends JFrame {
         // Configurar la transparencia de la tabla y sus celdas
         table.setOpaque(false);
         ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
-        ControladorVista.configurarTablaRegistarCliente(model, table, scrollPane, PanelVistaCompra,15, 200, 1055, 300);
+        String [] columnas ={"N° Registro","Nombre","Apellido","DNI","iDCliente","Direccion","RUC","Telefono","Correo","Fecha Registro"};
+        ControladorVista.configurarTabla(model, table, scrollPane, PanelVistaCompra,15, 200, 1055, 300,columnas);
 
         //Ingresar los Datos
 

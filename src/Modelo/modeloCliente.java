@@ -5,7 +5,6 @@ public class modeloCliente extends modeloPersona {
     private int iDCliente;
     private int Ruc;
 
-
     public modeloCliente(String nombre, String apellido, int DNI, int iD, String direccion, int telefono, String correo, int RUC){
         super(nombre, apellido, DNI, iD, direccion, telefono, correo);
         this.iDCliente = iD;
