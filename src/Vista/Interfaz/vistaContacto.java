@@ -5,7 +5,7 @@ import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import Controlador.ControladorVista;
+import Controlador.ControladorInterfaz;
 import Vista.ImagenFondo;
 
 
@@ -47,12 +47,12 @@ public class vistaContacto extends JFrame {
         table.setOpaque(false);
         ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
 
-        ControladorVista.agregarEtiqueta(PanelVistaPedido, "Escriba su dirección de correo:",new Font("Aptos Black", Font.BOLD, 20),5, 5, 450, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.BOLD, 20), 5, 40, 525, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaPedido, "Escriba su mensaje:",new Font("Aptos Black", Font.BOLD, 20),5, 80, 525, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.BOLD, 20), 5, 120, 525, 120);
-        ControladorVista.agregarBoton(PanelVistaPedido, "Enviar", 390, 235, 250, 30, 385, 260, "check.png");
-        ControladorVista.agregarBoton(PanelVistaPedido, "Cancelar", 460, 235, 250, 30, 465, 260, "x.png");
+        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Escriba su dirección de correo:",new Font("Aptos Black", Font.BOLD, 20),5, 5, 450, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.BOLD, 20), 5, 40, 525, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Escriba su mensaje:",new Font("Aptos Black", Font.BOLD, 20),5, 80, 525, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.BOLD, 20), 5, 120, 525, 120);
+        ControladorInterfaz.agregarBoton(PanelVistaPedido, "Enviar", 390, 235, 250, 30, 385, 260, "check.png");
+        ControladorInterfaz.agregarBoton(PanelVistaPedido, "Cancelar", 460, 235, 250, 30, 465, 260, "x.png");
 
 
     }

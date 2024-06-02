@@ -6,7 +6,7 @@ import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import Controlador.ControladorVista;
+import Controlador.ControladorInterfaz;
 import Vista.ImagenFondo;
 
 public class vistaCompra extends JFrame {
@@ -41,51 +41,51 @@ public class vistaCompra extends JFrame {
         ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
 
         String [] columnas = {"ID","Producto","Precio","Cantidad","Total"};
-        ControladorVista.configurarTabla(model, table, scrollPane, PanelVistaCompra,15, 210, 850, 290,columnas);
+        ControladorInterfaz.configurarTabla(model, table, scrollPane, PanelVistaCompra,15, 210, 850, 290,columnas);
 
         // Datos Funcionario
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Datos del Funcionario:", new Font("Aptos Black", Font.BOLD, 20), 10, 5, 430, 20);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "ID", new Font("Aptos Black", Font.BOLD, 15), 15, 30, 50, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Nombre", new Font("Aptos Black", Font.BOLD, 15), 100, 30, 150, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Apellido", new Font("Aptos Black", Font.BOLD, 15), 260, 30, 150, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 15, 65, 75, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 100, 65, 150, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 260, 65, 175, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Datos del Funcionario:", new Font("Aptos Black", Font.BOLD, 20), 10, 5, 430, 20);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "ID", new Font("Aptos Black", Font.BOLD, 15), 15, 30, 50, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Nombre", new Font("Aptos Black", Font.BOLD, 15), 100, 30, 150, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Apellido", new Font("Aptos Black", Font.BOLD, 15), 260, 30, 150, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 15, 65, 75, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 100, 65, 150, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 260, 65, 175, 35);
 
         // Datos Cliente
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Datos del Cliente:", new Font("Aptos Black", Font.BOLD, 20), 450, 5, 400, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "ID", new Font("Aptos Black", Font.BOLD, 15), 455, 30, 50, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Descripción", new Font("Aptos Black", Font.BOLD, 15), 540, 30, 150, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "RUC", new Font("Aptos Black", Font.BOLD, 15), 750, 30, 150, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 455, 65, 75, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 540, 65, 200, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 750, 65, 115, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Datos del Cliente:", new Font("Aptos Black", Font.BOLD, 20), 450, 5, 400, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "ID", new Font("Aptos Black", Font.BOLD, 15), 455, 30, 50, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Descripción", new Font("Aptos Black", Font.BOLD, 15), 540, 30, 150, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "RUC", new Font("Aptos Black", Font.BOLD, 15), 750, 30, 150, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 455, 65, 75, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 540, 65, 200, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 750, 65, 115, 35);
 
         // Datos Productos
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Datos del Producto:", new Font("Aptos Black", Font.BOLD, 20), 15, 100, 400, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "ID", new Font("Aptos Black", Font.BOLD, 15), 15, 130, 80, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Descripción", new Font("Aptos Black", Font.BOLD, 15), 110, 130, 150, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Precio", new Font("Aptos Black", Font.BOLD, 15), 270, 130, 100, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Stock", new Font("Aptos Black", Font.BOLD, 15), 355, 130, 75, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Cantidad", new Font("Aptos Black", Font.BOLD, 15), 465, 130, 150, 35);
-        ControladorVista.agregarEtiqueta(PanelVistaCompra, "Total Venta", new Font("Aptos Black", Font.BOLD, 15), 550, 130, 150, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 15, 160, 85, 35); //ID
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 110, 160, 150, 35); //Descripción
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 270, 160, 75, 35); //Precio 
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 355, 160, 100, 35); // Stock
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 465, 160, 75, 35); //Cantidad
-        ControladorVista.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 550, 160, 125, 35); //Total venta
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Datos del Producto:", new Font("Aptos Black", Font.BOLD, 20), 15, 100, 400, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "ID", new Font("Aptos Black", Font.BOLD, 15), 15, 130, 80, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Descripción", new Font("Aptos Black", Font.BOLD, 15), 110, 130, 150, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Precio", new Font("Aptos Black", Font.BOLD, 15), 270, 130, 100, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Stock", new Font("Aptos Black", Font.BOLD, 15), 355, 130, 75, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Cantidad", new Font("Aptos Black", Font.BOLD, 15), 465, 130, 150, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Total Venta", new Font("Aptos Black", Font.BOLD, 15), 550, 130, 150, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 15, 160, 85, 35); //ID
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 110, 160, 150, 35); //Descripción
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 270, 160, 75, 35); //Precio 
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 355, 160, 100, 35); // Stock
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 465, 160, 75, 35); //Cantidad
+        ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 550, 160, 125, 35); //Total venta
 
         // Botones
         // Botones Superiores
-        ControladorVista.agregarBoton(PanelVistaCompra, "Agregar", 700, 100, 75, 35, 690, 130, "check.png");
-        ControladorVista.agregarBoton(PanelVistaCompra, "Eliminar", 790, 100, 75, 35, 780, 130, "eliminar.png");
+        ControladorInterfaz.agregarBoton(PanelVistaCompra, "Agregar", 700, 100, 75, 35, 690, 130, "check.png");
+        ControladorInterfaz.agregarBoton(PanelVistaCompra, "Eliminar", 790, 100, 75, 35, 780, 130, "eliminar.png");
 
 
         //Botones Parte baja
-        ControladorVista.agregarBotonInferior(PanelVistaCompra, 345, 510, 75, 75, "nuevo.png");
-        ControladorVista.agregarBotonInferior(PanelVistaCompra, 435, 510, 75, 75, "guardar.png");
-        ControladorVista.agregarBotonInferior(PanelVistaCompra, 525, 510, 75, 75, "x.png");
+        ControladorInterfaz.agregarBotonInferior(PanelVistaCompra, 345, 510, 75, 75, "nuevo.png");
+        ControladorInterfaz.agregarBotonInferior(PanelVistaCompra, 435, 510, 75, 75, "guardar.png");
+        ControladorInterfaz.agregarBotonInferior(PanelVistaCompra, 525, 510, 75, 75, "x.png");
 
         //Esto se usará en el ControladorCompra
         String total = "Total: S/.          ";

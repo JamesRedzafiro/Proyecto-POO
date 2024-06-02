@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.table.*;
-import Controlador.ControladorVista;
+import Controlador.ControladorInterfaz;
 import Vista.ImagenFondo;
 
 
@@ -41,24 +41,13 @@ public class vistaPedido extends JFrame{
 
         // Crear el modelo de la tabla
         model = new DefaultTableModel();
-        model.addColumn("N° Pedido");
-        model.addColumn("Nombre");
-        model.addColumn("Precio");
-        model.addColumn("Fecha Entrega");
-
         // Crear la tabla con el modelo
         table = new JTable(model);
-
-        // Configurar la transparencia de la tabla y sus celdas
-        table.setOpaque(false);
-        ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
-        
-        // Agregar la tabla a un JScrollPane
         scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(15, 130, 675, 250);
-        scrollPane.setOpaque(false);
-        scrollPane.getViewport().setOpaque(false);
         PanelVistaPedido.add(scrollPane);
+
+        String [] columnas = {"N° Pedido","Nombre","Precio","Fecha Entrega"};
+        ControladorInterfaz.configurarTabla(model, table, scrollPane, PanelVistaPedido,15, 130, 675, 250, columnas);
 
         //Producto
         JLabel productoJLabel = new JLabel("Nombre del Producto:");
@@ -67,19 +56,19 @@ public class vistaPedido extends JFrame{
         PanelVistaPedido.add(productoJLabel);
 
         String[] productos = {"agua1", "agua2", "agua3", "agua4", "agua5", "agua6", "agua7"};
-        ControladorVista.agregarComboBox(PanelVistaPedido, productos, 15, 35, 225, 35);
+        ControladorInterfaz.agregarComboBox(PanelVistaPedido, productos, 15, 35, 225, 35);
         
         //Cantidad
-        ControladorVista.agregarEtiqueta(PanelVistaPedido, "Cantidad de Productos:", new Font("Aptos Black",Font.BOLD,20), 260, 0, 225, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 260, 35, 225, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Cantidad de Productos:", new Font("Aptos Black",Font.BOLD,20), 260, 0, 225, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 260, 35, 225, 35);
 
         //iD Cliente
-        ControladorVista.agregarEtiqueta(PanelVistaPedido,"ID Cliente",new Font("Aptos Black",Font.BOLD,20),505, 0, 225, 35);
-        ControladorVista.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 505, 35, 185, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido,"ID Cliente",new Font("Aptos Black",Font.BOLD,20),505, 0, 225, 35);
+        ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 505, 35, 185, 35);
 
         //Total
-        ControladorVista.agregarEtiqueta(PanelVistaPedido, "Total Pedido: S/. ", new Font("Aptos Black",Font.BOLD,20), 20, 400, 250, 40); 
-        ControladorVista.agregarEtiqueta(PanelVistaPedido, "00.00", new Font("Aptos Black",Font.BOLD,20), 200, 400, 250, 40);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Total Pedido: S/. ", new Font("Aptos Black",Font.BOLD,20), 20, 400, 250, 40); 
+        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "00.00", new Font("Aptos Black",Font.BOLD,20), 200, 400, 250, 40);
     
 
         //Botones
