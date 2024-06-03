@@ -1,4 +1,7 @@
-package Modelo;
+package Main;
+
+
+import Modelo.modeloUsuario;
 
 public class ejemploUsuario{
 
