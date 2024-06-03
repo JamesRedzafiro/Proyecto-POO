@@ -10,6 +10,7 @@ public class modeloPersona {
     private int telefono;
     private String correo;
 
+
     public modeloPersona(String nombre, String apellido, int DNI, int iD, String direccion, int telefono, String correo){
         this.nombre = nombre;
         this.apellido = apellido;
