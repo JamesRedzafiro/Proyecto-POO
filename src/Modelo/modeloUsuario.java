@@ -31,6 +31,7 @@ public class modeloUsuario extends modeloPersona{
         }
     }
     
+    //////////////MÉTODOS PROPIOS//////////
     public String InfoUsuario() {
         return "Usuario: " + getNombre() + " " + getApellido() + "\n" +
                "Cedula: " + getDNI() + "\n" +
