@@ -2,23 +2,80 @@ package Controlador;
 
 import javax.swing.*;
 import java.awt.Font;
+import java.awt.color.*;
+import java.awt.event.*;
+import javafx.scene.paint.Color;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import java.net.URL;
+import javax.swing.table.TableCellRenderer;
+import java.util.ArrayList;
+
+
+import java.net.URL;    
 
 public class ControladorInterfaz {
 
-    public static void configurarTabla(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel, int x, int y, int ancho, int alto, String[] columnas) {
+     public static void configurarTabla(DefaultTableModel model, JTable table, JScrollPane scrollPane, JPanel panel, int x, int y, int ancho, int alto, String[] columnas) {
+        // Establecer el modelo de tabla personalizado
+        table.setModel(new DefaultTableModel() {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+            @Override
+            public Object getValueAt(int row, int column) {
+                return model.getValueAt(row, column);
+            }
+
+            @Override
+            public int getColumnCount() {
+                return model.getColumnCount();
+            }
+
+            @Override
+            public String getColumnName(int column) {
+                return model.getColumnName(column);
+            }
+
+            @Override
+            public int getRowCount() {
+                return model.getRowCount();
+            }
+
+            @Override
+            public void setValueAt(Object aValue, int row, int column) {
+                model.setValueAt(aValue, row, column);
+            }
+        });
+
+        // Agregar columnas al modelo de tabla personalizado
         for (String columna : columnas) {
             model.addColumn(columna);
         }
+
+        // Configurar la tabla
         table.setOpaque(false);
         ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
+
+        // Establecer el estilo de la fuente en negrita
+        table.setFont(table.getFont().deriveFont(Font.BOLD));
+
+        // Establecer el color de fondo de la tabla
+        table.setBackground(Color.WHITE);
+
+        // Configurar el panel de desplazamiento y agregarlo al panel principal
         scrollPane.setBounds(x, y, ancho, alto);
         scrollPane.setOpaque(false);
-        scrollPane.getViewport().setOpaque(false);
+        scrollPane.getViewport().setOpaque(false); 
         panel.add(scrollPane);
     }
+    
 
     public static JLabel agregarEtiqueta(JPanel panel, String texto, Font font, int x, int y, int width, int height) {
         JLabel etiqueta = new JLabel(texto);

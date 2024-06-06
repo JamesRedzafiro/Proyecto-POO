@@ -6,7 +6,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import Controlador.ControladorInterfaz;
+import Controlador.ControladorVista;
 import Vista.ImagenFondo;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class vistaRegistrarCliente extends JFrame {
 
@@ -22,10 +25,10 @@ public class vistaRegistrarCliente extends JFrame {
     private JTextField rucField;
     private JTextField telefonoField;
     private JTextField correoField;
-    public JButton registrarButton;
-    public JButton actualizarButton;
-    public JButton cancelarButton;
-    public JButton guardarButton;
+    private JButton registrarButton;
+    private JButton actualizarButton;
+    private JButton eliminarButton;
+    private JButton guardarButton;
 
     public vistaRegistrarCliente() {
         this.setTitle("EMPRESA SOCOSANI:   Registrar Cliente");
@@ -76,7 +79,34 @@ public class vistaRegistrarCliente extends JFrame {
         // Botones
         registrarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Registrar", 740, 385, 75, 35, 740, 415, "check.png");
         actualizarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Actualizar", 828, 385, 75, 35, 825, 415, "actualizar.png");
-        cancelarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Cancelar", 915, 385, 75, 35, 910, 415, "x.png");
+        eliminarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Eliminar", 915, 385, 75, 35, 910, 415, "x.png");
         guardarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Guardar", 1000, 385, 75, 35, 995, 415, "guardar.png");
+
+        // Añadir ActionListener para el botón registrar
+        registrarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ControladorVista.registrarCliente(model, nombreField, apellidoField, dniField, idClienteField, direccionField, rucField, telefonoField, correoField);
+            }
+        });
+
+        // ActionListener para el botón "Actualizar"
+        actualizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ControladorVista.actualizarCliente(model, table, nombreField, apellidoField, dniField, idClienteField, direccionField, rucField, telefonoField, correoField);
+            }
+        });
+
+        // ActionListener para el botón "Eliminar"
+        eliminarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ControladorVista.eliminarCliente(model, table);
+            }
+        });
+
+
     }
+
+    
 }
