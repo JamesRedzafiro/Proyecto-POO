@@ -20,14 +20,15 @@ public class ControladorInterfaz {
         panel.add(scrollPane);
     }
 
-    public static void agregarEtiqueta(JPanel panel, String texto, Font font, int x, int y, int width, int height) {
+    public static JLabel agregarEtiqueta(JPanel panel, String texto, Font font, int x, int y, int width, int height) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setFont(font);
         etiqueta.setBounds(x, y, width, height);
         panel.add(etiqueta);
+        return etiqueta;
     }
 
-    public static void agregarCampoTexto(JPanel panel, Font font, int x, int y, int width, int height) {
+    public static JTextField agregarCampoTexto(JPanel panel, Font font, int x, int y, int width, int height) {
         JTextField campoTexto = new JTextField();
         campoTexto.setFont(font);
         campoTexto.setBounds(x, y, width, height);
@@ -36,9 +37,10 @@ public class ControladorInterfaz {
         // Asegurarse de que el texto esté alineado en la parte superior
         campoTexto.setAlignmentY(JTextArea.TOP_ALIGNMENT);
         panel.add(campoTexto);
+        return campoTexto;
     }
 
-    public static void agregarBoton(JPanel panel, String texto, int xLabel, int yLabel, int widthLabel,int heightLabel,int xButton,int yButton, String nombreIcon) {
+    public static JButton agregarBoton(JPanel panel, String texto, int xLabel, int yLabel, int widthLabel,int heightLabel,int xButton,int yButton, String nombreIcon) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setFont(new Font("Aptos Black", Font.BOLD, 15));
         etiqueta.setBounds(xLabel, yLabel, widthLabel, heightLabel);
@@ -56,9 +58,10 @@ public class ControladorInterfaz {
         btnJButton.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnJButton.setBounds(xButton, yButton, 75, 75);
         panel.add(btnJButton);
+        return btnJButton;
     }
 
-    public static void agregarBotonInferior(JPanel panel, int x, int y, int width, int height,String nombreIcon) {
+    public static JButton agregarBotonInferior(JPanel panel, int x, int y, int width, int height, String nombreIcon) {
         JButton btnJButton = new JButton();
         URL iconURL = ControladorInterfaz.class.getResource("/Imagenes/" + nombreIcon); // Ajusta la ruta de la imagen
         if (iconURL != null) {
@@ -71,13 +74,14 @@ public class ControladorInterfaz {
         btnJButton.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnJButton.setBounds(x, y, width, height);
         panel.add(btnJButton);
+        return btnJButton;
     }
 
-    public static void agregarComboBox(JPanel panel, String[] cadena, int x, int y, int width, int height) {
+    public static JComboBox<String> agregarComboBox(JPanel panel, String[] cadena, int x, int y, int width, int height) {
         JComboBox<String> comboBox = new JComboBox<>(cadena);
         comboBox.setFont(new Font("Aptos Black", Font.BOLD, 20));
         comboBox.setBounds(x, y, width, height);
         panel.add(comboBox);
+        return comboBox;
     }
-
 }
