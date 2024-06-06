@@ -105,6 +105,14 @@ public class vistaRegistrarCliente extends JFrame {
             }
         });
 
+        // ActionListener para el botón "Guardar"
+        // guardarButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         ControladorVista.guardarCliente(model, table);
+        //     }
+        //});
+
 
     }
 
