@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import Controlador.ControladorInterfaz;
-import Controlador.ControladorVista;
+import Controlador.ControladorRegistrarCliente;
 import Vista.ImagenFondo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -85,7 +85,7 @@ public class vistaRegistrarCliente extends JFrame {
         // Añadir ActionListener para el botón registrar
         registrarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ControladorVista.registrarCliente(model, nombreField, apellidoField, dniField, idClienteField, direccionField, rucField, telefonoField, correoField);
+                ControladorRegistrarCliente.registrarCliente(model, nombreField, apellidoField, dniField, idClienteField, direccionField, rucField, telefonoField, correoField);
             }
         });
 
@@ -93,7 +93,7 @@ public class vistaRegistrarCliente extends JFrame {
         actualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ControladorVista.actualizarCliente(model, table, nombreField, apellidoField, dniField, idClienteField, direccionField, rucField, telefonoField, correoField);
+                ControladorRegistrarCliente.actualizarCliente(model, table, nombreField, apellidoField, dniField, idClienteField, direccionField, rucField, telefonoField, correoField);
             }
         });
 
@@ -101,7 +101,7 @@ public class vistaRegistrarCliente extends JFrame {
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ControladorVista.eliminarCliente(model, table);
+                ControladorRegistrarCliente.eliminarCliente(model, table);
             }
         });
 
@@ -113,8 +113,5 @@ public class vistaRegistrarCliente extends JFrame {
         //     }
         //});
 
-
     }
-
-    
 }

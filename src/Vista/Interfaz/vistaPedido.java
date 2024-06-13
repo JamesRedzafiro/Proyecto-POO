@@ -34,6 +34,11 @@ public class vistaPedido extends JFrame{
 
     private void ComponentesVistaPedido(){
 
+        JComboBox productoBox;
+        JTextField cantidaField;
+        JTextField idClienteField;
+        JLabel totalLabel;
+
         //Usa ImagenFondo en lugar de JPanel
         ImagenFondo PanelVistaPedido = new ImagenFondo("/Imagenes/fondo-socosani.png");
         PanelVistaPedido.setLayout(null);
@@ -56,19 +61,19 @@ public class vistaPedido extends JFrame{
         PanelVistaPedido.add(productoJLabel);
 
         String[] productos = {"agua1", "agua2", "agua3", "agua4", "agua5", "agua6", "agua7"};
-        ControladorInterfaz.agregarComboBox(PanelVistaPedido, productos, 15, 35, 225, 35);
+        productoBox = ControladorInterfaz.agregarComboBox(PanelVistaPedido, productos, 15, 35, 225, 35);
         
         //Cantidad
         ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Cantidad de Productos:", new Font("Aptos Black",Font.BOLD,20), 260, 0, 225, 35);
-        ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 260, 35, 225, 35);
+        cantidaField = ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 260, 35, 225, 35);
 
         //iD Cliente
         ControladorInterfaz.agregarEtiqueta(PanelVistaPedido,"ID Cliente",new Font("Aptos Black",Font.BOLD,20),505, 0, 225, 35);
-        ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 505, 35, 185, 35);
+        idClienteField = ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 505, 35, 185, 35);
 
         //Total
         ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Total Pedido: S/. ", new Font("Aptos Black",Font.BOLD,20), 20, 400, 250, 40); 
-        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "00.00", new Font("Aptos Black",Font.BOLD,20), 200, 400, 250, 40);
+        totalLabel =  ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "00.00", new Font("Aptos Black",Font.BOLD,20), 200, 400, 250, 40);
     
 
         //Botones
