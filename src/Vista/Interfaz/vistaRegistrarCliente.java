@@ -2,14 +2,21 @@ package Vista.Interfaz;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+import BaseDatos.ConexionBD;
 import Controlador.ControladorInterfaz;
 import Controlador.ControladorRegistrarCliente;
 import Vista.ImagenFondo;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class vistaRegistrarCliente extends JFrame {
 
@@ -105,13 +112,36 @@ public class vistaRegistrarCliente extends JFrame {
             }
         });
 
-        // ActionListener para el botón "Guardar"
-        // guardarButton.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         ControladorVista.guardarCliente(model, table);
-        //     }
-        //});
+        //ActionListener para el botón "Guardar"
+        /*
+        guardarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //int id, String nombre, String apellido, int dni, String direccion, int telefono, String correo
+                int idCliente;
+                try {
+                    idCliente = Integer.parseInt(idClienteField.getText());
+                } catch (NumberFormatException a) {
+                    JOptionPane.showMessageDialog(null,"El ID de cliente debe ser un número entero");
+                    return;
+                }                
+                String nombre = nombreField.getText();
+                String apellido = apellidoField.getText();
+                int dni = Integer.parseInt(dniField.getText());
+                String direccion = direccionField.getText();
+                int telefono = Integer.parseInt(telefonoField.getText());
+                String correo = correoField.getText();
+
+                try {
+                    ConexionBD.insertarPersona(idCliente, nombre, apellido, dni, direccion, telefono, correo);
+                } catch (SQLException o) {
+                    Logger.getLogger(vistaRegistrarCliente.class.getName()).log(Level.SEVERE, null, e);
+                    JOptionPane.showMessageDialog(null, "Error al insertar persona en la base de datos");
+                }
+            }
+        });
+        */
+        
 
     }
 }
