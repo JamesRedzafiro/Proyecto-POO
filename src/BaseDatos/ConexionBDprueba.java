@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ConexionBD {
+public class ConexionBDprueba {
 
     // Cadena de conexión a tu base de datos
-    private static final String URL = "jdbc:sqlserver://JamesRed\\SQLEXPRESS:1433;databaseName=BaseDatosSocosani";
+    private static final String URL = "jdbc:sqlserver://JamesRed\\localhost:1433;databaseName=BaseDatosSocosani;encrypt=true;trustServerCertificate=true;";
     private static final String USER = "sa";
     private static final String PASSWORD = "Nadeko575.";
 
@@ -36,9 +36,26 @@ public class ConexionBD {
         }
     }
 
+    public void eliminarPersona(int id){
+        String query = "DELETE FROM modeloPersona WHERE iD = ?";
+
+        try (
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            PreparedStatement stmt = conn.prepareStatement(query)
+            ) 
+        {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+                System.out.println("Persona eliminada correctamente.");
+        } catch (SQLException e) {
+                    System.out.println("Error SQL: " + e.getMessage());
+        }
+    } 
+    
     public static void main(String[] args) {
-        ConexionBD conexion = new ConexionBD();
+        ConexionBDprueba conexion = new ConexionBDprueba();
         // Ejemplo de cómo llamar al método insertarPersona
         conexion.insertarPersona(1, "Juan", "Perez", 12345678, "Av. Principal 123", 999888777, "juan@example.com");
     }
 }
+

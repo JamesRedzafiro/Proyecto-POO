@@ -10,15 +10,14 @@ public class modeloPersona {
     private int telefono;
     private String correo;
 
-
-    public modeloPersona(String nombre, String apellido, int DNI, int iD, String direccion, int telefono, String correo){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.DNI = DNI;
-        this.iD = iD;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.correo = correo;
+    public modeloPersona(String nombre, String apellido, int DNI, int iD, String direccion, int telefono, String correo) {
+        setNombre(nombre);
+        setApellido(apellido);
+        setDNI(DNI);
+        setID(iD);
+        setDireccion(direccion);
+        setTelefono(telefono);
+        setCorreo(correo);
     }
 
     public String getNombre() {
@@ -26,6 +25,9 @@ public class modeloPersona {
     }
 
     public void setNombre(String nombre) {
+        if (!nombre.matches("[a-zA-Z]+")) {
+            throw new IllegalArgumentException("El nombre solo debe contener letras");
+        }
         this.nombre = nombre;
     }
 
@@ -34,6 +36,9 @@ public class modeloPersona {
     }
 
     public void setApellido(String apellido) {
+        if (!apellido.matches("[a-zA-Z]+")) {
+            throw new IllegalArgumentException("El apellido solo debe contener letras");
+        }
         this.apellido = apellido;
     }
 
@@ -42,6 +47,10 @@ public class modeloPersona {
     }
 
     public void setDNI(int DNI) {
+        String dniString = String.valueOf(DNI);
+        if (!dniString.matches("\\d{8}")) {
+            throw new IllegalArgumentException("El DNI debe tener 8 dígitos");
+        }
         this.DNI = DNI;
     }
 
@@ -50,6 +59,7 @@ public class modeloPersona {
     }
 
     public void setID(int iD) {
+        // Validación para el ID
         this.iD = iD;
     }
 
@@ -58,6 +68,7 @@ public class modeloPersona {
     }
 
     public void setDireccion(String direccion) {
+        // Validación para la dirección
         this.direccion = direccion;
     }
 
@@ -66,6 +77,10 @@ public class modeloPersona {
     }
 
     public void setTelefono(int telefono) {
+        String telefonoString = String.valueOf(telefono);
+        if (!telefonoString.matches("\\d{9}")) {
+            throw new IllegalArgumentException("El teléfono debe tener 9 dígitos");
+        }
         this.telefono = telefono;
     }
 
@@ -74,6 +89,9 @@ public class modeloPersona {
     }
 
     public void setCorreo(String correo) {
+        if (!correo.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+            throw new IllegalArgumentException("El correo electrónico no es válido");
+        }
         this.correo = correo;
     }
 }

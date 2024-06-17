@@ -5,6 +5,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import BaseDatos.ConexionBDprueba;
+import Controlador.validarInformacion;
+
 public class ControladorRegistrarCliente {
 
     public static void registrarCliente(DefaultTableModel model, JTextField nombreField, JTextField apellidoField, JTextField dniField, JTextField idClienteField, JTextField direccionField, JTextField rucField, JTextField telefonoField, JTextField correoField) {
@@ -16,23 +19,33 @@ public class ControladorRegistrarCliente {
         String ruc = rucField.getText();
         String telefono = telefonoField.getText();
         String correo = correoField.getText();
-        // Validaciones básicas (puedes añadir más según tus necesidades)
-        if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || idCliente.isEmpty() || direccion.isEmpty() || ruc.isEmpty() || telefono.isEmpty() || correo.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        
+        // Validar datos
+        if (!validarNombreApellido(nombre) || !validarNombreApellido(apellido)) {
+            JOptionPane.showMessageDialog(null, "El nombre y apellido deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        // Añadir fila a la tabla
-        model.addRow(new Object[]{model.getRowCount() + 1, nombre, apellido, dni, idCliente, direccion, ruc, telefono, correo, new java.util.Date()});
-        // Limpiar campos
-        nombreField.setText("");
-        apellidoField.setText("");
-        dniField.setText("");
-        idClienteField.setText("");
-        direccionField.setText("");
-        rucField.setText("");
-        telefonoField.setText("");
-        correoField.setText("");
+        if (!validarDNI(dni)) {
+            JOptionPane.showMessageDialog(null, "El DNI debe contener exactamente 8 números sin espacios", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!validarRUC(ruc)) {
+            JOptionPane.showMessageDialog(null, "El RUC debe contener exactamente 10 dígitos y empezar con 1 o 2", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!validarTelefono(telefono)) {
+            JOptionPane.showMessageDialog(null, "El teléfono debe contener exactamente 9 dígitos que empiecen con 9", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!validarCorreo(correo)) {
+            JOptionPane.showMessageDialog(null, "El correo electrónico debe contener '@' y terminar en '.com'", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
+        // Resto del código de registro
+        // Añadir fila a la tabla, limpiar campos, etc.
     }
+    
 
     public static void actualizarCliente(DefaultTableModel model, JTable table, JTextField nombreField, JTextField apellidoField, JTextField dniField, JTextField idClienteField, JTextField direccionField, JTextField rucField, JTextField telefonoField, JTextField correoField) {
         int selectedRow = table.getSelectedRow();
@@ -88,7 +101,29 @@ public class ControladorRegistrarCliente {
         }
     } 
 
+    public static void guardarCliente(DefaultTableModel model) {
+        ConexionBDprueba conexion = new ConexionBDprueba();
+        
+        for (int i = 0; i < model.getRowCount(); i++) {
+            int idCliente = Integer.parseInt(model.getValueAt(i, 0).toString());
+            String nombre = model.getValueAt(i, 1).toString();
+            String apellido = model.getValueAt(i, 2).toString();
+            int dni = Integer.parseInt(model.getValueAt(i, 3).toString());
+            String direccion = model.getValueAt(i, 4).toString();
+            int telefono = Integer.parseInt(model.getValueAt(i, 5).toString());
+            String correo = model.getValueAt(i, 6).toString();
     
+            // Intenta insertar los datos y muestra un mensaje según el resultado
+            try {
+                conexion.insertarPersona(idCliente, nombre, apellido, dni, direccion, telefono, correo);
+                JOptionPane.showMessageDialog(null, "Datos insertados correctamente en la base de datos.");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error al insertar persona en la base de datos: " + ex.getMessage());
+                continue;
+            }
+        }
+    }
+
 
 
 }
