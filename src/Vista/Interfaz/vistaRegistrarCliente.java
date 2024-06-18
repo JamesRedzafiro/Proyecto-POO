@@ -2,20 +2,17 @@ package Vista.Interfaz;
 
 import java.awt.*;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
-import BaseDatos.ConexionBDprueba;
+
 import Controlador.ControladorInterfaz;
 import Controlador.ControladorRegistrarCliente;
-import Modelo.modeloPersona;
+
 import Vista.ImagenFondo;
 
 
@@ -120,11 +117,6 @@ public class vistaRegistrarCliente extends JFrame {
                 ControladorRegistrarCliente.guardarCliente(model);
             }
         });
-        
-        
-        
-        
-        
         
 
     }
