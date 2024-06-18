@@ -3,6 +3,8 @@ package BaseDatos;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.SQLException;
 
 public class ConexionBDprueba {
@@ -50,12 +52,22 @@ public class ConexionBDprueba {
         } catch (SQLException e) {
                     System.out.println("Error SQL: " + e.getMessage());
         }
-    } 
-    
-    public static void main(String[] args) {
-        ConexionBDprueba conexion = new ConexionBDprueba();
-        // Ejemplo de cómo llamar al método insertarPersona
-        conexion.insertarPersona(1, "Juan", "Perez", 12345678, "Av. Principal 123", 999888777, "juan@example.com");
+    }
+
+    public int getLastIdCliente() {
+        int lastIdCliente = 0;
+        try (
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT MAX(iD) AS lastId FROM modeloPersona") // Ajusta la consulta según tu tabla
+        ) {
+            if (rs.next()) {
+                lastIdCliente = rs.getInt("lastId");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+        }
+        return lastIdCliente;
     }
 }
 
