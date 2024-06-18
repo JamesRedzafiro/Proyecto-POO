@@ -1,17 +1,29 @@
 package Modelo;
 
+import java.util.Date;
+
 public class modeloPedido {
 
+    private int iDPedido;
     private int cantidad;
-    private String fecha;
     private modeloCliente Cliente;
     private modeloProducto Producto;
+    private Date fecha;
 
-    public modeloPedido(int cantidad, String fecha, modeloCliente cliente, modeloProducto producto){
+    public modeloPedido(int iDPedido, int cantidad, Date fecha, modeloCliente cliente, modeloProducto producto){
+        this.iDPedido = iDPedido;
         this.cantidad = cantidad;
         this.fecha = fecha;
         this.Cliente = cliente;
         this.Producto = producto;
+    }
+
+    public int getIDPedido(){
+        return iDPedido;
+    }
+
+    public void setIDPedido(int iDPedido){
+        this.iDPedido = iDPedido;
     }
 
     public modeloProducto getProducto() {
@@ -30,11 +42,11 @@ public class modeloPedido {
         this.cantidad = cantidad;
     }
  
-    public String getFecha() {
+    public Date getFecha() {
         return this.fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

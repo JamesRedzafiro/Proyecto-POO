@@ -68,7 +68,6 @@ public class modeloPersona {
     }
 
     public void setDireccion(String direccion) {
-        // Validación para la dirección
         this.direccion = direccion;
     }
 

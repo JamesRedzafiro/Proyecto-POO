@@ -24,17 +24,13 @@ public class modeloUsuario extends modeloPersona{
     }
 
     public void setContrasena(String contrasena) {
-        if (contrasena.length() >= 8 && contrasena.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")) {
             this.contrasena = contrasena;
-        } else {
-            System.out.println("La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula y un número.");
-        }
     }
     
-    //////////////MÉTODOS PROPIOS//////////
+    //////////////MÉTODOS PRUEBA//////////
     public String InfoUsuario() {
         return "Usuario: " + getNombre() + " " + getApellido() + "\n" +
-               "Cedula: " + getDNI() + "\n" +
+               "DNI: " + getDNI() + "\n" +
                "ID Usuario: " + iDUsuario + "\n" +
                "Direccion: " + getDireccion() + "\n" +
                "Numero de telefono: " + getTelefono() + "\n" +
@@ -44,7 +40,7 @@ public class modeloUsuario extends modeloPersona{
 
     public static String InfoUsuario(modeloUsuario usuario) {
         return "Usuario: " + usuario.getNombre() + " " + usuario.getApellido() + "\n" +
-               "Cedula: " + usuario.getDNI() + "\n" +
+               "DNI: " + usuario.getDNI() + "\n" +
                "ID Usuario: " + usuario.getIDUsuario() + "\n" +
                "Direccion: " + usuario.getDireccion() + "\n" +
                "Numero de telefono: " + usuario.getTelefono() + "\n" +
