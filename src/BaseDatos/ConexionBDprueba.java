@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 
 public class ConexionBDprueba {
 
@@ -21,11 +22,17 @@ public class ConexionBDprueba {
     }
 
     // Método para insertar datos en la tabla modeloPersona
-    public void insertarPersona(String id, String nombre, String apellido, String dni, String direccion, String telefono, String correo) throws SQLException {
-        String query = "INSERT INTO modeloPersona (iD, nombre, apellido, DNI, direccion, telefono, correo) " +
-                       "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+    public void insertarPersona(String id, String nombre, String apellido, String dni, String direccion, String telefono, String correo, Date fechaRegistro) throws SQLException {
+        String query = "INSERT INTO modeloPersona (iD, nombre, apellido, DNI, direccion, telefono, correo, fechaRegistro) " +
+                       "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        
         try {
+
+            if (conn == null || conn.isClosed()) {
+                throw new SQLException("La conexión no está inicializada correctamente.");
+            }
+
             stmt = conn.prepareStatement(query);
             stmt.setString(1, id);
             stmt.setString(2, nombre);
@@ -34,8 +41,13 @@ public class ConexionBDprueba {
             stmt.setString(5, direccion); // Asumiendo que 'direccion' es un String
             stmt.setString(6, telefono);
             stmt.setString(7, correo);
-
+            stmt.setDate(8, fechaRegistro);
+    
             stmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
         } finally {
             // Cerrar el statement en un bloque finally para asegurar la liberación de recursos
             if (stmt != null) {
@@ -43,7 +55,7 @@ public class ConexionBDprueba {
             }
         }
     }
-
+    
     // Método para insertar datos en la tabla modeloCliente
     public void insertarCliente(String idCliente, String id, String ruc) throws SQLException {
         String query = "INSERT INTO modeloCliente (iDCliente, iD, Ruc) VALUES (?, ?, ?)";
@@ -105,7 +117,7 @@ public class ConexionBDprueba {
     }
 
     // Método para iniciar una transacción
-    public void beginTransaction() throws SQLException {
+    public void iniciarConexion() throws SQLException {
         conn = DriverManager.getConnection(URL, USER, PASSWORD);
         conn.setAutoCommit(false); // Deshabilitar auto-commit para iniciar la transacción
     }
@@ -137,3 +149,4 @@ public class ConexionBDprueba {
         }
     }
 }
+
