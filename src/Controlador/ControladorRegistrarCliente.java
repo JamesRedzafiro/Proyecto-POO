@@ -1,10 +1,7 @@
 package Controlador;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import javax.print.DocFlavor.URL;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -45,7 +42,7 @@ public class ControladorRegistrarCliente {
             JOptionPane.showMessageDialog(null, "El correo electrónico debe contener '@' y terminar en '.com'", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+    
         // Añadir fila a la tabla
         model.addRow(new Object[]{model.getRowCount() + 1, nombre, apellido, dni, idCliente, direccion, ruc, telefono, correo, new java.util.Date()});
         
@@ -59,7 +56,7 @@ public class ControladorRegistrarCliente {
         telefonoField.setText("");
         correoField.setText("");
     }
-
+    
     public static void actualizarCliente(DefaultTableModel model, JTable table, JTextField nombreField, JTextField apellidoField, JTextField dniField, JTextField idClienteField, JTextField direccionField, JTextField rucField, JTextField telefonoField, JTextField correoField) {
         int selectedRow = table.getSelectedRow();
         if (selectedRow == -1) {
@@ -137,54 +134,58 @@ public class ControladorRegistrarCliente {
         ConexionBDprueba conexion = new ConexionBDprueba();
         int rowCount = model.getRowCount();
         
-        // Variable para determinar si todos los registros se guardaron correctamente
-        boolean todosGuardados = true;
+        boolean datosGuardados = true;
         
         try {
-            conexion.beginTransaction(); // Iniciar transacción
+            conexion.iniciarConexion(); // Iniciar transacción
             
-            // Recorremos cada fila del modelo de tabla
             for (int i = 0; i < rowCount; i++) {
                 String nombre = model.getValueAt(i, 1).toString();
                 String apellido = model.getValueAt(i, 2).toString();
                 String dniStr = model.getValueAt(i, 3).toString();
-                String direccion = model.getValueAt(i, 4).toString();
-                String telefonoStr = model.getValueAt(i, 5).toString();
-                String correo = model.getValueAt(i, 6).toString();
-                String idClienteStr = model.getValueAt(i, 7).toString();
-                String rucStr = model.getValueAt(i, 8).toString();
-        
-                // Obtener el último ID de cliente de la base de datos
-                int ultimoIdCliente = conexion.getLastIdCliente();
-                int nuevoIdCliente = ultimoIdCliente + 1;
-                String idCliente = String.valueOf(nuevoIdCliente); // Convertir a String
-        
+                String idClienteStr = model.getValueAt(i, 4).toString();
+                String direccion = model.getValueAt(i, 5).toString();
+                String rucStr = model.getValueAt(i, 6).toString();
+                String telefonoStr = model.getValueAt(i, 7).toString();
+                String correo = model.getValueAt(i, 8).toString();
+                java.util.Date fechaRegistroUtil = (java.util.Date) model.getValueAt(i, 9);
+                java.sql.Date fechaRegistroDate = new java.sql.Date(fechaRegistroUtil.getTime());
+                
                 try {
-                    // Insertar datos en la base de datos usando la conexión establecida
-                    conexion.insertarPersona(idCliente, nombre, apellido, dniStr, direccion, telefonoStr, correo);
-                    conexion.insertarCliente(idCliente, idClienteStr, rucStr);
-                    conexion.insertarUsuario(idCliente, idCliente, dniStr); // idUsuario es igual a idCliente, contraseña es el DNI
+                    // Insertar primero en modeloPersona
+                    conexion.insertarPersona(idClienteStr, nombre, apellido, dniStr, direccion, telefonoStr, correo, fechaRegistroDate);
+                    
+                    // Verificar que el iD generado existe en modeloPersona
+                    // 
+                    // 
+                
+                    // Insertar en modeloCliente
+                    conexion.insertarCliente(idClienteStr, idClienteStr, rucStr);
+                    
+                    // Insertar en modeloUsuario (si es necesario)
+                    conexion.insertarUsuario(idClienteStr, idClienteStr, dniStr); // Suponiendo que la contraseña es el DNI
                     
                     JOptionPane.showMessageDialog(null, "Datos insertados correctamente en la base de datos.");
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Error al insertar persona en la base de datos: " + ex.getMessage());
-                    todosGuardados = false; // Marcar que no se guardó este registro
-                    conexion.rollbackTransaction(); // Deshacer transacción en caso de error
-                    break; // Salir del bucle si hay un error
+                    JOptionPane.showMessageDialog(null, "Error al insertar en la base de datos: " + ex.getMessage());
+                    datosGuardados = false;
+                    conexion.rollbackTransaction();
+                    break;
                 }
             }
             
-            if (todosGuardados) {
-                conexion.commitTransaction(); // Confirmar transacción si todos los registros se guardaron correctamente
+            if (datosGuardados) {
+                conexion.commitTransaction();
                 model.setRowCount(0); // Limpiar todas las filas del modelo de tabla después de guardar los datos
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error de conexión con la base de datos: " + e.getMessage());
         } finally {
-            conexion.closeConnection(); // Cerrar conexión al finalizar
+            conexion.closeConnection();
         }
     }
     
-
+    
     
 }
+
