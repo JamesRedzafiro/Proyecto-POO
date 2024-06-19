@@ -6,9 +6,10 @@ public class modeloPedido {
 
     private int iDPedido;
     private int cantidad;
+    private Date fecha;
     private modeloCliente Cliente;
     private modeloProducto Producto;
-    private Date fecha;
+    
 
     public modeloPedido(int iDPedido, int cantidad, Date fecha, modeloCliente cliente, modeloProducto producto){
         this.iDPedido = iDPedido;

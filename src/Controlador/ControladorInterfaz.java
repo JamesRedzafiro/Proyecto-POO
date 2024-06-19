@@ -101,4 +101,5 @@ public class ControladorInterfaz {
         panel.add(comboBox);
         return comboBox;
     }
+    
 }

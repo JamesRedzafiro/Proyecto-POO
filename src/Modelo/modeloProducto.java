@@ -3,15 +3,15 @@ package Modelo;
 public class modeloProducto {
     
     private int iDProducto;
-    private String marca;
+    private String nombre;
     private double volumen;
     private double precio;
     private String sabor;
 
     // Constructor de la clase Producto
-    public modeloProducto(int iDProducto,String marca, double volumen, double precio, String sabor) {
+    public modeloProducto(int iDProducto,String nombre, double volumen, double precio, String sabor) {
         this.iDProducto = iDProducto;
-        this.marca = marca;
+        this.nombre = nombre;
         this.volumen = volumen;
         this.precio = precio;
         this.sabor = sabor;
@@ -26,12 +26,12 @@ public class modeloProducto {
         this.iDProducto = iDProducto;
     }
        
-    public String getMarca() {
-        return marca;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public double getVolumen() {
@@ -57,5 +57,20 @@ public class modeloProducto {
     public void setSabor(String sabor) {
         this.sabor = sabor;
     }
+
+    @Override
+    public String toString() {
+        return "Producto: { Código: " + iDProducto +
+               ", Nombre: '" + nombre + '\'' +
+               ", Volumen: " + volumen +
+               ", Precio: " + precio +
+               ", Sabor: '" + sabor + '\'' +
+               " }";
+    }
+
 }
+
+    
+    
+
 

@@ -7,6 +7,8 @@ import javax.swing.table.*;
 import Controlador.ControladorInterfaz;
 import Vista.ImagenFondo;
 
+import Modelo.ArrayProductos;
+
 
 public class vistaPedido extends JFrame{
 
@@ -60,9 +62,10 @@ public class vistaPedido extends JFrame{
         productoJLabel.setBounds(15, 0, 225, 35);
         PanelVistaPedido.add(productoJLabel);
 
-        String[] productos = {"agua1", "agua2", "agua3", "agua4", "agua5", "agua6", "agua7"};
-        productoBox = ControladorInterfaz.agregarComboBox(PanelVistaPedido, productos, 15, 35, 225, 35);
         
+        ArrayProductos arrayProductos = new ArrayProductos();
+        productoBox = ControladorInterfaz.agregarComboBox(PanelVistaPedido, arrayProductos.getNombreArray(), 15, 35, 225, 35);
+
         //Cantidad
         ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Cantidad de Productos:", new Font("Aptos Black",Font.BOLD,20), 260, 0, 225, 35);
         cantidaField = ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 260, 35, 225, 35);
