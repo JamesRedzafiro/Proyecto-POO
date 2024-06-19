@@ -58,7 +58,7 @@ public class modeloProducto {
         this.sabor = sabor;
     }
 
-    @Override
+    //@Override
     public String toString() {
         return "Producto: { Código: " + iDProducto +
                ", Nombre: '" + nombre + '\'' +
