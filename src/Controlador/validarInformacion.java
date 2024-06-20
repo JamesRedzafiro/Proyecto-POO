@@ -11,7 +11,7 @@ public class ValidarInformacion {
     }
 
     public static boolean validarRUC(String ruc) {
-        return ruc.matches("^[1-2]\\d{9}$"); // Empieza con 1 o 2 y tiene exactamente 10 dígitos
+        return ruc.matches("^[1-2]\\d{10}$"); // Empieza con 1 o 2 y tiene exactamente 10 dígitos
     }
 
     public static boolean validarTelefono(String telefono) {
