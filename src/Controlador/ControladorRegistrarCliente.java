@@ -7,7 +7,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import BaseDatos.ConexionBDprueba;
+import BaseDatos.ConexionBDRegistrarCliente;
 
 public class ControladorRegistrarCliente {
 
@@ -22,7 +22,7 @@ public class ControladorRegistrarCliente {
         String correo = correoField.getText();
         
         // Validar datos
-        if (!ValidarInformacion.validarNombreApellido(nombre) || !ValidarInformacion.validarNombreApellido(apellido)) {
+        if (!ValidarInformacion.validarNombre(nombre) || !ValidarInformacion.validarNombre(apellido)) {
             JOptionPane.showMessageDialog(null, "El nombre y apellido deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -73,7 +73,7 @@ public class ControladorRegistrarCliente {
         String correo = correoField.getText();
         
         // Validar datos
-        if (!ValidarInformacion.validarNombreApellido(nombre) || !ValidarInformacion.validarNombreApellido(apellido)) {
+        if (!ValidarInformacion.validarNombre(nombre) || !ValidarInformacion.validarNombre(apellido)) {
             JOptionPane.showMessageDialog(null, "El nombre y apellido deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -131,7 +131,7 @@ public class ControladorRegistrarCliente {
     }
 
     public static void guardarCliente(DefaultTableModel model) {
-        ConexionBDprueba conexion = new ConexionBDprueba();
+        ConexionBDRegistrarCliente conexion = new ConexionBDRegistrarCliente();
         int rowCount = model.getRowCount();
         
         boolean datosGuardados = true;

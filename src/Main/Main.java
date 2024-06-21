@@ -1,11 +1,7 @@
 package Main;
 import javax.swing.SwingUtilities;
 
-import Vista.Interfaz.vistaBuscarCliente;
-import Vista.Interfaz.vistaCompra;
-import Vista.Interfaz.vistaContacto;
-import Vista.Interfaz.vistaPedido;
-import Vista.Interfaz.vistaRegistrarCliente;
+import Vista.Interfaz.*;
 
 public class Main {
 
@@ -15,9 +11,10 @@ public class Main {
             public void run() {
                 //new vistaCompra().setVisible(true);
                 //new vistaPedido().setVisible(true);
-                new vistaRegistrarCliente().setVisible(true);
+                //new vistaRegistrarCliente().setVisible(true);
                 //new vistaBuscarCliente().setVisible(true);
                 //new vistaContacto().setVisible(true);
+                new VistaAgregarProducto().setVisible(true);
             }
         });
     }

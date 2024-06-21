@@ -1,34 +1,20 @@
 package BaseDatos;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 
-public class ConexionBDprueba {
+public class ConexionBDRegistrarCliente extends ConexionBD {
 
-    // Cadena de conexión a tu base de datos
-    private static final String URL = "jdbc:sqlserver://JamesRed\\localhost:1433;databaseName=BaseDatosSocosani;encrypt=true;trustServerCertificate=true;";
-    private static final String USER = "sa";
-    private static final String PASSWORD = "Nadeko575.";
-    private Connection conn;
-    private PreparedStatement stmt;
-    
-    public ConexionBDprueba() {
-        conn = null;
-        stmt = null;
+    public ConexionBDRegistrarCliente() {
+        super(); // Llama al constructor de la clase base
     }
 
     // Método para insertar datos en la tabla modeloPersona
     public void insertarPersona(String id, String nombre, String apellido, String dni, String direccion, String telefono, String correo, Date fechaRegistro) throws SQLException {
-        String query = "INSERT INTO modeloPersona (iD, nombre, apellido, DNI, direccion, telefono, correo, fechaRegistro) " +
-                       "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
+        String query = "INSERT INTO modeloPersona (iD, nombre, apellido, DNI, direccion, telefono, correo, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
-
             if (conn == null || conn.isClosed()) {
                 throw new SQLException("La conexión no está inicializada correctamente.");
             }
@@ -50,7 +36,7 @@ public class ConexionBDprueba {
             throw ex;
         } finally {
             // Cerrar el statement en un bloque finally para asegurar la liberación de recursos
-            if (stmt != null) {
+            if (stmt != null && !stmt.isClosed()) {
                 stmt.close();
             }
         }
@@ -67,9 +53,12 @@ public class ConexionBDprueba {
             stmt.setString(3, ruc);
 
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
         } finally {
             // Cerrar el statement en un bloque finally para asegurar la liberación de recursos
-            if (stmt != null) {
+            if (stmt != null && !stmt.isClosed()) {
                 stmt.close();
             }
         }
@@ -86,9 +75,12 @@ public class ConexionBDprueba {
             stmt.setString(3, contrasena);
 
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
         } finally {
             // Cerrar el statement en un bloque finally para asegurar la liberación de recursos
-            if (stmt != null) {
+            if (stmt != null && !stmt.isClosed()) {
                 stmt.close();
             }
         }
@@ -98,55 +90,28 @@ public class ConexionBDprueba {
     public int getLastIdCliente() throws SQLException {
         int lastIdCliente = 0;
         String query = "SELECT MAX(iDCliente) AS lastId FROM modeloCliente";
-        
+        ResultSet rs = null;
+
         try {
             stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             if (rs.next()) {
                 lastIdCliente = rs.getInt("lastId");
             }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
         } finally {
-            // Cerrar el statement en un bloque finally para asegurar la liberación de recursos
-            if (stmt != null) {
+            // Cerrar el ResultSet y el statement en un bloque finally para asegurar la liberación de recursos
+            if (rs != null && !rs.isClosed()) {
+                rs.close();
+            }
+            if (stmt != null && !stmt.isClosed()) {
                 stmt.close();
             }
         }
         
         return lastIdCliente;
     }
-
-    // Método para iniciar una transacción
-    public void iniciarConexion() throws SQLException {
-        conn = DriverManager.getConnection(URL, USER, PASSWORD);
-        conn.setAutoCommit(false); // Deshabilitar auto-commit para iniciar la transacción
-    }
-
-    // Método para confirmar la transacción
-    public void commitTransaction() throws SQLException {
-        conn.commit();
-    }
-
-    // Método para revertir la transacción
-    public void rollbackTransaction() {
-        try {
-            if (conn != null) {
-                conn.rollback();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Cerrar la conexión
-    public void closeConnection() {
-        try {
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
-
