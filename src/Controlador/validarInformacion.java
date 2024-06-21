@@ -3,7 +3,7 @@ package Controlador;
 public class ValidarInformacion {
 
     public static boolean validarNombre(String texto) {
-        return texto.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ]+"); // Solo letras y caracteres acentuados
+        return texto.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+"); // Solo letras y caracteres acentuados
     }
 
     public static boolean validarDNI(String dni) {

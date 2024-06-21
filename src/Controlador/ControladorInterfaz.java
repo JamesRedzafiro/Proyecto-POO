@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 import java.net.URL;
+import java.util.List;
 
 public class ControladorInterfaz {
 
@@ -94,7 +95,8 @@ public class ControladorInterfaz {
         return btnJButton;
     }
 
-    public static JComboBox<String> agregarComboBox(JPanel panel, String[] cadena, int x, int y, int width, int height) {
+    public static JComboBox<String> agregarComboBox(JPanel panel, List<String> nombres, int x, int y, int width, int height) {
+        String[] cadena = nombres.toArray(new String[0]); // Convertir List a Array de String
         JComboBox<String> comboBox = new JComboBox<>(cadena);
         comboBox.setFont(new Font("Aptos Black", Font.BOLD, 20));
         comboBox.setBounds(x, y, width, height);
@@ -103,3 +105,4 @@ public class ControladorInterfaz {
     }
     
 }
+

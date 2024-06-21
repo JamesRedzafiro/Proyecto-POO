@@ -1,7 +1,11 @@
 package BaseDatos;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConexionBDRegistrarProducto extends ConexionBD {
 
@@ -11,8 +15,8 @@ public class ConexionBDRegistrarProducto extends ConexionBD {
     }
 
     // Método para insertar datos en la tabla modeloPersona
-    public void insertarProducto(String iDProducto, String nombre, String volumen, String precio, String sabor, Date fechaRegistro) throws SQLException {
-        String query = "INSERT INTO modeloPersona (iDProducto, nombre, volumen, precio, sabor, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?)";
+    public void insertarProducto( String nombre, String volumen, String precio, String sabor, Date fechaRegistro) throws SQLException {
+        String query = "INSERT INTO modeloProducto (nombre, volumen, precio, sabor, fechaRegistro) VALUES (?, ?, ?, ?, ?)";
         
         try {
             if (conn == null || conn.isClosed()) {
@@ -20,12 +24,12 @@ public class ConexionBDRegistrarProducto extends ConexionBD {
             }
 
             stmt = conn.prepareStatement(query);
-            stmt.setString(1, iDProducto);
-            stmt.setString(2, nombre);
-            stmt.setString(3, volumen);
-            stmt.setString(4, precio); 
-            stmt.setString(5, sabor); 
-            stmt.setDate(6, fechaRegistro);
+            //stmt.setString(1, iDProducto);
+            stmt.setString(1, nombre);
+            stmt.setString(2, volumen);
+            stmt.setString(3, precio); 
+            stmt.setString(4, sabor); 
+            stmt.setDate(5, fechaRegistro);
     
             stmt.executeUpdate();
             
@@ -41,7 +45,28 @@ public class ConexionBDRegistrarProducto extends ConexionBD {
     }
     
     
+    public List<String> obtenerNombresProductos() throws SQLException {
+        List<String> nombresProductos = new ArrayList<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String query = "SELECT nombre FROM modeloProducto"; // Consulta SQL para obtener nombres de productos
 
+        try {
+            stmt = conn.prepareStatement(query);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                nombresProductos.add(rs.getString("nombre"));
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        return nombresProductos; // Devolver lista de nombres de productos
+    }
 
     
 }

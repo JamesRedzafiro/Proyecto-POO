@@ -1,6 +1,7 @@
 package Vista.Interfaz;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -45,8 +46,9 @@ public class vistaBuscarCliente extends JFrame {
         //Ingresar los Datos
 
         String [] cadena = {"iDCliente","Nombre","Apellido","Dni","RUC","Dirección"};
+        ArrayList<String> arrayListCadena = new ArrayList<>(Arrays.asList(cadena));
         ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Escoja Método de Busqueda:", new Font("Aptos Black", Font.BOLD, 20), 10, 15, 430, 35);
-        ControladorInterfaz.agregarComboBox(PanelVistaCompra, cadena, 15, 80, 200, 35);
+        ControladorInterfaz.agregarComboBox(PanelVistaCompra, arrayListCadena, 15, 80, 200, 35);
         ControladorInterfaz.agregarCampoTexto(PanelVistaCompra,new Font("Aptos Black", Font.BOLD, 20), 15, 140, 250, 35);
 
         ControladorInterfaz.agregarBoton(PanelVistaCompra, "Buscar",710, 70, 75, 35, 700, 100, "check.png");

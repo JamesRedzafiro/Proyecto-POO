@@ -55,14 +55,14 @@ public class VistaAgregarProducto extends JFrame {
         table.setOpaque(false);
         ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
 
-        String [] columnas = {"N° Registro", "iDProducto", "Nombre", "Volumen", "Precio", "Sabor", "Fecha Registro"};
+        String [] columnas = {"N° Registro", "Nombre", "Volumen", "Precio", "Sabor", "Fecha Registro"};
         ControladorInterfaz.configurarTabla(model, table, scrollPane, PanelVistaCompra, 15, 450, 625, 200, columnas);
 
         
 
         // Ingresar los Datos
-        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "iDProducto:", new Font("Aptos Black", Font.BOLD, 20), 40, 5, 430, 25);
-        iDProductoField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 30, 550, 35);
+        //ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "iDProducto:", new Font("Aptos Black", Font.BOLD, 20), 40, 5, 430, 25);
+        //iDProductoField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 30, 550, 35);
         ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Nombre:", new Font("Aptos Black", Font.BOLD, 20), 40, 75, 430, 25);
         nombreField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 100, 550, 35);
         ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Volumen:", new Font("Aptos Black", Font.BOLD, 20), 40, 135, 430, 25);
@@ -86,7 +86,7 @@ public class VistaAgregarProducto extends JFrame {
         registrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ControladorRegistrarProducto.registrarProducto(model, iDProductoField, nombreField, volumenField, precioField, saborField);
+                ControladorRegistrarProducto.registrarProducto(model, nombreField, volumenField, precioField, saborField);
             }
         });
 

@@ -2,9 +2,11 @@ package Vista.Interfaz;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
 import Controlador.ControladorInterfaz;
+import Controlador.ControladorRegistrarProducto;
 import Vista.ImagenFondo;
 
 import Modelo.ArrayProductos;
@@ -15,6 +17,7 @@ public class vistaPedido extends JFrame{
     private DefaultTableModel model;
     private JTable table;
     private JScrollPane scrollPane;
+
 
 
     public vistaPedido() {
@@ -62,9 +65,10 @@ public class vistaPedido extends JFrame{
         productoJLabel.setBounds(15, 0, 225, 35);
         PanelVistaPedido.add(productoJLabel);
 
-        
-        ArrayProductos arrayProductos = new ArrayProductos();
-        productoBox = ControladorInterfaz.agregarComboBox(PanelVistaPedido, arrayProductos.getNombreArray(), 15, 35, 225, 35);
+        //ComboBox Lista Productos
+        List<String> nombresProductos = ControladorRegistrarProducto.obtenerNombresProductos();
+        productoBox = ControladorInterfaz.agregarComboBox(PanelVistaPedido, nombresProductos, 15, 35, 225, 35);
+
 
         //Cantidad
         ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Cantidad de Productos:", new Font("Aptos Black",Font.BOLD,20), 260, 0, 225, 35);
