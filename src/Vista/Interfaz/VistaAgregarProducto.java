@@ -5,9 +5,6 @@ import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
-import BaseDatos.ConexionBDRegistrarProducto;
-
 import java.awt.event.*;
 
 import Controlador.*;
@@ -21,7 +18,6 @@ public class VistaAgregarProducto extends JFrame {
     private JScrollPane scrollPane;
 
     private JTextField nombreField;
-    private JTextField iDProductoField;
     private JTextField volumenField;
     private JTextField precioField;
     private JTextField saborField;

@@ -7,14 +7,16 @@ public class modeloPedido {
     private int iDPedido;
     private int cantidad;
     private Date fecha;
+    private double totalPedido;
     private modeloCliente Cliente;
     private modeloProducto Producto;
     
 
-    public modeloPedido(int iDPedido, int cantidad, Date fecha, modeloCliente cliente, modeloProducto producto){
+    public modeloPedido(int iDPedido, int cantidad, Date fecha,double totalPedido, modeloCliente cliente, modeloProducto producto){
         this.iDPedido = iDPedido;
         this.cantidad = cantidad;
         this.fecha = fecha;
+        this.totalPedido = totalPedido;
         this.Cliente = cliente;
         this.Producto = producto;
     }
@@ -49,6 +51,14 @@ public class modeloPedido {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public double getTotalPedido() {
+        return this.totalPedido;
+    }
+
+    public void setTotalPedido(double totalPedido) {
+        this.totalPedido = totalPedido;
     }
 
     public modeloCliente getCliente() {

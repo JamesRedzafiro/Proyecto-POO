@@ -1,6 +1,5 @@
 package Controlador;
 
-import java.awt.color.*;
 import javax.swing.*;
 import java.awt.Font;
 import javax.swing.table.DefaultTableCellRenderer;

@@ -9,8 +9,6 @@ import Controlador.ControladorInterfaz;
 import Controlador.ControladorRegistrarProducto;
 import Vista.ImagenFondo;
 
-import Modelo.ArrayProductos;
-
 
 public class vistaPedido extends JFrame{
 
@@ -56,7 +54,7 @@ public class vistaPedido extends JFrame{
         scrollPane = new JScrollPane(table);
         PanelVistaPedido.add(scrollPane);
 
-        String [] columnas = {"N° Pedido","Nombre","Precio","Fecha Entrega"};
+        String [] columnas = {"N° Pedido","Nombre","Cantidad","iDProducto","iDCliente","Total Pedido","Fecha Pedido"};
         ControladorInterfaz.configurarTabla(model, table, scrollPane, PanelVistaPedido,15, 130, 675, 250, columnas);
 
         //Producto

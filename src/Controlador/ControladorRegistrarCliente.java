@@ -1,7 +1,6 @@
 package Controlador;
 
 import java.sql.SQLException;
-import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
