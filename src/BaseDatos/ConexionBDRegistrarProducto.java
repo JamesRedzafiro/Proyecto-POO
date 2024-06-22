@@ -68,5 +68,29 @@ public class ConexionBDRegistrarProducto extends ConexionBD {
         return nombresProductos; // Devolver lista de nombres de productos
     }
 
+    // Método para obtener el precio del producto
+    public double obtenerPrecioProducto(int iDProducto) throws SQLException {
+        double precio = 0.0;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String query = "SELECT precio FROM modeloProducto WHERE iDProducto = ?";
+
+        try {
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, iDProducto);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                precio = rs.getDouble("precio");
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        return precio;
+    }
     
 }

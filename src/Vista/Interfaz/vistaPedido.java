@@ -4,10 +4,18 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import Controlador.ControladorInterfaz;
+import Controlador.ControladorPedido;
 import Controlador.ControladorRegistrarProducto;
 import Vista.ImagenFondo;
+
+
+
+
+
 
 
 public class vistaPedido extends JFrame{
@@ -37,7 +45,7 @@ public class vistaPedido extends JFrame{
 
     private void ComponentesVistaPedido(){
 
-        JComboBox productoBox;
+        JComboBox<String> productoBox;
         JTextField cantidaField;
         JTextField idClienteField;
         JLabel totalLabel;
@@ -109,12 +117,12 @@ public class vistaPedido extends JFrame{
 
         //Agregar listeners a los botones
         
-        // btnGuardar.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         controladorPedido.guardarPedido();
-        //     }
-        // });
+        btnGuardar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               ControladorPedido.registrarPedido(model, productoBox, cantidaField, idClienteField, idClienteField);
+            }
+        });
         
         // btnActualizar.addActionListener(new ActionListener() {
         //     @Override

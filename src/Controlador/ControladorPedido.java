@@ -2,6 +2,7 @@ package Controlador;
 
 import java.sql.SQLException;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -10,45 +11,48 @@ import BaseDatos.ConexionBDRegistrarProducto;
 
 public class ControladorPedido {
 
-    
+    public static void registrarPedido(DefaultTableModel model, JComboBox<String> nombreField, JTextField cantidadField, JTextField iDProductoField, 
+                                       JTextField iDClienteField) {
+                                        
+        String nombre = (String) nombreField.getSelectedItem();
+        String cantidadStr = cantidadField.getText();
+        String iDProductoStr = iDProductoField.getText();
+        String iDClienteStr = iDClienteField.getText();
 
-    public static void registrarPedido(DefaultTableModel model, JTextField nombreField, JTextField volumenField, JTextField precioField, JTextField saborField) {
-        //String iDProducto = iDProductoField.getText();
-        String nombre = nombreField.getText();
-        String volumen = volumenField.getText();
-        String precio = precioField.getText();
-        String sabor = saborField.getText();
-        
-        // Validar datos
-        //if (!ValidarInformacion.validarInt(iDProducto)) {
-        //    JOptionPane.showMessageDialog(null, "El IDProducto debe contener solo números sin espacios", "Error", JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
+        if (!ValidarInformacion.validarInt(cantidadStr)) {
+            JOptionPane.showMessageDialog(null, "La cantidad debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!ValidarInformacion.validarInt(iDProductoStr) || !ValidarInformacion.validarInt(iDClienteStr)) {
+            JOptionPane.showMessageDialog(null, "El IDProducto y el IDCliente deben contener solo números sin espacios", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        if (!ValidarInformacion.validarNombre(nombre) || !ValidarInformacion.validarNombre(sabor)) {
-            JOptionPane.showMessageDialog(null, "El nombre y sabor deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        int cantidad = Integer.parseInt(cantidadStr);
+        int iDProducto = Integer.parseInt(iDProductoStr);
+        int iDCliente = Integer.parseInt(iDClienteStr);
         
-        if (!ValidarInformacion.validarDouble(volumen)) {
-            JOptionPane.showMessageDialog(null, "El volumen deben tener dos decimales", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        ConexionBDRegistrarProducto conexion = new ConexionBDRegistrarProducto();
+
+        try {
+            conexion.iniciarConexion();
+            double precioProducto = conexion.obtenerPrecioProducto(iDProducto);
+            double totalPrecio = cantidad * precioProducto;
+            
+            // Añadir fila a la tabla
+            model.addRow(new Object[]{model.getRowCount() + 1, nombre, cantidad, iDProducto, iDCliente, totalPrecio, new java.util.Date()});
+            
+            // Limpiar campos
+            nombreField.setSelectedIndex(-1);
+            cantidadField.setText("");
+            iDProductoField.setText("");
+            iDClienteField.setText("");
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el precio del producto: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            conexion.closeConnection();
         }
-        if (!ValidarInformacion.validarDouble(precio)) {
-            JOptionPane.showMessageDialog(null, "El precio debe tener dos decimales", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-         
-        // Añadir fila a la tabla
-        model.addRow(new Object[]{model.getRowCount() + 1, nombre, volumen, precio, sabor, new java.util.Date()});
-        
-        // Limpiar campos
-        nombreField.setText("");
-        //iDProductoField.setText("");
-        volumenField.setText("");
-        precioField.setText("");
-        saborField.setText("");
-    
     }
 
     public static void guardarProducto(DefaultTableModel model) {
