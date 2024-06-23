@@ -169,19 +169,19 @@ public class ControladorRegistrarCliente {
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Error al insertar en la base de datos: " + ex.getMessage());
                     datosGuardados = false;
-                    conexion.rollbackTransaction();
+                    conexion.revertirConexion();
                     break;
                 }
             }
             
             if (datosGuardados) {
-                conexion.commitTransaction();
+                conexion.confirmarConexion();
                 model.setRowCount(0); // Limpiar todas las filas del modelo de tabla después de guardar los datos
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error de conexión con la base de datos: " + e.getMessage());
         } finally {
-            conexion.closeConnection();
+            conexion.cerrarConexion();
         }
     }
     

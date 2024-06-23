@@ -1,5 +1,6 @@
 package BaseDatos;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,22 +10,18 @@ import java.util.List;
 
 public class ConexionBDRegistrarProducto extends ConexionBD {
 
-
     public ConexionBDRegistrarProducto() {
-        super(); // Llama al constructor de la clase base
+        super();  // Llamamos al constructor de la clase padre para inicializar la conexión
     }
 
     // Método para insertar datos en la tabla modeloPersona
-    public void insertarProducto( String nombre, String volumen, String precio, String sabor, Date fechaRegistro) throws SQLException {
+    public void insertarProducto(String nombre, String volumen, String precio, String sabor, Date fechaRegistro) throws SQLException {
         String query = "INSERT INTO modeloProducto (nombre, volumen, precio, sabor, fechaRegistro) VALUES (?, ?, ?, ?, ?)";
         
-        try {
-            if (conn == null || conn.isClosed()) {
-                throw new SQLException("La conexión no está inicializada correctamente.");
-            }
-
-            stmt = conn.prepareStatement(query);
-            //stmt.setString(1, iDProducto);
+        iniciarConexion();
+        Connection connection = getConnection();
+        
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, nombre);
             stmt.setString(2, volumen);
             stmt.setString(3, precio); 
@@ -33,14 +30,8 @@ public class ConexionBDRegistrarProducto extends ConexionBD {
     
             stmt.executeUpdate();
             
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw ex;
         } finally {
-            // Cerrar el statement en un bloque finally para asegurar la liberación de recursos
-            if (stmt != null && !stmt.isClosed()) {
-                stmt.close();
-            }
+            cerrarConexion();
         }
     }
     
@@ -52,7 +43,9 @@ public class ConexionBDRegistrarProducto extends ConexionBD {
         String query = "SELECT nombre FROM modeloProducto"; // Consulta SQL para obtener nombres de productos
 
         try {
-            stmt = conn.prepareStatement(query);
+            iniciarConexion();
+            Connection connection = getConnection();
+            stmt = connection.prepareStatement(query);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 nombresProductos.add(rs.getString("nombre"));
@@ -69,28 +62,74 @@ public class ConexionBDRegistrarProducto extends ConexionBD {
     }
 
     // Método para obtener el precio del producto
-    public double obtenerPrecioProducto(int iDProducto) throws SQLException {
-        double precio = 0.0;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        String query = "SELECT precio FROM modeloProducto WHERE iDProducto = ?";
-
-        try {
-            stmt = conn.prepareStatement(query);
-            stmt.setInt(1, iDProducto);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                precio = rs.getDouble("precio");
+    public double obtenerPrecioProducto(String nombreProducto) throws SQLException {
+        iniciarConexion();
+        Connection connection = getConnection();
+        
+        double precioProducto = 0.0;
+        String query = "SELECT precio FROM modeloProducto WHERE nombre = ?";
+        
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, nombreProducto);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                precioProducto = resultSet.getDouble("precio");
             }
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stmt != null) {
-                stmt.close();
-            }
+            cerrarConexion();
         }
-        return precio;
+
+        if (precioProducto == 0.0) {
+            throw new SQLException("Precio del producto no encontrado");
+        }
+
+        return precioProducto;
     }
     
+    public int obtenerIDProducto(String nombre) throws SQLException {
+        iniciarConexion();
+        Connection connection = getConnection();
+        
+        int iDProducto = -1;
+        String query = "SELECT idProducto FROM modeloProducto WHERE nombre = ?";
+        
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, nombre);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                iDProducto = resultSet.getInt("idProducto");
+            }
+        } finally {
+            cerrarConexion();
+        }
+
+        if (iDProducto == -1) {
+            throw new SQLException("Producto no encontrado");
+        }
+
+        return iDProducto;
+    }
+
+    public boolean existeCliente(int iDCliente) throws SQLException {
+        boolean existe = false;
+        String query = "SELECT COUNT(*) AS count FROM modeloCliente WHERE idCliente = ?";
+
+        iniciarConexion();
+        Connection connection = getConnection();
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, iDCliente);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                existe = (count > 0);
+            }
+        } finally {
+            cerrarConexion();
+        }
+    
+        return existe;
+    }
 }

@@ -11,47 +11,48 @@ import BaseDatos.ConexionBDRegistrarProducto;
 
 public class ControladorPedido {
 
-    public static void registrarPedido(DefaultTableModel model, JComboBox<String> nombreField, JTextField cantidadField, JTextField iDProductoField, 
-                                       JTextField iDClienteField) {
-                                        
-        String nombre = (String) nombreField.getSelectedItem();
+    public static void registrarPedido(DefaultTableModel model, JComboBox<String> nombreComboBox, JTextField cantidadField, JTextField iDClienteField) {
+        String nombre = (String) nombreComboBox.getSelectedItem();
         String cantidadStr = cantidadField.getText();
-        String iDProductoStr = iDProductoField.getText();
         String iDClienteStr = iDClienteField.getText();
-
+    
         if (!ValidarInformacion.validarInt(cantidadStr)) {
             JOptionPane.showMessageDialog(null, "La cantidad debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!ValidarInformacion.validarInt(iDProductoStr) || !ValidarInformacion.validarInt(iDClienteStr)) {
-            JOptionPane.showMessageDialog(null, "El IDProducto y el IDCliente deben contener solo números sin espacios", "Error", JOptionPane.ERROR_MESSAGE);
+        if (!ValidarInformacion.validarInt(iDClienteStr)) {
+            JOptionPane.showMessageDialog(null, "El IDCliente debe contener solo números sin espacios", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+    
         int cantidad = Integer.parseInt(cantidadStr);
-        int iDProducto = Integer.parseInt(iDProductoStr);
         int iDCliente = Integer.parseInt(iDClienteStr);
-        
+    
         ConexionBDRegistrarProducto conexion = new ConexionBDRegistrarProducto();
-
+    
         try {
-            conexion.iniciarConexion();
-            double precioProducto = conexion.obtenerPrecioProducto(iDProducto);
-            double totalPrecio = cantidad * precioProducto;
+
+            // Verificar si el IDCliente existe en la base de datos
+            if (!conexion.existeCliente(iDCliente)) {
+            JOptionPane.showMessageDialog(null, "El IDCliente especificado no existe en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+            }
             
+            // Obtener iDProducto y precioProducto según el nombre del producto
+            int iDProducto = conexion.obtenerIDProducto(nombre);
+            double precioProducto = conexion.obtenerPrecioProducto(nombre);
+            double totalPrecio = cantidad * precioProducto;
+    
             // Añadir fila a la tabla
             model.addRow(new Object[]{model.getRowCount() + 1, nombre, cantidad, iDProducto, iDCliente, totalPrecio, new java.util.Date()});
             
             // Limpiar campos
-            nombreField.setSelectedIndex(-1);
+            nombreComboBox.setSelectedIndex(-1);
             cantidadField.setText("");
-            iDProductoField.setText("");
-            iDClienteField.setText("");
-            
+            //iDClienteField.setText("");
+    
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener el precio del producto: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            conexion.closeConnection();
+            JOptionPane.showMessageDialog(null, "Error al obtener la información del producto: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -81,19 +82,19 @@ public class ControladorPedido {
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Error al insertar en la base de datos: " + ex.getMessage());
                     datosGuardados = false;
-                    conexion.rollbackTransaction();
+                    conexion.revertirConexion();
                     break;
                 }
             }
             
             if (datosGuardados) {
-                conexion.commitTransaction();
+                conexion.confirmarConexion();
                 model.setRowCount(0); // Limpiar todas las filas del modelo de tabla después de guardar los datos
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error de conexión con la base de datos: " + e.getMessage());
         } finally {
-            conexion.closeConnection();
+            conexion.cerrarConexion();
         }
     }
 

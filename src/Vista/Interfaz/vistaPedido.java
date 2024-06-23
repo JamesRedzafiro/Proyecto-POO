@@ -120,7 +120,7 @@ public class vistaPedido extends JFrame{
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               ControladorPedido.registrarPedido(model, productoBox, cantidaField, idClienteField, idClienteField);
+               ControladorPedido.registrarPedido(model, productoBox, cantidaField, idClienteField);
             }
         });
         

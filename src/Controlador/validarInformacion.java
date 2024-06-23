@@ -1,5 +1,9 @@
 package Controlador;
 
+
+
+import BaseDatos.*;
+
 public class ValidarInformacion {
 
     public static boolean validarNombre(String texto) {
@@ -11,7 +15,7 @@ public class ValidarInformacion {
     }
 
     public static boolean validarRUC(String ruc) {
-        return ruc.matches("^[1-2]\\d{10}$"); // Empieza con 1 o 2 y tiene exactamente 10 dígitos
+        return ruc.matches("^[1-2]\\d{10}$"); // Empieza con 1 o 2 y tiene exactamente 11 dígitos
     }
 
     public static boolean validarTelefono(String telefono) {
@@ -30,7 +34,6 @@ public class ValidarInformacion {
     public static boolean validarInt(String input) {
         return input.matches("^\\d+$"); // Verifica que la cadena contenga solo dígitos
     }
-    
     
 
 }
