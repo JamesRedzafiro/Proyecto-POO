@@ -92,8 +92,6 @@ public class ControladorRegistrarProducto {
         }
     }
 
-    
-
     public static List<String> obtenerNombresProductos() {
         List<String> nombresProductos = null;
         ConexionBDRegistrarProducto conexionBD = new ConexionBDRegistrarProducto();

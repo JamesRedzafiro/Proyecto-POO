@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import BaseDatos.ConexionBDRegistrarProducto;
+import BaseDatos.*;
 
 public class ControladorPedido {
 
@@ -28,19 +28,20 @@ public class ControladorPedido {
         int cantidad = Integer.parseInt(cantidadStr);
         int iDCliente = Integer.parseInt(iDClienteStr);
     
-        ConexionBDRegistrarProducto conexion = new ConexionBDRegistrarProducto();
+        ConexionBDRegistrarProducto conexionProducto = new ConexionBDRegistrarProducto();
+        ConexionBDRegistrarCliente conexionCliente = new ConexionBDRegistrarCliente();
     
         try {
 
             // Verificar si el IDCliente existe en la base de datos
-            if (!conexion.existeCliente(iDCliente)) {
+            if (!conexionCliente.existeCliente(iDCliente)) {
             JOptionPane.showMessageDialog(null, "El IDCliente especificado no existe en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
             }
             
             // Obtener iDProducto y precioProducto según el nombre del producto
-            int iDProducto = conexion.obtenerIDProducto(nombre);
-            double precioProducto = conexion.obtenerPrecioProducto(nombre);
+            int iDProducto = conexionProducto.obtenerIDProducto(nombre);
+            double precioProducto = conexionProducto.obtenerPrecioProducto(nombre);
             double totalPrecio = cantidad * precioProducto;
     
             // Añadir fila a la tabla

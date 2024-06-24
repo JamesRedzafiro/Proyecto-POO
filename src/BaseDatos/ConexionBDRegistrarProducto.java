@@ -35,7 +35,7 @@ public class ConexionBDRegistrarProducto extends ConexionBD {
         }
     }
     
-    
+    //Método para obtener la list de productos de la tabla modeloProducto para el JComboBOx del formulario modeloPedido
     public List<String> obtenerNombresProductos() throws SQLException {
         List<String> nombresProductos = new ArrayList<>();
         PreparedStatement stmt = null;
@@ -87,6 +87,7 @@ public class ConexionBDRegistrarProducto extends ConexionBD {
         return precioProducto;
     }
     
+    //Método para obtener el IDProducto usando el nombre del producto seleccionado por el JComboBox
     public int obtenerIDProducto(String nombre) throws SQLException {
         iniciarConexion();
         Connection connection = getConnection();
@@ -112,24 +113,4 @@ public class ConexionBDRegistrarProducto extends ConexionBD {
         return iDProducto;
     }
 
-    public boolean existeCliente(int iDCliente) throws SQLException {
-        boolean existe = false;
-        String query = "SELECT COUNT(*) AS count FROM modeloCliente WHERE idCliente = ?";
-
-        iniciarConexion();
-        Connection connection = getConnection();
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, iDCliente);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                int count = rs.getInt("count");
-                existe = (count > 0);
-            }
-        } finally {
-            cerrarConexion();
-        }
-    
-        return existe;
-    }
 }

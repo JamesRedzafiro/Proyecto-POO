@@ -152,6 +152,12 @@ public class ControladorRegistrarCliente {
                 java.sql.Date fechaRegistroDate = new java.sql.Date(fechaRegistroUtil.getTime());
                 
                 try {
+                    // Verificar si el IDPersona ya existe en la base de datos
+                    int idPersona = Integer.parseInt(idClienteStr);
+                    if (conexion.existePersona(idPersona)) {
+                        throw new SQLException("IDPersona ya existe en la base de datos: "+idPersona);
+                    }
+
                     // Insertar primero en modeloPersona
                     conexion.insertarPersona(idClienteStr, nombre, apellido, dniStr, direccion, telefonoStr, correo, fechaRegistroDate);
                     

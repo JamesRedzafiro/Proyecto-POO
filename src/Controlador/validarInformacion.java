@@ -27,8 +27,7 @@ public class ValidarInformacion {
     }
     
     public static boolean validarDouble(String decimal) {
-        // Verifica que el volumen sea un número positivo con 2 decimales
-        return decimal.matches("\\d+\\.\\d{2}");
+        return decimal.matches("\\d+\\.\\d{2}"); // Verifica que el volumen sea un número positivo con 2 decimales
     }
 
     public static boolean validarInt(String input) {
