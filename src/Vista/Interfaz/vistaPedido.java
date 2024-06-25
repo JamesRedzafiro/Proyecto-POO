@@ -7,29 +7,21 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Controlador.ControladorInterfaz;
-import Controlador.ControladorPedido;
-import Controlador.ControladorRegistrarProducto;
+
+import Controlador.*;
 import Vista.ImagenFondo;
 
-
-
-
-
-
-
-public class vistaPedido extends JFrame{
+public class vistaPedido extends JFrame {
 
     private DefaultTableModel model;
     private JTable table;
     private JScrollPane scrollPane;
-
-
+    public static double sumaTotal = 0.0;
+    public static JLabel totalLabel;
 
     public vistaPedido() {
-
-        this.setTitle("EMPRESA SOCOSANI:   Pedido de Compra");
-        this.setFont(new Font("Aptos Black",Font.BOLD,35));
+        this.setTitle("EMPRESA SOCOSANI: Pedido de Compra");
+        this.setFont(new Font("Aptos Black", Font.BOLD, 35));
         this.setBounds(0, 0, 725, 500);
 
         // Asegúrate de que el contenido de la ventana no esté cubierto por el fondo del panel
@@ -37,20 +29,24 @@ public class vistaPedido extends JFrame{
 
         this.setIconImages(Arrays.asList(new ImageIcon(getClass().getResource("/Imagenes/logo-socosani.png")).getImage()));
 
-        //C:\Users\James Red\Desktop\PROGRAMACION\Java\UTP-class\Proyecto_POO\Proyecto\src\Vista\ImagenFondo.java
         this.setLocationRelativeTo(null);
         ComponentesVistaPedido();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private void ComponentesVistaPedido(){
+    public static void inicializarTotalLabel(JPanel panel) {
+        totalLabel = ControladorInterfaz.agregarEtiqueta(panel, "00.00", new Font("Aptos Black", Font.BOLD, 20), 200, 400, 250, 40);
+    }
 
+    public static void actualizarTotalLabel() {
+        totalLabel.setText(String.format("%.2f", sumaTotal));
+    }
+
+    private void ComponentesVistaPedido() {
         JComboBox<String> productoBox;
         JTextField cantidaField;
         JTextField idClienteField;
-        JLabel totalLabel;
 
-        //Usa ImagenFondo en lugar de JPanel
         ImagenFondo PanelVistaPedido = new ImagenFondo("/Imagenes/fondo-socosani.png");
         PanelVistaPedido.setLayout(null);
         this.getContentPane().add(PanelVistaPedido);
@@ -62,90 +58,67 @@ public class vistaPedido extends JFrame{
         scrollPane = new JScrollPane(table);
         PanelVistaPedido.add(scrollPane);
 
-        String [] columnas = {"N° Pedido","Nombre","Cantidad","iDProducto","iDCliente","Total Pedido","Fecha Pedido"};
-        ControladorInterfaz.configurarTabla(model, table, scrollPane, PanelVistaPedido,15, 130, 675, 250, columnas);
+        String[] columnas = {"N° Pedido", "Nombre", "Cantidad", "iDProducto", "iDCliente", "Total Pedido", "Fecha Pedido"};
+        ControladorInterfaz.configurarTabla(model, table, scrollPane, PanelVistaPedido, 15, 130, 675, 250, columnas);
 
-        //Producto
+        // Producto
         JLabel productoJLabel = new JLabel("Nombre del Producto:");
-        productoJLabel.setFont(new Font("Aptos Black",Font.BOLD,20));
+        productoJLabel.setFont(new Font("Aptos Black", Font.BOLD, 20));
         productoJLabel.setBounds(15, 0, 225, 35);
         PanelVistaPedido.add(productoJLabel);
 
-        //ComboBox Lista Productos
+        // ComboBox Lista Productos
         List<String> nombresProductos = ControladorRegistrarProducto.obtenerNombresProductos();
         productoBox = ControladorInterfaz.agregarComboBox(PanelVistaPedido, nombresProductos, 15, 35, 225, 35);
 
-
-        //Cantidad
-        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Cantidad de Productos:", new Font("Aptos Black",Font.BOLD,20), 260, 0, 225, 35);
+        // Cantidad
+        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Cantidad de Productos:", new Font("Aptos Black", Font.BOLD, 20), 260, 0, 225, 35);
         cantidaField = ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 260, 35, 225, 35);
 
-        //iD Cliente
-        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido,"ID Cliente",new Font("Aptos Black",Font.BOLD,20),505, 0, 225, 35);
+        // ID Cliente
+        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "ID Cliente", new Font("Aptos Black", Font.BOLD, 20), 505, 0, 225, 35);
         idClienteField = ControladorInterfaz.agregarCampoTexto(PanelVistaPedido, new Font("Aptos Black", Font.PLAIN, 20), 505, 35, 185, 35);
 
-        //Total
-        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Total Pedido: S/. ", new Font("Aptos Black",Font.BOLD,20), 20, 400, 250, 40); 
-        totalLabel =  ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "00.00", new Font("Aptos Black",Font.BOLD,20), 200, 400, 250, 40);
-    
+        // Total
+        ControladorInterfaz.agregarEtiqueta(PanelVistaPedido, "Total Pedido: S/. ", new Font("Aptos Black", Font.BOLD, 20), 20, 400, 250, 40);
+        
+        // Inicializar totalLabel
+        inicializarTotalLabel(PanelVistaPedido);
 
-        //Botones
+        // Botones
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setFont(new Font("Aptos Black",Font.BOLD,20));
+        btnGuardar.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnGuardar.setBounds(35, 80, 140, 40);
         PanelVistaPedido.add(btnGuardar);
 
         JButton btnActualizar = new JButton("Actualizar");
-        btnActualizar.setFont(new Font("Aptos Black",Font.BOLD,20));
+        btnActualizar.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnActualizar.setBounds(300, 80, 140, 40);
         PanelVistaPedido.add(btnActualizar);
 
         JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setFont(new Font("Aptos Black",Font.BOLD,20));
+        btnCancelar.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnCancelar.setBounds(535, 80, 140, 40);
         PanelVistaPedido.add(btnCancelar);
 
         JButton btnEnviar = new JButton("Enviar");
-        btnEnviar.setFont(new Font("Aptos Black",Font.BOLD,20));
+        btnEnviar.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnEnviar.setBounds(550, 400, 140, 40);
         PanelVistaPedido.add(btnEnviar);
 
         JButton btnContacto = new JButton("Contactanos");
-        btnContacto.setFont(new Font("Aptos Black",Font.BOLD,20));
+        btnContacto.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnContacto.setBounds(375, 400, 160, 40);
         PanelVistaPedido.add(btnContacto);
 
-        //Agregar listeners a los botones
-        
+        // Agregar listeners a los botones
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               ControladorPedido.registrarPedido(model, productoBox, cantidaField, idClienteField);
+                ControladorPedido.registrarPedido(model, productoBox, cantidaField, idClienteField);
             }
         });
-        
-        // btnActualizar.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         actualizarPedido();
-        //     }
-        // });
 
-        // btnCancelar.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         cancelarPedido();
-        //     }
-        // });
-
-        // btnEnviar.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         enviarPedido();
-        //         }
-        // });
-        
         
     }
-
 }

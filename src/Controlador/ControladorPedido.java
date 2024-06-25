@@ -3,11 +3,13 @@ package Controlador;
 import java.sql.SQLException;
 
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import BaseDatos.*;
+import Vista.Interfaz.*;
 
 public class ControladorPedido {
 
@@ -47,6 +49,10 @@ public class ControladorPedido {
             // Añadir fila a la tabla
             model.addRow(new Object[]{model.getRowCount() + 1, nombre, cantidad, iDProducto, iDCliente, totalPrecio, new java.util.Date()});
             
+            // Actualizar suma total y totalLabel
+            vistaPedido.sumaTotal += totalPrecio;
+            vistaPedido.actualizarTotalLabel();
+
             // Limpiar campos
             nombreComboBox.setSelectedIndex(-1);
             cantidadField.setText("");
@@ -57,7 +63,9 @@ public class ControladorPedido {
         }
     }
 
-    public static void guardarProducto(DefaultTableModel model) {
+        
+
+        public static void guardarProducto(DefaultTableModel model) {
         ConexionBDRegistrarProducto conexion = new ConexionBDRegistrarProducto();
         int rowCount = model.getRowCount();
         
