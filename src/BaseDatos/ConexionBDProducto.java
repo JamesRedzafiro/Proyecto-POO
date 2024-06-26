@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConexionBDRegistrarProducto extends ConexionBD {
+public class ConexionBDProducto extends ConexionBD {
 
-    public ConexionBDRegistrarProducto() {
+    public ConexionBDProducto() {
         super();  // Llamamos al constructor de la clase padre para inicializar la conexión
     }
 

@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import BaseDatos.ConexionBDRegistrarProducto;
+import BaseDatos.ConexionBDProducto;
 
 public class ControladorRegistrarProducto {
 
@@ -51,7 +51,7 @@ public class ControladorRegistrarProducto {
     }
 
     public static void guardarProducto(DefaultTableModel model) {
-        ConexionBDRegistrarProducto conexion = new ConexionBDRegistrarProducto();
+        ConexionBDProducto conexion = new ConexionBDProducto();
         int rowCount = model.getRowCount();
         
         boolean datosGuardados = true;
@@ -94,7 +94,7 @@ public class ControladorRegistrarProducto {
 
     public static List<String> obtenerNombresProductos() {
         List<String> nombresProductos = null;
-        ConexionBDRegistrarProducto conexionBD = new ConexionBDRegistrarProducto();
+        ConexionBDProducto conexionBD = new ConexionBDProducto();
         try {
             conexionBD.iniciarConexion();
             nombresProductos = conexionBD.obtenerNombresProductos(); // Aquí se llama al método de instancia

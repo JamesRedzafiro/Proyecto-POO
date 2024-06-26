@@ -6,7 +6,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import BaseDatos.ConexionBDRegistrarCliente;
+import BaseDatos.ConexionBDCliente;
 
 public class ControladorRegistrarCliente {
 
@@ -131,7 +131,7 @@ public class ControladorRegistrarCliente {
     }
 
     public static void guardarCliente(DefaultTableModel model) {
-        ConexionBDRegistrarCliente conexion = new ConexionBDRegistrarCliente();
+        ConexionBDCliente conexion = new ConexionBDCliente();
         int rowCount = model.getRowCount();
         
         boolean datosGuardados = true;

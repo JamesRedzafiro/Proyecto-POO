@@ -6,9 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ConexionBDRegistrarCliente extends ConexionBD {
+public class ConexionBDCliente extends ConexionBD {
 
-    public ConexionBDRegistrarCliente() {
+    public ConexionBDCliente() {
         super(); // Llama al constructor de la clase base
     }
 
