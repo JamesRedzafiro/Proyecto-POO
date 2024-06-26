@@ -86,10 +86,10 @@ public class vistaPedido extends JFrame {
         inicializarTotalLabel(PanelVistaPedido);
 
         // Botones
-        JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setFont(new Font("Aptos Black", Font.BOLD, 20));
-        btnGuardar.setBounds(35, 80, 140, 40);
-        PanelVistaPedido.add(btnGuardar);
+        JButton btnRegistrar = new JButton("Registrar");
+        btnRegistrar.setFont(new Font("Aptos Black", Font.BOLD, 20));
+        btnRegistrar.setBounds(35, 80, 140, 40);
+        PanelVistaPedido.add(btnRegistrar);
 
         JButton btnActualizar = new JButton("Actualizar");
         btnActualizar.setFont(new Font("Aptos Black", Font.BOLD, 20));
@@ -112,13 +112,20 @@ public class vistaPedido extends JFrame {
         PanelVistaPedido.add(btnContacto);
 
         // Agregar listeners a los botones
-        btnGuardar.addActionListener(new ActionListener() {
+        btnRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ControladorPedido.registrarPedido(model, productoBox, cantidaField, idClienteField);
             }
         });
 
-        
+        btnEnviar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ControladorPedido controladorPedido = new ControladorPedido();
+                controladorPedido.guardarPedido(model);
+            }
+        });
+
     }
 }

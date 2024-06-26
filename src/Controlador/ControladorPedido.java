@@ -1,17 +1,33 @@
 package Controlador;
 
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.Date;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import BaseDatos.*;
-import Vista.Interfaz.*;
+import Modelo.modeloCliente;
+import Modelo.modeloPedido;
+import Modelo.modeloProducto;
+import Vista.Interfaz.vistaPedido;
 
 public class ControladorPedido {
+
+    private static int ultimoIDPedido = 0;
+
+    // Método para inicializar el último ID de pedido desde la base de datos
+    public static void inicializarUltimoIDPedido() {
+        ConexionBDRegistrarPedido conexionPedido = new ConexionBDRegistrarPedido();
+        try {
+            ultimoIDPedido = conexionPedido.obtenerUltimoIDPedido();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void registrarPedido(DefaultTableModel model, JComboBox<String> nombreComboBox, JTextField cantidadField, JTextField iDClienteField) {
         String nombre = (String) nombreComboBox.getSelectedItem();
@@ -34,11 +50,10 @@ public class ControladorPedido {
         ConexionBDRegistrarCliente conexionCliente = new ConexionBDRegistrarCliente();
     
         try {
-
             // Verificar si el IDCliente existe en la base de datos
             if (!conexionCliente.existeCliente(iDCliente)) {
-            JOptionPane.showMessageDialog(null, "El IDCliente especificado no existe en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+                JOptionPane.showMessageDialog(null, "El IDCliente especificado no existe en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             
             // Obtener iDProducto y precioProducto según el nombre del producto
@@ -52,60 +67,53 @@ public class ControladorPedido {
             // Actualizar suma total y totalLabel
             vistaPedido.sumaTotal += totalPrecio;
             vistaPedido.actualizarTotalLabel();
-
+    
             // Limpiar campos
             nombreComboBox.setSelectedIndex(-1);
             cantidadField.setText("");
-            //iDClienteField.setText("");
+            // iDClienteField.setText("");
     
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al obtener la información del producto: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-        
-
-        public static void guardarProducto(DefaultTableModel model) {
-        ConexionBDRegistrarProducto conexion = new ConexionBDRegistrarProducto();
-        int rowCount = model.getRowCount();
-        
-        boolean datosGuardados = true;
-        
+    public void guardarPedido(DefaultTableModel model) {
+        ConexionBDRegistrarPedido conexion = new ConexionBDRegistrarPedido();
+        List<modeloPedido> pedidos = new ArrayList<>();
+    
         try {
-            conexion.iniciarConexion(); // Iniciar transacción
-            
-            for (int i = 0; i < rowCount; i++) {
-                //String iDProducto = model.getValueAt(i, 1).toString();
-                String nombre = model.getValueAt(i, 1).toString();
-                String volumen = model.getValueAt(i,2).toString();
-                String precio = model.getValueAt(i, 3).toString();
-                String sabor = model.getValueAt(i, 4).toString();
-                java.util.Date fechaRegistroUtil = (java.util.Date) model.getValueAt(i, 5);
-                java.sql.Date fechaRegistroDate = new java.sql.Date(fechaRegistroUtil.getTime());
-                
-                try {
-                    // Insertar primero en modeloPersona
-                    conexion.insertarProducto( nombre, volumen, precio, sabor, fechaRegistroDate);
-                    JOptionPane.showMessageDialog(null, "Datos insertados correctamente en la base de datos.");
-                    
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Error al insertar en la base de datos: " + ex.getMessage());
-                    datosGuardados = false;
-                    conexion.revertirConexion();
-                    break;
-                }
+            // Recorrer las filas del modelo de la tabla
+            for (int i = 0; i < model.getRowCount(); i++) {
+                int iDProducto = Integer.parseInt(model.getValueAt(i, 3).toString());
+                int iDCliente = Integer.parseInt(model.getValueAt(i, 4).toString());
+                int cantidad = Integer.parseInt(model.getValueAt(i, 2).toString());
+                double totalPedido = Double.parseDouble(model.getValueAt(i, 5).toString());
+                java.util.Date fechaPedido = (java.util.Date) model.getValueAt(i, 6);
+    
+                // Obtener detalles de producto y cliente desde la base de datos
+                modeloProducto producto = conexion.obtenerProductoPorID(iDProducto);
+                modeloCliente cliente = conexion.obtenerClientePorID(iDCliente);
+    
+                // Crear instancia de modeloPedido
+                modeloPedido pedido = new modeloPedido(0, cantidad, fechaPedido, totalPedido, "Pendiente", cliente, producto);
+                pedidos.add(pedido);
             }
-            
-            if (datosGuardados) {
-                conexion.confirmarConexion();
-                model.setRowCount(0); // Limpiar todas las filas del modelo de tabla después de guardar los datos
+    
+            // Insertar el pedido y los detalles del pedido
+            int iDPedido = conexion.insertarPedido(pedidos.get(0));
+            for (modeloPedido pedido : pedidos) {
+                pedido.setIDPedido(iDPedido);
             }
+            conexion.insertarDetallePedido(iDPedido, pedidos);
+    
+            System.out.println("Pedido registrado exitosamente con ID: " + iDPedido);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error de conexión con la base de datos: " + e.getMessage());
-        } finally {
-            conexion.cerrarConexion();
+            e.printStackTrace();
+            System.out.println("Error al registrar el pedido: " + e.getMessage());
         }
     }
-
     
+    
+
 }

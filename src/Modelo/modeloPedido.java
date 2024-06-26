@@ -6,17 +6,19 @@ public class modeloPedido {
 
     private int iDPedido;
     private int cantidad;
-    private Date fecha;
+    private Date fechaPedido;
     private double totalPedido;
+    private String estado;
     private modeloCliente Cliente;
     private modeloProducto Producto;
     
 
-    public modeloPedido(int iDPedido, int cantidad, Date fecha,double totalPedido, modeloCliente cliente, modeloProducto producto){
+    public modeloPedido(int iDPedido, int cantidad, Date fechaPedido,double totalPedido, String estado, modeloCliente cliente, modeloProducto producto){
         this.iDPedido = iDPedido;
         this.cantidad = cantidad;
-        this.fecha = fecha;
+        this.fechaPedido = fechaPedido;
         this.totalPedido = totalPedido;
+        this.estado = estado;
         this.Cliente = cliente;
         this.Producto = producto;
     }
@@ -29,14 +31,6 @@ public class modeloPedido {
         this.iDPedido = iDPedido;
     }
 
-    public modeloProducto getProducto() {
-        return Producto;
-    }
-
-    public void setProducto(modeloProducto producto) {
-        this.Producto = producto;
-    }
-
     public int getCantidad() {
         return this.cantidad;
     }
@@ -45,12 +39,12 @@ public class modeloPedido {
         this.cantidad = cantidad;
     }
  
-    public Date getFecha() {
-        return this.fecha;
+    public Date getFechaPedido() {
+        return this.fechaPedido;
     }
 
     public void setFecha(Date fecha) {
-        this.fecha = fecha;
+        this.fechaPedido = fecha;
     }
 
     public double getTotalPedido() {
@@ -65,7 +59,23 @@ public class modeloPedido {
         return Cliente;
     }
 
+    public void setEstado (String estado){
+        this.estado=estado;
+    }
+
+    public String getEstado(){
+        return this.estado;
+    }
+
     public void setCliente(modeloCliente cliente) {
         this.Cliente = cliente;
+    }
+    
+    public modeloProducto getProducto() {
+        return Producto;
+    }
+
+    public void setProducto(modeloProducto producto) {
+        this.Producto = producto;
     }
 }
