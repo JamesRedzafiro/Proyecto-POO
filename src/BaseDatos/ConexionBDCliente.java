@@ -13,61 +13,62 @@ public class ConexionBDCliente extends ConexionBD {
     }
 
     // Método para insertar datos en la tabla modeloPersona
-    public void insertarPersona(String id, String nombre, String apellido, String dni, String direccion, String telefono, String correo, Date fechaRegistro) throws SQLException {
-        String query = "INSERT INTO modeloPersona (iD, nombre, apellido, DNI, direccion, telefono, correo, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
+    public int insertarPersona(String nombre, String apellido, String dni, String direccion, String telefono, String correo, Date fechaRegistro) throws SQLException {
+        String query = "INSERT INTO modeloPersona (nombre, apellido, DNI, direccion, telefono, correo, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        int generatedId = 0;
+
         iniciarConexion();
         Connection connection = getConnection();
 
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-           
-            stmt.setString(1, id);
-            stmt.setString(2, nombre);
-            stmt.setString(3, apellido);
-            stmt.setString(4, dni); 
-            stmt.setString(5, direccion); 
-            stmt.setString(6, telefono);
-            stmt.setString(7, correo);
-            stmt.setDate(8, fechaRegistro);
-    
+        try (PreparedStatement stmt = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, nombre);
+            stmt.setString(2, apellido);
+            stmt.setString(3, dni);
+            stmt.setString(4, direccion);
+            stmt.setString(5, telefono);
+            stmt.setString(6, correo);
+            stmt.setDate(7, fechaRegistro);
+
             stmt.executeUpdate();
-    
+            
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                generatedId = rs.getInt(1);
+            }
+
         } finally {
             cerrarConexion();
         }
+
+        return generatedId;
     }
     
     // Método para insertar datos en la tabla modeloCliente
-    public void insertarCliente(String idCliente, String id, String ruc) throws SQLException {
+    public void insertarCliente(int idCliente, int idPersona, String ruc) throws SQLException {
         String query = "INSERT INTO modeloCliente (iDCliente, iD, Ruc) VALUES (?, ?, ?)";
 
         iniciarConexion();
         Connection connection = getConnection();
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-
-            stmt.setString(1, idCliente);
-            stmt.setString(2, id);
+            stmt.setInt(1, idCliente);
+            stmt.setInt(2, idPersona);
             stmt.setString(3, ruc);
-
             stmt.executeUpdate();
-
         } finally {
             cerrarConexion();
         }
     }
 
     // Método para insertar datos en la tabla modeloUsuario
-    public void insertarUsuario(String idUsuario, String id, String contrasena) throws SQLException {
+    public void insertarUsuario(int idUsuario, int idPersona, String contrasena) throws SQLException {
         String query = "INSERT INTO modeloUsuario (iDUsuario, iD, contrasena) VALUES (?, ?, ?)";
 
         iniciarConexion();
         Connection connection = getConnection();
-        
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, idUsuario);
-            stmt.setString(2, id);
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(2, idPersona);
             stmt.setString(3, contrasena);
-
             stmt.executeUpdate();
         } finally {
             cerrarConexion();

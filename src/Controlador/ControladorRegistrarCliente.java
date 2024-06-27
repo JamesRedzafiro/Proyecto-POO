@@ -144,52 +144,46 @@ public class ControladorRegistrarCliente {
                 String apellido = model.getValueAt(i, 2).toString();
                 String dniStr = model.getValueAt(i, 3).toString();
                 String idClienteStr = model.getValueAt(i, 4).toString();
+                int idCliente = Integer.parseInt(idClienteStr);
                 String direccion = model.getValueAt(i, 5).toString();
                 String rucStr = model.getValueAt(i, 6).toString();
                 String telefonoStr = model.getValueAt(i, 7).toString();
                 String correo = model.getValueAt(i, 8).toString();
                 java.util.Date fechaRegistroUtil = (java.util.Date) model.getValueAt(i, 9);
                 java.sql.Date fechaRegistroDate = new java.sql.Date(fechaRegistroUtil.getTime());
-                
+    
                 try {
-                    // Verificar si el IDPersona ya existe en la base de datos
-                    int idPersona = Integer.parseInt(idClienteStr);
-                    if (conexion.existePersona(idPersona)) {
-                        throw new SQLException("IDPersona ya existe en la base de datos: "+idPersona);
-                    }
-
-                    // Insertar primero en modeloPersona
-                    conexion.insertarPersona(idClienteStr, nombre, apellido, dniStr, direccion, telefonoStr, correo, fechaRegistroDate);
-                    
-                    // Verificar que el iD generado existe en modeloPersona
-                    // 
-                    // 
-                
-                    // Insertar en modeloCliente
-                    conexion.insertarCliente(idClienteStr, idClienteStr, rucStr);
-                    
-                    // Insertar en modeloUsuario (si es necesario)
-                    conexion.insertarUsuario(idClienteStr, idClienteStr, dniStr); // Suponiendo que la contraseña es el DNI
-                    
-                    JOptionPane.showMessageDialog(null, "Datos insertados correctamente en la base de datos.");
+                    // Insertar primero en modeloPersona y obtener el ID generado
+                    int idPersona = conexion.insertarPersona(nombre, apellido, dniStr, direccion, telefonoStr, correo, fechaRegistroDate);
+    
+                    // Insertar en modeloCliente usando el ID generado
+                    conexion.insertarCliente(idCliente, idPersona, rucStr);
+    
+                    // Insertar en modeloUsuario. Suponiendo que la contraseña es el DNI
+                    conexion.insertarUsuario(idCliente, idPersona, dniStr);
+    
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Error al insertar en la base de datos: " + ex.getMessage());
                     datosGuardados = false;
-                    conexion.revertirConexion();
+                    conexion.revertirConexion(); // Revertir la transacción en caso de error
                     break;
                 }
             }
-            
+    
             if (datosGuardados) {
-                conexion.confirmarConexion();
+                conexion.confirmarConexion(); // Confirmar la transacción si todos los datos fueron guardados correctamente
                 model.setRowCount(0); // Limpiar todas las filas del modelo de tabla después de guardar los datos
+                JOptionPane.showMessageDialog(null, "Datos insertados correctamente en la base de datos.");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error de conexión con la base de datos: " + e.getMessage());
         } finally {
-            conexion.cerrarConexion();
+            conexion.cerrarConexion(); // Cerrar la conexión en el bloque finally para asegurar que siempre se cierre
         }
     }
+    
+    
+    
     
     
     
