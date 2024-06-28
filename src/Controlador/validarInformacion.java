@@ -1,7 +1,5 @@
 package Controlador;
 
-
-
 public class ValidarInformacion {
 
     public static boolean validarNombre(String texto) {

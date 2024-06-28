@@ -2,9 +2,11 @@ package BaseDatos;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class ConexionBDCliente extends ConexionBD {
 
@@ -12,15 +14,12 @@ public class ConexionBDCliente extends ConexionBD {
         super(); // Llama al constructor de la clase base
     }
 
-    // Método para insertar datos en la tabla modeloPersona
-    public int insertarPersona(String nombre, String apellido, String dni, String direccion, String telefono, String correo, Date fechaRegistro) throws SQLException {
+    public int insertarPersona(String nombre, String apellido, String dni, String direccion, String telefono, String correo, java.sql.Date fechaRegistro) throws SQLException {
         String query = "INSERT INTO modeloPersona (nombre, apellido, DNI, direccion, telefono, correo, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        int generatedId = 0;
-
+        
         iniciarConexion();
         Connection connection = getConnection();
-
-        try (PreparedStatement stmt = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, nombre);
             stmt.setString(2, apellido);
             stmt.setString(3, dni);
@@ -28,53 +27,108 @@ public class ConexionBDCliente extends ConexionBD {
             stmt.setString(5, telefono);
             stmt.setString(6, correo);
             stmt.setDate(7, fechaRegistro);
-
             stmt.executeUpdate();
             
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
-                generatedId = rs.getInt(1);
+                return rs.getInt(1);
+            } else {
+                throw new SQLException("Error al obtener el ID generado.");
             }
-
-        } finally {
-            cerrarConexion();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
         }
-
-        return generatedId;
     }
     
-    // Método para insertar datos en la tabla modeloCliente
-    public void insertarCliente(int idCliente, int idPersona, String ruc) throws SQLException {
+    public void insertarCliente(int idPersona, String ruc) throws SQLException {
         String query = "INSERT INTO modeloCliente (iDCliente, iD, Ruc) VALUES (?, ?, ?)";
-
-        iniciarConexion();
+        
         Connection connection = getConnection();
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, idCliente);
+            stmt.setInt(1, idPersona);  // Usar idPersona como iDCliente
             stmt.setInt(2, idPersona);
             stmt.setString(3, ruc);
             stmt.executeUpdate();
-        } finally {
-            cerrarConexion();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
         }
     }
-
-    // Método para insertar datos en la tabla modeloUsuario
-    public void insertarUsuario(int idUsuario, int idPersona, String contrasena) throws SQLException {
+    
+    public void insertarUsuario(String idUsuario, int idPersona, String contrasena) throws SQLException {
         String query = "INSERT INTO modeloUsuario (iDUsuario, iD, contrasena) VALUES (?, ?, ?)";
-
-        iniciarConexion();
+        
         Connection connection = getConnection();
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, idUsuario);
+            stmt.setString(1, idUsuario);
             stmt.setInt(2, idPersona);
             stmt.setString(3, contrasena);
             stmt.executeUpdate();
-        } finally {
-            cerrarConexion();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
         }
     }
-
+    
+    public void agregarDatos(String nombre, String apellido, String dni, String direccion, String telefono, String correo, String ruc) {
+        ConexionBDCliente conexion = new ConexionBDCliente();
+        
+        try {
+            conexion.iniciarConexion(); // Iniciar transacción
+            
+            // Insertar datos en modeloPersona y obtener el ID generado
+            java.sql.Date fechaRegistro = new java.sql.Date(new java.util.Date().getTime());
+            int idPersona = conexion.insertarPersona(nombre, apellido, dni, direccion, telefono, correo, fechaRegistro);
+            
+            // Insertar datos en modeloCliente usando el ID generado
+            conexion.insertarCliente(idPersona, ruc);
+            
+            // Generar el IDUsuario concatenando nombre e idPersona
+            String idUsuario = nombre + idPersona;
+            
+            // Insertar datos en modeloUsuario usando el IDUsuario generado
+            conexion.insertarUsuario(idUsuario, idPersona, dni);
+            
+            conexion.confirmarConexion(); // Confirmar transacción
+    
+            // Mostrar datos insertados en un JOptionPane
+            String message = String.format("Datos insertados correctamente:\n\n"
+                    + "modeloPersona:\n"
+                    + "ID: %d\n"
+                    + "Nombre: %s\n"
+                    + "Apellido: %s\n"
+                    + "DNI: %s\n"
+                    + "Dirección: %s\n"
+                    + "Teléfono: %s\n"
+                    + "Correo: %s\n"
+                    + "Fecha de Registro: %s\n\n"
+                    + "modeloCliente:\n"
+                    + "IDCliente: %d\n"
+                    + "ID: %d\n"
+                    + "RUC: %s\n\n"
+                    + "modeloUsuario:\n"
+                    + "IDUsuario: %s\n"
+                    + "ID: %d\n"
+                    + "Contraseña: %s",
+                    idPersona, nombre, apellido, dni, direccion, telefono, correo, fechaRegistro.toString(),
+                    idPersona, idPersona, ruc,
+                    idUsuario, idPersona, dni);
+    
+            JOptionPane.showMessageDialog(null, message);
+    
+        } catch (SQLException e) {
+            try {
+                conexion.revertirConexion(); // Revertir transacción en caso de error
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al revertir la transacción: " + ex.getMessage());
+            }
+            JOptionPane.showMessageDialog(null, "Error al insertar datos: " + e.getMessage());
+        } finally {
+            conexion.cerrarConexion(); // Cerrar la conexión
+        }
+    }
+    
     // Obtener el último ID de cliente de la base de datos
     public int getLastIdCliente() throws SQLException {
         int lastIdCliente = 0;

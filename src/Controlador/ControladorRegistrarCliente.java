@@ -3,6 +3,7 @@ package Controlador;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import java.sql.Date;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -10,52 +11,53 @@ import BaseDatos.ConexionBDCliente;
 
 public class ControladorRegistrarCliente {
 
-    public static void registrarCliente(DefaultTableModel model, JTextField nombreField, JTextField apellidoField, JTextField dniField, 
-                                        JTextField idClienteField, JTextField direccionField, JTextField rucField, JTextField telefonoField, JTextField correoField) {
-        String nombre = nombreField.getText();
-        String apellido = apellidoField.getText();
-        String dni = dniField.getText();
-        String idCliente = idClienteField.getText();
-        String direccion = direccionField.getText();
-        String ruc = rucField.getText();
-        String telefono = telefonoField.getText();
-        String correo = correoField.getText();
-        
-        // Validar datos
-        if (!ValidarInformacion.validarNombre(nombre) || !ValidarInformacion.validarNombre(apellido)) {
-            JOptionPane.showMessageDialog(null, "El nombre y apellido deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (!ValidarInformacion.validarDNI(dni)) {
-            JOptionPane.showMessageDialog(null, "El DNI debe contener exactamente 8 números sin espacios", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (!ValidarInformacion.validarRUC(ruc)) {
-            JOptionPane.showMessageDialog(null, "El RUC debe contener exactamente 10 dígitos y empezar con 1 o 2", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (!ValidarInformacion.validarTelefono(telefono)) {
-            JOptionPane.showMessageDialog(null, "El teléfono debe contener exactamente 9 dígitos que empiecen con 9", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (!ValidarInformacion.validarCorreo(correo)) {
-            JOptionPane.showMessageDialog(null, "El correo electrónico debe contener '@' y terminar en '.com'", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
     
-        // Añadir fila a la tabla
-        model.addRow(new Object[]{model.getRowCount() + 1, nombre, apellido, dni, idCliente, direccion, ruc, telefono, correo, new java.util.Date()});
-        
-        // Limpiar campos
-        nombreField.setText("");
-        apellidoField.setText("");
-        dniField.setText("");
-        idClienteField.setText("");
-        direccionField.setText("");
-        rucField.setText("");
-        telefonoField.setText("");
-        correoField.setText("");
+public static void registrarCliente(DefaultTableModel model, JTextField nombreField, JTextField apellidoField, JTextField dniField, JTextField direccionField, JTextField rucField, JTextField telefonoField, JTextField correoField) {
+    String nombre = nombreField.getText();
+    String apellido = apellidoField.getText();
+    String dni = dniField.getText();
+    String direccion = direccionField.getText();
+    String ruc = rucField.getText();
+    String telefono = telefonoField.getText();
+    String correo = correoField.getText();
+
+    // Validar datos
+    if (!ValidarInformacion.validarNombre(nombre) || !ValidarInformacion.validarNombre(apellido)) {
+        JOptionPane.showMessageDialog(null, "El nombre y apellido deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
     }
+    if (!ValidarInformacion.validarDNI(dni)) {
+        JOptionPane.showMessageDialog(null, "El DNI debe contener exactamente 8 números sin espacios", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    if (!ValidarInformacion.validarRUC(ruc)) {
+        JOptionPane.showMessageDialog(null, "El RUC debe contener exactamente 10 dígitos y empezar con 1 o 2", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    if (!ValidarInformacion.validarTelefono(telefono)) {
+        JOptionPane.showMessageDialog(null, "El teléfono debe contener exactamente 9 dígitos que empiecen con 9", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    if (!ValidarInformacion.validarCorreo(correo)) {
+        JOptionPane.showMessageDialog(null, "El correo electrónico debe contener '@' y terminar en '.com'", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Obtener la fecha actual en el formato java.sql.Date
+    Date fechaRegistro = new Date(System.currentTimeMillis());
+
+    // Añadir fila a la tabla
+    model.addRow(new Object[]{model.getRowCount() + 1, nombre, apellido, dni, direccion, ruc, telefono, correo, fechaRegistro});
+
+    // Limpiar campos
+    nombreField.setText("");
+    apellidoField.setText("");
+    dniField.setText("");
+    direccionField.setText("");
+    rucField.setText("");
+    telefonoField.setText("");
+    correoField.setText("");
+}
     
     public static void actualizarCliente(DefaultTableModel model, JTable table, JTextField nombreField, JTextField apellidoField, JTextField dniField, JTextField idClienteField, JTextField direccionField, JTextField rucField, JTextField telefonoField, JTextField correoField) {
         int selectedRow = table.getSelectedRow();
@@ -131,56 +133,30 @@ public class ControladorRegistrarCliente {
     }
 
     public static void guardarCliente(DefaultTableModel model) {
-        ConexionBDCliente conexion = new ConexionBDCliente();
         int rowCount = model.getRowCount();
-        
-        boolean datosGuardados = true;
-        
-        try {
-            conexion.iniciarConexion(); // Iniciar transacción
-            
-            for (int i = 0; i < rowCount; i++) {
-                String nombre = model.getValueAt(i, 1).toString();
-                String apellido = model.getValueAt(i, 2).toString();
-                String dniStr = model.getValueAt(i, 3).toString();
-                String idClienteStr = model.getValueAt(i, 4).toString();
-                int idCliente = Integer.parseInt(idClienteStr);
-                String direccion = model.getValueAt(i, 5).toString();
-                String rucStr = model.getValueAt(i, 6).toString();
-                String telefonoStr = model.getValueAt(i, 7).toString();
-                String correo = model.getValueAt(i, 8).toString();
-                java.util.Date fechaRegistroUtil = (java.util.Date) model.getValueAt(i, 9);
-                java.sql.Date fechaRegistroDate = new java.sql.Date(fechaRegistroUtil.getTime());
     
-                try {
-                    // Insertar primero en modeloPersona y obtener el ID generado
-                    int idPersona = conexion.insertarPersona(nombre, apellido, dniStr, direccion, telefonoStr, correo, fechaRegistroDate);
+        for (int i = 0; i < rowCount; i++) {
+            String nombre = model.getValueAt(i, 1).toString();
+            String apellido = model.getValueAt(i, 2).toString();
+            String dniStr = model.getValueAt(i, 3).toString();
+            String direccion = model.getValueAt(i, 4).toString();
+            String rucStr = model.getValueAt(i, 5).toString();
+            String telefonoStr = model.getValueAt(i, 6).toString();
+            String correo = model.getValueAt(i, 7).toString();
+            java.sql.Date fechaRegistro = (java.sql.Date) model.getValueAt(i, 8);
     
-                    // Insertar en modeloCliente usando el ID generado
-                    conexion.insertarCliente(idCliente, idPersona, rucStr);
-    
-                    // Insertar en modeloUsuario. Suponiendo que la contraseña es el DNI
-                    conexion.insertarUsuario(idCliente, idPersona, dniStr);
-    
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Error al insertar en la base de datos: " + ex.getMessage());
-                    datosGuardados = false;
-                    conexion.revertirConexion(); // Revertir la transacción en caso de error
-                    break;
-                }
+            try {
+                ConexionBDCliente conexion = new ConexionBDCliente();
+                conexion.agregarDatos(nombre, apellido, dniStr, direccion, telefonoStr, correo, rucStr);
+                model.removeRow(i); // Eliminar fila después de insertar datos
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al insertar datos en la fila " + i + ": " + e.getMessage());
             }
-    
-            if (datosGuardados) {
-                conexion.confirmarConexion(); // Confirmar la transacción si todos los datos fueron guardados correctamente
-                model.setRowCount(0); // Limpiar todas las filas del modelo de tabla después de guardar los datos
-                JOptionPane.showMessageDialog(null, "Datos insertados correctamente en la base de datos.");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error de conexión con la base de datos: " + e.getMessage());
-        } finally {
-            conexion.cerrarConexion(); // Cerrar la conexión en el bloque finally para asegurar que siempre se cierre
         }
     }
+    
+    
+    
     
     
     
