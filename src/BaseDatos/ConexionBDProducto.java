@@ -1,7 +1,6 @@
 package BaseDatos;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,57 +10,55 @@ import java.util.List;
 public class ConexionBDProducto extends ConexionBD {
 
     public ConexionBDProducto() {
-        super();  // Llamamos al constructor de la clase padre para inicializar la conexión
+        super();
     }
 
-    // Método para insertar datos en la tabla modeloPersona
-    public void insertarProducto(String nombre, String volumen, String precio, String sabor, Date fechaRegistro) throws SQLException {
+    public void insertarProducto(String nombre, double volumen, double precio, String sabor, java.sql.Date fechaRegistro) throws SQLException {
         String query = "INSERT INTO modeloProducto (nombre, volumen, precio, sabor, fechaRegistro) VALUES (?, ?, ?, ?, ?)";
         
-        iniciarConexion();
         Connection connection = getConnection();
         
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, nombre);
-            stmt.setString(2, volumen);
-            stmt.setString(3, precio); 
-            stmt.setString(4, sabor); 
+            stmt.setDouble(2, volumen);
+            stmt.setDouble(3, precio);
+            stmt.setString(4, sabor);
             stmt.setDate(5, fechaRegistro);
-    
             stmt.executeUpdate();
             
+            // Confirmar transacción
+            connection.commit();
+        } catch (SQLException e) {
+            // Revertir transacción en caso de error
+            if (connection != null) {
+                connection.rollback();
+            }
+            throw e;
         } finally {
-            cerrarConexion();
+            if (connection != null) {
+                connection.close();
+            }
         }
     }
     
-    //Método para obtener la list de productos de la tabla modeloProducto para el JComboBOx del formulario modeloPedido
+
     public List<String> obtenerNombresProductos() throws SQLException {
         List<String> nombresProductos = new ArrayList<>();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        String query = "SELECT nombre FROM modeloProducto"; // Consulta SQL para obtener nombres de productos
+        String query = "SELECT nombre FROM modeloProducto";
 
-        try {
-            iniciarConexion();
-            Connection connection = getConnection();
-            stmt = connection.prepareStatement(query);
-            rs = stmt.executeQuery();
+        iniciarConexion();
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 nombresProductos.add(rs.getString("nombre"));
             }
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stmt != null) {
-                stmt.close();
-            }
+            cerrarConexion();
         }
-        return nombresProductos; // Devolver lista de nombres de productos
+        return nombresProductos;
     }
 
-    // Método para obtener el precio del producto
     public double obtenerPrecioProducto(String nombreProducto) throws SQLException {
         iniciarConexion();
         Connection connection = getConnection();
@@ -86,8 +83,7 @@ public class ConexionBDProducto extends ConexionBD {
 
         return precioProducto;
     }
-    
-    //Método para obtener el IDProducto usando el nombre del producto seleccionado por el JComboBox
+
     public int obtenerIDProducto(String nombre) throws SQLException {
         iniciarConexion();
         Connection connection = getConnection();
@@ -112,5 +108,4 @@ public class ConexionBDProducto extends ConexionBD {
 
         return iDProducto;
     }
-
 }
