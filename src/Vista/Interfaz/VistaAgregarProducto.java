@@ -29,7 +29,7 @@ public class VistaAgregarProducto extends JFrame {
     public VistaAgregarProducto() {
         this.setTitle("EMPRESA SOCOSANI:   Registrar Producto");
         this.setFont(new Font("Aptos Black", Font.BOLD, 35));
-        this.setBounds(0, 0, 675, 700);
+        this.setBounds(0, 0, 675, 625);
         setLayout(new BorderLayout());
         this.setIconImages(Arrays.asList(new ImageIcon(getClass().getResource("/Imagenes/logo-socosani.png")).getImage()));
         this.setLocationRelativeTo(null);
@@ -51,31 +51,31 @@ public class VistaAgregarProducto extends JFrame {
         ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
 
         String [] columnas = {"N° Registro", "Nombre", "Volumen", "Precio", "Sabor", "Fecha Registro"};
-        ControladorInterfaz.configurarTabla(model, table, scrollPane, PanelVistaCompra, 15, 450, 625, 200, columnas);
+        ControladorInterfaz.configurarTabla(model, table, scrollPane, PanelVistaCompra, 15, 390, 625, 180, columnas);
 
         
 
         // Ingresar los Datos
         //ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "iDProducto:", new Font("Aptos Black", Font.BOLD, 20), 40, 5, 430, 25);
         //iDProductoField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 30, 550, 35);
-        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Nombre:", new Font("Aptos Black", Font.BOLD, 20), 40, 75, 430, 25);
-        nombreField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 100, 550, 35);
-        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Volumen:", new Font("Aptos Black", Font.BOLD, 20), 40, 135, 430, 25);
-        volumenField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 160, 550, 35);
-        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Precio:", new Font("Aptos Black", Font.BOLD, 20), 40, 195, 430, 25);
-        precioField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 220, 550, 35);
-        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Sabor:", new Font("Aptos Black", Font.BOLD, 20), 40, 255, 430, 25);
-        saborField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 280, 550, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Nombre:", new Font("Aptos Black", Font.BOLD, 20), 40, 5, 430, 25);
+        nombreField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 30, 550, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Volumen:", new Font("Aptos Black", Font.BOLD, 20), 40, 75, 430, 25);
+        volumenField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 100, 550, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Precio:", new Font("Aptos Black", Font.BOLD, 20), 40, 135, 430, 25);
+        precioField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 160, 550, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaCompra, "Sabor:", new Font("Aptos Black", Font.BOLD, 20), 40, 195, 430, 25);
+        saborField = ControladorInterfaz.agregarCampoTexto(PanelVistaCompra, new Font("Aptos Black", Font.PLAIN, 20), 25, 220, 550, 35);
         
         // Botones
-        registrarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Registrar", 20, 320, 75, 35,
-                                                                             20, 350, "check.png");
-        actualizarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Actualizar", 108, 320, 75, 35,
-                                                                             105, 350, "actualizar.png");
-        eliminarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Eliminar", 450, 320, 75, 35,
-                                                                             450, 350, "x.png");
-        guardarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Guardar", 550, 320, 75, 35,
-                                                                             550, 350, "guardar.png");
+        registrarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Registrar", 20, 265, 75, 35,
+                                                                             20, 300, "check.png");
+        actualizarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Actualizar", 108, 265, 75, 35,
+                                                                             105, 300, "actualizar.png");
+        eliminarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Eliminar", 450, 265, 75, 35,
+                                                                             450, 300, "x.png");
+        guardarButton = ControladorInterfaz.agregarBoton(PanelVistaCompra, "Guardar", 550, 265, 75, 35,
+                                                                             550, 300, "guardar.png");
 
         // Añadir ActionListener para el botón registrar
         registrarButton.addActionListener(new ActionListener() {
