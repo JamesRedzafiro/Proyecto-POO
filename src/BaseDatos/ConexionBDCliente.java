@@ -55,6 +55,24 @@ public class ConexionBDCliente extends ConexionBD {
             throw e;
         }
     }
+
+    public void insertarFuncionario(int idPersona, String puesto) throws SQLException {
+        String query = "INSERT INTO modeloFuncionario (iDFuncionario, iD, puesto) VALUES (?, ?, ?)";
+
+        iniciarConexion();
+        Connection connection = getConnection();
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, idPersona);
+            stmt.setInt(2, idPersona);
+            stmt.setString(3, puesto);
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } 
+    }
     
     public void insertarUsuario(String idUsuario, int idPersona, String contrasena) throws SQLException {
         String query = "INSERT INTO modeloUsuario (iDUsuario, iD, contrasena) VALUES (?, ?, ?)";
@@ -71,7 +89,7 @@ public class ConexionBDCliente extends ConexionBD {
         }
     }
     
-    public void agregarDatos(String nombre, String apellido, String dni, String direccion, String telefono, String correo, String ruc) {
+    public void agregarDatosCliente(String nombre, String apellido, String dni, String direccion, String telefono, String correo, String ruc) {
         ConexionBDCliente conexion = new ConexionBDCliente();
         
         try {
@@ -113,6 +131,64 @@ public class ConexionBDCliente extends ConexionBD {
                     + "Contraseña: %s",
                     idPersona, nombre, apellido, dni, direccion, telefono, correo, fechaRegistro.toString(),
                     idPersona, idPersona, ruc,
+                    idUsuario, idPersona, dni);
+    
+            JOptionPane.showMessageDialog(null, message);
+    
+        } catch (SQLException e) {
+            try {
+                conexion.revertirConexion(); // Revertir transacción en caso de error
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al revertir la transacción: " + ex.getMessage());
+            }
+            JOptionPane.showMessageDialog(null, "Error al insertar datos: " + e.getMessage());
+        } finally {
+            conexion.cerrarConexion(); // Cerrar la conexión
+        }
+    }
+
+    public void agregarDatosFuncionario(String nombre, String apellido, String dni, String direccion, String telefono, String correo, String puesto) {
+        ConexionBDCliente conexion = new ConexionBDCliente();
+        
+        try {
+            conexion.iniciarConexion(); // Iniciar transacción
+            
+            // Insertar datos en modeloPersona y obtener el ID generado
+            java.sql.Date fechaRegistro = new java.sql.Date(new java.util.Date().getTime());
+            int idPersona = conexion.insertarPersona(nombre, apellido, dni, direccion, telefono, correo, fechaRegistro);
+            
+            // Insertar datos en modeloCliente usando el ID generado
+            conexion.insertarFuncionario(idPersona, puesto);
+            
+            // Generar el IDUsuario concatenando nombre e idPersona
+            String idUsuario = nombre + idPersona;
+            
+            // Insertar datos en modeloUsuario usando el IDUsuario generado
+            conexion.insertarUsuario(idUsuario, idPersona, dni);
+            
+            conexion.confirmarConexion(); // Confirmar transacción
+    
+            // Mostrar datos insertados en un JOptionPane
+            String message = String.format("Datos insertados correctamente:\n\n"
+                    + "modeloPersona:\n"
+                    + "ID: %d\n"
+                    + "Nombre: %s\n"
+                    + "Apellido: %s\n"
+                    + "DNI: %s\n"
+                    + "Dirección: %s\n"
+                    + "Teléfono: %s\n"
+                    + "Correo: %s\n"
+                    + "Fecha de Registro: %s\n\n"
+                    + "modeloFuncionario:\n"
+                    + "IDCliente: %d\n"
+                    + "ID: %d\n"
+                    + "Puesto: %s\n\n"
+                    + "modeloUsuario:\n"
+                    + "IDUsuario: %s\n"
+                    + "ID: %d\n"
+                    + "Contraseña: %s",
+                    idPersona, nombre, apellido, dni, direccion, telefono, correo, fechaRegistro.toString(),
+                    idPersona, idPersona, puesto,
                     idUsuario, idPersona, dni);
     
             JOptionPane.showMessageDialog(null, message);

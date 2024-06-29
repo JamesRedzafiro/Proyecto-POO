@@ -29,6 +29,4 @@ public class ValidarInformacion {
     public static boolean validarInt(String input) {
         return input.matches("^\\d+$"); // Verifica que la cadena contenga solo dígitos
     }
-    
-
 }

@@ -30,7 +30,6 @@ public class VistaAgregarProducto extends JFrame {
         this.setTitle("EMPRESA SOCOSANI:   Registrar Producto");
         this.setFont(new Font("Aptos Black", Font.BOLD, 35));
         this.setBounds(0, 0, 675, 700);
-
         setLayout(new BorderLayout());
         this.setIconImages(Arrays.asList(new ImageIcon(getClass().getResource("/Imagenes/logo-socosani.png")).getImage()));
         this.setLocationRelativeTo(null);
@@ -109,7 +108,5 @@ public class VistaAgregarProducto extends JFrame {
                     ControladorRegistrarProducto.guardarProducto(model);
             }
         });
-
-
     }
 }
