@@ -150,12 +150,6 @@ public class ControladorRegistrarFuncionario {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
+ 
 }
 

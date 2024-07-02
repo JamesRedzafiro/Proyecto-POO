@@ -15,7 +15,8 @@ public class Main {
                 //new vistaRegistrarCliente().setVisible(true);
                 //new vistaBuscarCliente().setVisible(true);
                 //new vistaContacto().setVisible(true);
-                new VistaAgregarProducto().setVisible(true);
+                //new VistaAgregarProducto().setVisible(true);
+                new VistaLogin().setVisible(true);
             }
         });
     }
