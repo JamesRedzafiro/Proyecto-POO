@@ -66,10 +66,10 @@ public class VistaLogin extends JFrame {
 
         // Ingresar los Datos
         ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "USUARIO:", robotoFont.deriveFont(Font.BOLD, 24), 25, 5, 200, 30);
-        iDUsuarioField = ControladorInterfaz.agregarCampoTexto(PanelVistaLogin, robotoFont.deriveFont(Font.PLAIN, 18), 25, 45, 300, 30);
+        iDUsuarioField = ControladorInterfaz.agregarCampoTexto(PanelVistaLogin, robotoFont.deriveFont(Font.PLAIN, 20), 25, 45, 300, 30);
         ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "CONTRASEÑA:", robotoFont.deriveFont(Font.BOLD, 24), 25, 100, 200, 30);
         contrasenaField = new JPasswordField();
-        contrasenaField.setFont(robotoFont.deriveFont(Font.PLAIN, 18));
+        contrasenaField.setFont(robotoFont.deriveFont(Font.PLAIN, 30));
         contrasenaField.setBounds(25, 135, 300, 30);
         PanelVistaLogin.add(contrasenaField);
 
