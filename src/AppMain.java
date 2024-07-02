@@ -1,9 +1,9 @@
-package Main;
+
 import javax.swing.SwingUtilities;
 
 import Vista.Interfaz.*;
 
-public class Main {
+public class AppMain {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

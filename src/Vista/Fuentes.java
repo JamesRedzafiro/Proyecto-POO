@@ -33,4 +33,5 @@ public class Fuentes {
     public static Font getAptosBackFont(float size, int style){
         return aptosblackFont.deriveFont(style, size);
     }
+
 }

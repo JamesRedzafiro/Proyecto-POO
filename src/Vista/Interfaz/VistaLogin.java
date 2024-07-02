@@ -6,19 +6,15 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
 
-import Controlador.*;
-import Vista.ImagenFondo;
+import Controlador.ControladorInterfaz;
 import Vista.Fuentes;
+import Vista.ImagenFondo;
 
 public class VistaLogin extends JFrame {
-
     private DefaultTableModel model;
     private JTable table;
     private JScrollPane scrollPane;
-
 
     private JTextField iDUsuarioField;
     private JPasswordField contrasenaField;
@@ -42,6 +38,7 @@ public class VistaLogin extends JFrame {
     private void ComponentesVistaLogin() {
         ImagenFondo PanelVistaLogin = new ImagenFondo("/Imagenes/fondo-socosani.png");
         PanelVistaLogin.setLayout(null);
+        PanelVistaLogin.setOpaque(true); // Asegurar la opacidad del panel principal
         this.getContentPane().add(PanelVistaLogin);
 
         // Crear el modelo de la tabla y configurar la tabla
@@ -53,11 +50,11 @@ public class VistaLogin extends JFrame {
         ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
 
         // Ingresar los Datos
-        ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "USUARIO:", Fuentes.getRobotoFont(Font.BOLD, 24), 25, 5, 200, 30);
-        iDUsuarioField = ControladorInterfaz.agregarCampoTexto(PanelVistaLogin, Fuentes.getRobotoFont(Font.PLAIN, 20), 5, 45, 200, 35);
-        ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "CONTRASEÑA:", Fuentes.getRobotoFont(Font.BOLD, 24), 25, 100, 200, 30);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "USUARIO:", Fuentes.getRobotoFont(24, Font.BOLD), 25, 5, 200, 30);
+        iDUsuarioField = ControladorInterfaz.agregarCampoTexto(PanelVistaLogin, Fuentes.getRobotoFont(20, Font.PLAIN), 5, 45, 200, 35);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "CONTRASEÑA:", Fuentes.getRobotoFont(24, Font.BOLD), 25, 100, 200, 30);
         contrasenaField = new JPasswordField();
-        contrasenaField.setFont(Fuentes.getRobotoFont(Font.PLAIN, 30));
+        contrasenaField.setFont(Fuentes.getRobotoFont(30, Font.PLAIN));
         contrasenaField.setBounds(5, 135, 200, 35);
         PanelVistaLogin.add(contrasenaField);
 
@@ -107,5 +104,4 @@ public class VistaLogin extends JFrame {
             }
         });
     }
-
 }
