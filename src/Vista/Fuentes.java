@@ -10,11 +10,13 @@ public class Fuentes {
 
     private static Font playwriteFont;
     private static Font robotoFont;
+    private static Font aptosblackFont;
 
     static {
         try {
             playwriteFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/Fuentes/PLAYWRITEITMODERNA-REGULAR.ttf")).deriveFont(18f);
             robotoFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/Fuentes/Roboto-Regular.ttf")).deriveFont(18f);
+            aptosblackFont = Font.createFont(Font.TRUETYPE_FONT,new File("src/Fuentes/Aptos-Back.ttf")).deriveFont(18f);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
@@ -27,5 +29,8 @@ public class Fuentes {
     public static Font getRobotoFont(float size, int style) {
         return robotoFont.deriveFont(style, size);
     }
-    
+
+    public static Font getAptosBackFont(float size, int style){
+        return aptosblackFont.deriveFont(style, size);
+    }
 }
