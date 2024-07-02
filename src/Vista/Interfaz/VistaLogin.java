@@ -66,27 +66,33 @@ public class VistaLogin extends JFrame {
 
         // Ingresar los Datos
         ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "USUARIO:", robotoFont.deriveFont(Font.BOLD, 24), 25, 5, 200, 30);
-        iDUsuarioField = ControladorInterfaz.agregarCampoTexto(PanelVistaLogin, robotoFont.deriveFont(Font.PLAIN, 20), 25, 45, 300, 30);
+        iDUsuarioField = ControladorInterfaz.agregarCampoTexto(PanelVistaLogin, robotoFont.deriveFont(Font.PLAIN, 20), 5, 45, 200, 35);
         ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "CONTRASEÑA:", robotoFont.deriveFont(Font.BOLD, 24), 25, 100, 200, 30);
         contrasenaField = new JPasswordField();
         contrasenaField.setFont(robotoFont.deriveFont(Font.PLAIN, 30));
-        contrasenaField.setBounds(25, 135, 300, 30);
+        contrasenaField.setBounds(5, 135, 200, 35);
         PanelVistaLogin.add(contrasenaField);
 
         // Botones
         btnIngresar = new JButton("Ingresar");
-        btnIngresar.setFont(robotoFont.deriveFont(Font.BOLD, 20));
-        btnIngresar.setBounds(370, 35, 160, 35);
+        btnIngresar.setFont(Fuentes.getPlaywriteFont(20, Font.BOLD));
+        btnIngresar.setBounds(370, 45, 145, 35);
+        btnIngresar.setBackground(Color.decode("#4CAF50")); // Color en formato HEX
+        btnIngresar.setForeground(Color.WHITE); // Color del texto en blanco
         PanelVistaLogin.add(btnIngresar);
 
         btnSalir = new JButton("Salir");
-        btnSalir.setFont(robotoFont.deriveFont(Font.BOLD, 20));
-        btnSalir.setBounds(370, 120, 160, 35);
+        btnSalir.setFont(Fuentes.getPlaywriteFont(20, Font.BOLD));
+        btnSalir.setBounds(370, 135, 145, 35);
+        btnSalir.setBackground(Color.decode("#F44336")); // Color en formato HEX
+        btnSalir.setForeground(Color.WHITE); // Color del texto en blanco
         PanelVistaLogin.add(btnSalir);
 
-        btnContacto = new JButton("Contactanos");
-        btnContacto.setFont(robotoFont.deriveFont(Font.BOLD, 20));
-        btnContacto.setBounds(370, 250, 160, 35);
+        btnContacto = new JButton("Ayuda");
+        btnContacto.setFont(Fuentes.getPlaywriteFont(20, Font.BOLD));
+        btnContacto.setBounds(5, 210, 120, 35);
+        btnContacto.setBackground(Color.decode("#2196F3")); // Color en formato HEX
+        btnContacto.setForeground(Color.WHITE); // Color del texto en blanco
         PanelVistaLogin.add(btnContacto);
 
         // Añadir ActionListener para el botón registrar
