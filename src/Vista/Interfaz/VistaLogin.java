@@ -3,8 +3,6 @@ package Vista.Interfaz;
 import java.awt.*;
 import java.util.Arrays;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 
 import Controlador.ControladorInterfaz;
@@ -12,10 +10,7 @@ import Vista.Fuentes;
 import Vista.ImagenFondo;
 
 public class VistaLogin extends JFrame {
-    private DefaultTableModel model;
-    private JTable table;
-    private JScrollPane scrollPane;
-
+  
     private JTextField iDUsuarioField;
     private JPasswordField contrasenaField;
 
@@ -41,27 +36,20 @@ public class VistaLogin extends JFrame {
         PanelVistaLogin.setOpaque(true); // Asegurar la opacidad del panel principal
         this.getContentPane().add(PanelVistaLogin);
 
-        // Crear el modelo de la tabla y configurar la tabla
-        model = new DefaultTableModel();
-        table = new JTable(model);
-        scrollPane = new JScrollPane(table);
-        // Configurar la transparencia de la tabla y sus celdas
-        table.setOpaque(false);
-        ((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
 
         // Ingresar los Datos
-        ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "USUARIO:", Fuentes.getRobotoFont(24, Font.BOLD), 10, 10, 200, 30);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "USUARIO:", Fuentes.getRobotoFont(24, Font.ITALIC), 10, 10, 200, 30);
         iDUsuarioField = ControladorInterfaz.agregarCampoTexto(PanelVistaLogin, Fuentes.getRobotoFont(20, Font.PLAIN), 5, 45, 200, 35);
-        ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "CONTRASEÑA:", Fuentes.getRobotoFont(24, Font.BOLD), 10, 100, 200, 30);
+        ControladorInterfaz.agregarEtiqueta(PanelVistaLogin, "CONTRASEÑA:", Fuentes.getRobotoFont(24, Font.ITALIC), 10, 100, 200, 30);
         contrasenaField = new JPasswordField();
-        contrasenaField.setFont(Fuentes.getRobotoFont(30, Font.PLAIN));
+        contrasenaField.setFont(Fuentes.getRobotoFont(30, Font.ITALIC));
         contrasenaField.setBounds(5, 135, 200, 35);
         PanelVistaLogin.add(contrasenaField);
 
         // Botones
         btnIngresar = new JButton("Ingresar");
-        btnIngresar.setFont(Fuentes.getPlaywriteFont(20, Font.BOLD));
-        btnIngresar.setBounds(370, 45, 145, 35);
+        btnIngresar.setFont(Fuentes.getPlaywriteFont(20, Font.ITALIC));
+        btnIngresar.setBounds(370, 44, 145, 35);
         btnIngresar.setBackground(Color.decode("#4CAF50")); // Color en formato HEX
         btnIngresar.setForeground(Color.WHITE); // Color del texto en blanco
         btnIngresar.setBorderPainted(false); // Sin borde pintado
@@ -69,7 +57,7 @@ public class VistaLogin extends JFrame {
         PanelVistaLogin.add(btnIngresar);
 
         btnSalir = new JButton("Salir");
-        btnSalir.setFont(Fuentes.getPlaywriteFont(20, Font.BOLD));
+        btnSalir.setFont(Fuentes.getPlaywriteFont(20, Font.ITALIC));
         btnSalir.setBounds(370, 135, 145, 35);
         btnSalir.setBackground(Color.decode("#F44336")); // Color en formato HEX
         btnSalir.setForeground(Color.WHITE); // Color del texto en blanco
@@ -77,9 +65,9 @@ public class VistaLogin extends JFrame {
         btnSalir.setFocusPainted(false); // Sin enfoque pintado
         PanelVistaLogin.add(btnSalir);
 
-        btnContacto = new JButton("Ayuda");
-        btnContacto.setFont(Fuentes.getPlaywriteFont(15, Font.BOLD));
-        btnContacto.setBounds(5, 180, 100, 30);
+        btnContacto = new JButton("¿Olvidaste la contraseña?");
+        btnContacto.setFont(Fuentes.getPlaywriteFont(10, Font.ITALIC));
+        btnContacto.setBounds(5, 180, 160, 30);
         btnContacto.setBackground(Color.decode("#2196F3")); // Color en formato HEX
         btnContacto.setForeground(Color.WHITE); // Color del texto en blanco
         btnContacto.setBorderPainted(false); // Sin borde pintado
@@ -90,7 +78,7 @@ public class VistaLogin extends JFrame {
         btnIngresar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Acción para el botón Ingresar
+                //
             }
         });
 
@@ -98,7 +86,7 @@ public class VistaLogin extends JFrame {
         btnSalir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Acción para el botón Salir
+                //
             }
         });
 
@@ -106,7 +94,7 @@ public class VistaLogin extends JFrame {
         btnContacto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Acción para el botón Contacto
+                //
             }
         });
     }
