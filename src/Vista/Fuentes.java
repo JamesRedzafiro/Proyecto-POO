@@ -16,7 +16,7 @@ public class Fuentes {
         try {
             playwriteFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/Fuentes/PLAYWRITEITMODERNA-REGULAR.ttf")).deriveFont(18f);
             robotoFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/Fuentes/Roboto-Regular.ttf")).deriveFont(18f);
-            aptosblackFont = Font.createFont(Font.TRUETYPE_FONT,new File("src/Fuentes/Aptos-Back.ttf")).deriveFont(18f);
+            aptosblackFont = Font.createFont(Font.TRUETYPE_FONT,new File("src/Fuentes/Aptos-Black.ttf")).deriveFont(18f);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }

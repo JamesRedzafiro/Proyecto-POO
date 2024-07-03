@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 
-
 import java.net.URL;
 import java.util.List;
 
@@ -41,6 +40,7 @@ public class ControladorInterfaz {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setFont(font);
         etiqueta.setBounds(x, y, width, height);
+        etiqueta.setForeground(new java.awt.Color(8, 9, 78)); // Color de texto
         panel.add(etiqueta);
         return etiqueta;
     }
@@ -60,6 +60,7 @@ public class ControladorInterfaz {
     public static JButton agregarBoton(JPanel panel, String texto, int xLabel, int yLabel, int widthLabel,int heightLabel,int xButton,int yButton, String nombreIcon) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setFont(new Font("Aptos Black", Font.BOLD, 15));
+        etiqueta.setForeground(new java.awt.Color(8, 9, 78)); // Color de texto
         etiqueta.setBounds(xLabel, yLabel, widthLabel, heightLabel);
         panel.add(etiqueta);
 
@@ -99,6 +100,7 @@ public class ControladorInterfaz {
         JComboBox<String> comboBox = new JComboBox<>(cadena);
         comboBox.setFont(new Font("Aptos Black", Font.BOLD, 20));
         comboBox.setBounds(x, y, width, height);
+        comboBox.setForeground(new java.awt.Color(8, 9, 78)); // Color de texto
         panel.add(comboBox);
         return comboBox;
     }
