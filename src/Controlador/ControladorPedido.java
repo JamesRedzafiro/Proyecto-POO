@@ -12,17 +12,6 @@ import Vista.Interfaz.vistaPedido;
 
 public class ControladorPedido {
 
-    private static int ultimoIDPedido = 1;
-
-    // Método para inicializar el último ID de pedido desde la base de datos
-    public static void inicializarUltimoIDPedido() {
-        ConexionBDPedido conexionPedido = new ConexionBDPedido();
-        try {
-            ultimoIDPedido = conexionPedido.obtenerUltimoIDPedido();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void registrarPedido(DefaultTableModel model, JComboBox<String> nombreComboBox, JTextField cantidadField, JTextField iDClienteField) {
         String nombre = (String) nombreComboBox.getSelectedItem();
