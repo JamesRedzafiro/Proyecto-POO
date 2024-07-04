@@ -63,6 +63,11 @@ public class ControladorPedido {
     }
     
     public void guardarPedido(DefaultTableModel model) {
+
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "No hay datos para guardar.");
+            return;
+        }
         ConexionBDPedido conexion = new ConexionBDPedido();
         int rowCount = model.getRowCount();
         boolean datosGuardados = true;

@@ -75,6 +75,8 @@ public class ControladorInterfaz {
         }
         btnJButton.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnJButton.setBounds(xButton, yButton, 75, 75);
+        btnJButton.setFocusPainted(false); 
+        btnJButton.setBorderPainted(false); 
         panel.add(btnJButton);
         return btnJButton;
     }
@@ -91,6 +93,8 @@ public class ControladorInterfaz {
         }
         btnJButton.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnJButton.setBounds(x, y, width, height);
+        btnJButton.setFocusPainted(false);
+        btnJButton.setBorderPainted(false); 
         panel.add(btnJButton);
         return btnJButton;
     }
@@ -101,6 +105,7 @@ public class ControladorInterfaz {
         comboBox.setFont(new Font("Aptos Black", Font.BOLD, 20));
         comboBox.setBounds(x, y, width, height);
         comboBox.setForeground(new java.awt.Color(8, 9, 78)); // Color de texto
+        comboBox.getVisibleRect();
         panel.add(comboBox);
         return comboBox;
     }

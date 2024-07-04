@@ -89,26 +89,31 @@ public class vistaPedido extends JFrame {
         JButton btnRegistrar = new JButton("Registrar");
         btnRegistrar.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnRegistrar.setBounds(35, 80, 140, 40);
+        btnRegistrar.setFocusPainted(false);
         PanelVistaPedido.add(btnRegistrar);
 
         JButton btnActualizar = new JButton("Actualizar");
         btnActualizar.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnActualizar.setBounds(300, 80, 140, 40);
+        btnActualizar.setFocusPainted(false);
         PanelVistaPedido.add(btnActualizar);
 
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnCancelar.setBounds(535, 80, 140, 40);
+        btnCancelar.setFocusPainted(false);
         PanelVistaPedido.add(btnCancelar);
 
         JButton btnEnviar = new JButton("Enviar");
         btnEnviar.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnEnviar.setBounds(550, 400, 140, 40);
+        btnEnviar.setFocusPainted(false);
         PanelVistaPedido.add(btnEnviar);
 
         JButton btnContacto = new JButton("Contactanos");
         btnContacto.setFont(new Font("Aptos Black", Font.BOLD, 20));
         btnContacto.setBounds(375, 400, 160, 40);
+        btnContacto.setFocusPainted(false);
         PanelVistaPedido.add(btnContacto);
 
         // Agregar listeners a los botones

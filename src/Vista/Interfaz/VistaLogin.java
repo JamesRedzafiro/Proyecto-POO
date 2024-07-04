@@ -22,7 +22,7 @@ public class VistaLogin extends JFrame {
     public VistaLogin() {
         this.setTitle("EMPRESA SOCOSANI: Login");
         this.setFont(Fuentes.getRobotoFont(35, Font.BOLD));
-        this.setBounds(0, 0, 550, 300);
+        this.setBounds(0, 0, 600, 325);
         setLayout(new BorderLayout());
         this.setIconImages(Arrays.asList(new ImageIcon(getClass().getResource("/Imagenes/logo-socosani.png")).getImage()));
         this.setLocationRelativeTo(null);
@@ -51,28 +51,28 @@ public class VistaLogin extends JFrame {
         btnIngresar = new JButton("Ingresar");
         btnIngresar.setFont(Fuentes.getPlaywriteFont(20, Font.ITALIC));
         btnIngresar.setBounds(370, 44, 145, 35);
-        btnIngresar.setBackground(Color.decode("#4CAF50")); // Color en formato HEX
-        btnIngresar.setForeground(Color.WHITE); // Color del texto en blanco
-        btnIngresar.setBorderPainted(false); // Sin borde pintado
-        btnIngresar.setFocusPainted(false); // Sin enfoque pintado
+        btnIngresar.setBackground(Color.decode("#4CAF50")); 
+        btnIngresar.setForeground(Color.WHITE); 
+        btnIngresar.setBorderPainted(false); 
+        btnIngresar.setFocusPainted(false); 
         PanelVistaLogin.add(btnIngresar);
 
         btnSalir = new JButton("Salir");
         btnSalir.setFont(Fuentes.getPlaywriteFont(20, Font.ITALIC));
         btnSalir.setBounds(370, 135, 145, 35);
-        btnSalir.setBackground(Color.decode("#F44336")); // Color en formato HEX
-        btnSalir.setForeground(Color.WHITE); // Color del texto en blanco
-        btnSalir.setBorderPainted(false); // Sin borde pintado
-        btnSalir.setFocusPainted(false); // Sin enfoque pintado
+        btnSalir.setBackground(Color.decode("#F44336")); 
+        btnSalir.setForeground(Color.WHITE); 
+        btnSalir.setBorderPainted(false); 
+        btnSalir.setFocusPainted(false); 
         PanelVistaLogin.add(btnSalir);
 
         btnContacto = new JButton("¿Olvidaste la contraseña?");
         btnContacto.setFont(Fuentes.getPlaywriteFont(10, Font.ITALIC));
-        btnContacto.setBounds(5, 180, 160, 30);
-        btnContacto.setBackground(Color.decode("#2196F3")); // Color en formato HEX
-        btnContacto.setForeground(Color.WHITE); // Color del texto en blanco
-        btnContacto.setBorderPainted(false); // Sin borde pintado
-        btnContacto.setFocusPainted(false); // Sin enfoque pintado
+        btnContacto.setBounds(5, 220, 160, 30);
+        btnContacto.setBackground(Color.decode("#2196F3")); 
+        btnContacto.setForeground(Color.WHITE);
+        btnContacto.setBorderPainted(false);
+        btnContacto.setFocusPainted(false); 
         PanelVistaLogin.add(btnContacto);
 
         // Añadir ActionListener para el botón registrar
