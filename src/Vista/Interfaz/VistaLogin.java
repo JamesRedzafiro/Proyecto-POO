@@ -18,6 +18,7 @@ public class VistaLogin extends JFrame {
     private JButton btnSalir;
     private JButton btnContacto;
 
+
     public VistaLogin() {
         this.setTitle("EMPRESA SOCOSANI: Login");
         this.setFont(Fuentes.getRobotoFont(35, Font.BOLD));

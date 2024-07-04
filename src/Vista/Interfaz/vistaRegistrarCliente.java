@@ -100,7 +100,7 @@ public class vistaRegistrarCliente extends JFrame {
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ControladorRegistrarCliente.eliminarCliente(model, table);
+                //ControladorRegistrarCliente.eliminarCliente(model, table);
             }
         });
 
