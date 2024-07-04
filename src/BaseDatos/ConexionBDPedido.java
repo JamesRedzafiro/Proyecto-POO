@@ -32,6 +32,8 @@ public class ConexionBDPedido extends ConexionBD {
     }
 
     public int insertarPedido(int iDPedido, int iDCliente, Date fechaPedido, String estado) throws SQLException {
+
+        
         String query = "INSERT INTO pedido (iDCliente, fechaPedido, estado) VALUES (?, ?, ?)";
         iniciarConexion();
         Connection connection = getConnection();

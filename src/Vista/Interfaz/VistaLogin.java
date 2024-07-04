@@ -22,7 +22,7 @@ public class VistaLogin extends JFrame {
     public VistaLogin() {
         this.setTitle("EMPRESA SOCOSANI: Login");
         this.setFont(Fuentes.getRobotoFont(35, Font.BOLD));
-        this.setBounds(0, 0, 600, 325);
+        this.setBounds(0, 0, 625, 350);
         setLayout(new BorderLayout());
         this.setIconImages(Arrays.asList(new ImageIcon(getClass().getResource("/Imagenes/logo-socosani.png")).getImage()));
         this.setLocationRelativeTo(null);
@@ -50,7 +50,7 @@ public class VistaLogin extends JFrame {
         // Botones
         btnIngresar = new JButton("Ingresar");
         btnIngresar.setFont(Fuentes.getPlaywriteFont(20, Font.ITALIC));
-        btnIngresar.setBounds(370, 44, 145, 35);
+        btnIngresar.setBounds(440, 170, 145, 35);
         btnIngresar.setBackground(Color.decode("#4CAF50")); 
         btnIngresar.setForeground(Color.WHITE); 
         btnIngresar.setBorderPainted(false); 
@@ -59,7 +59,7 @@ public class VistaLogin extends JFrame {
 
         btnSalir = new JButton("Salir");
         btnSalir.setFont(Fuentes.getPlaywriteFont(20, Font.ITALIC));
-        btnSalir.setBounds(370, 135, 145, 35);
+        btnSalir.setBounds(440, 240, 145, 35);
         btnSalir.setBackground(Color.decode("#F44336")); 
         btnSalir.setForeground(Color.WHITE); 
         btnSalir.setBorderPainted(false); 
@@ -68,11 +68,12 @@ public class VistaLogin extends JFrame {
 
         btnContacto = new JButton("¿Olvidaste la contraseña?");
         btnContacto.setFont(Fuentes.getPlaywriteFont(10, Font.ITALIC));
-        btnContacto.setBounds(5, 220, 160, 30);
+        btnContacto.setBounds(5, 260, 190, 30);
         btnContacto.setBackground(Color.decode("#2196F3")); 
         btnContacto.setForeground(Color.WHITE);
         btnContacto.setBorderPainted(false);
         btnContacto.setFocusPainted(false); 
+        btnContacto.setHorizontalAlignment(SwingConstants.LEFT);
         PanelVistaLogin.add(btnContacto);
 
         // Añadir ActionListener para el botón registrar

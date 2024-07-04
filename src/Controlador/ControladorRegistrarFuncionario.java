@@ -127,6 +127,11 @@ public class ControladorRegistrarFuncionario {
 
     
     public static void guardarDatosFuncionario(DefaultTableModel model) {
+
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "No hay datos para guardar.");
+            return;
+        }
         int rowCount = model.getRowCount();
     
         for (int i = 0; i < rowCount; i++) {

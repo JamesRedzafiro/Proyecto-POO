@@ -132,6 +132,11 @@ public static void registrarCliente(DefaultTableModel model, JTextField nombreFi
     }
 
     public static void guardarCliente(DefaultTableModel model) {
+        
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "No hay datos para guardar.");
+            return;
+        }
         int rowCount = model.getRowCount();
     
         for (int i = 0; i < rowCount; i++) {

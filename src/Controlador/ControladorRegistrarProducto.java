@@ -42,6 +42,11 @@ public class ControladorRegistrarProducto {
     }
 
     public static void guardarProducto(DefaultTableModel model) {
+
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "No hay datos para guardar.");
+            return;
+        }
         ConexionBDProducto conexion = new ConexionBDProducto();
         int rowCount = model.getRowCount();
         boolean datosGuardados = true;
