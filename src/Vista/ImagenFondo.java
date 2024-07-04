@@ -5,7 +5,7 @@ import java.awt.*;
 import java.net.URL;
 
 public class ImagenFondo extends JPanel {
-    private Image fondoImagen;
+    protected Image fondoImagen;
 
     public ImagenFondo(String imagePath) {
         // Carga la imagen de fondo

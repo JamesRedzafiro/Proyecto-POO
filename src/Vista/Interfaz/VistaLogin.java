@@ -22,7 +22,7 @@ public class VistaLogin extends JFrame {
     public VistaLogin() {
         this.setTitle("EMPRESA SOCOSANI: Login");
         this.setFont(Fuentes.getRobotoFont(35, Font.BOLD));
-        this.setBounds(0, 0, 625, 350);
+        this.setBounds(0, 0, 550, 350);
         setLayout(new BorderLayout());
         this.setIconImages(Arrays.asList(new ImageIcon(getClass().getResource("/Imagenes/logo-socosani.png")).getImage()));
         this.setLocationRelativeTo(null);
@@ -32,7 +32,24 @@ public class VistaLogin extends JFrame {
     }
 
     private void ComponentesVistaLogin() {
-        ImagenFondo PanelVistaLogin = new ImagenFondo("/Imagenes/fondo-socosani.png");
+        ImagenFondo PanelVistaLogin = new ImagenFondo("/Imagenes/fondo-socosani.png") {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Rellena el fondo con color blanco
+                g.setColor(Color.WHITE);
+                g.fillRect(0, 0, getWidth(), getHeight());
+    
+                // Dibuja la imagen de fondo a la derecha
+                if (fondoImagen != null) {
+                    int imgWidth = fondoImagen.getWidth(this);
+                    int imgHeight = fondoImagen.getHeight(this);
+                    int x = getWidth() - imgWidth; // Alinea la imagen a la derecha
+                    int y = (getHeight() - imgHeight) / 2;
+                    g.drawImage(fondoImagen, x, y, this);
+                }
+            }
+        };       
         PanelVistaLogin.setLayout(null);
         PanelVistaLogin.setOpaque(true); // Asegurar la opacidad del panel principal
         this.getContentPane().add(PanelVistaLogin);
@@ -50,25 +67,27 @@ public class VistaLogin extends JFrame {
         // Botones
         btnIngresar = new JButton("Ingresar");
         btnIngresar.setFont(Fuentes.getPlaywriteFont(20, Font.ITALIC));
-        btnIngresar.setBounds(440, 170, 145, 35);
+        btnIngresar.setBounds(5, 200, 120, 35);
         btnIngresar.setBackground(Color.decode("#4CAF50")); 
         btnIngresar.setForeground(Color.WHITE); 
         btnIngresar.setBorderPainted(false); 
         btnIngresar.setFocusPainted(false); 
+        btnIngresar.setHorizontalAlignment(SwingConstants.LEFT);
         PanelVistaLogin.add(btnIngresar);
 
         btnSalir = new JButton("Salir");
         btnSalir.setFont(Fuentes.getPlaywriteFont(20, Font.ITALIC));
-        btnSalir.setBounds(440, 240, 145, 35);
+        btnSalir.setBounds(150, 200, 110, 35);
         btnSalir.setBackground(Color.decode("#F44336")); 
         btnSalir.setForeground(Color.WHITE); 
         btnSalir.setBorderPainted(false); 
         btnSalir.setFocusPainted(false); 
+        //btnSalir.setHorizontalAlignment(SwingConstants.LEFT);
         PanelVistaLogin.add(btnSalir);
 
         btnContacto = new JButton("¿Olvidaste la contraseña?");
         btnContacto.setFont(Fuentes.getPlaywriteFont(10, Font.ITALIC));
-        btnContacto.setBounds(5, 260, 190, 30);
+        btnContacto.setBounds(5, 260, 180, 30);
         btnContacto.setBackground(Color.decode("#2196F3")); 
         btnContacto.setForeground(Color.WHITE);
         btnContacto.setBorderPainted(false);

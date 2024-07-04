@@ -9,11 +9,11 @@ public class EjemploJMenuBar {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JMenuBar menuBar = new JMenuBar();
-        JMenu menuArchivo = new JMenu("Archivo");
-        JMenuItem itemAbrir = new JMenuItem("Abrir");
-        JMenuItem itemGuardar = new JMenuItem("Guardar");
-        JMenuItem itemSalir = new JMenuItem("Salir");
-        JMenuItem itemRecargar = new JMenuItem("Recargar");
+        JMenu menuArchivo = new JMenu("Menú");
+        JMenuItem itemAbrir = new JMenuItem("Adrian");
+        JMenuItem itemGuardar = new JMenuItem("Carlos");
+        JMenuItem itemSalir = new JMenuItem("Erick");
+        JMenuItem itemRecargar = new JMenuItem("James");
 
         menuArchivo.add(itemAbrir);
         menuArchivo.add(itemGuardar);
