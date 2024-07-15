@@ -5,7 +5,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import BaseDatos.ConexionBDProducto;
+
+import BaseDatos.*;
 
 public class ControladorRegistrarProducto {
 
