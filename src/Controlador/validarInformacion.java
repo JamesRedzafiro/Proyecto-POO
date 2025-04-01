@@ -1,6 +1,6 @@
 package Controlador;
 
-public class ValidarInformacion {
+public class validarInformacion {
 
     public static boolean validarNombre(String texto) {
         return texto.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+"); // Solo letras y caracteres acentuados
